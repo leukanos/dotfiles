@@ -45,6 +45,8 @@ apps=(
   libxslt
   jq
   teamocil
+  zsh
+  zsh-completions
 )
 
 brew install "${apps[@]}"
