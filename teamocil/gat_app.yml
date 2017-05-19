@@ -1,0 +1,41 @@
+windows:
+  - name: back-end
+    root: ~/projects/gat/gat-app
+    layout: main-vertical-flipped
+    panes:
+      - be foreman start
+      - commands:
+          - ggpull
+          - bers
+  - name: back-end-support
+    root: ~/projects/gat/gat-app
+    layout: even-horizontal
+    panes:
+      - berc
+      - echo rails
+  - name: customer-portal-app
+    root: ~/projects/gat/customer-portal-app
+    layout: main-vertical-flipped
+    panes:  
+      - npm start
+      - echo test-runner-app
+  - name: frontend-app
+    root: ~/projects/gat/gat-frontend-app
+    layout: main-vertical-flipped
+    panes:  
+      - npm start
+      - echo frontend-app
+  - name: admin
+    root: ~/projects/gat/admin-app
+    layout: main-vertical-flipped
+    panes:  
+      - yarn start
+      - echo admin
+  - name: devops
+    root: ~/projects/gat/devops-app
+    layout: main-vertical-flipped
+    panes:
+      - commands:
+          - ggpull
+          - bers -p 3500
+      - echo devops-app

@@ -1,0 +1,22 @@
+windows:
+  - name: back-end
+    root: ~/projects/gat/gat-app
+    layout: main-vertical-flipped
+    panes:
+      - be foreman start
+      - bez start
+      - commands:
+          - ggpull
+          - bez s
+  - name: back-end-support
+    root: ~/projects/gat/gat-app
+    layout: even-horizontal
+    panes:
+      - bez c
+      - echo rails
+  - name: fron-end
+    root: ~/projects/gat/test-runner-app
+    layout: even-horizontal
+    panes:  
+      - npm start
+      - echo test-runner-app
