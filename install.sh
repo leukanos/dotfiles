@@ -260,6 +260,7 @@ install_docker_compose() {
   mkdir -p "$HOME/dev/docker/elastic"
   mkdir -p "$HOME/dev/docker/prometheus"
   ln -fs "$dir/docker/docker-compose.yml" "$HOME/dev/docker/docker-compose.yml"
+  ln -fs "$dir/docker/elasticsearch.yml" "$HOME/dev/docker/elastic/elasticsearch.yml"
   # docker-compose up -d
 }
 
