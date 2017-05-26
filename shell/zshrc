@@ -1,9 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-eval "$(rbenv init -)"
-eval "$(thefuck --alias)"
-
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 ##################
