@@ -11,7 +11,7 @@ alias be="bundle exec"
 alias bez="bundle exec zeus"
 alias berc="bundle exec rails console"
 alias bers="bundle exec rails server"
-alias https="ruby -run -e httpd . -p 8080"
+alias https="ruby -run -e /httpd . -p 8080"
 
 alias ne='PATH=$(npm bin):$PATH'
 
@@ -26,21 +26,21 @@ alias weather="curl -4 http://wttr.in/"
 
 declare -a dirs_to_prepend
 dirs_to_prepend=(
-  "/usr/bin"
   "/usr/local/sbin"
-  "/usr/local/git/bin"
-  "/usr/local/"
-  "/usr/local/mysql/bin"
-  "/sw/bin/"
-  "/opt/local/bin"
-  "/opt/local/sbin"
-  "$HOME/dotfiles/bin"
+  # "/usr/local/git/bin"
+  "/usr/local"
+  "$HOME/.rbenv/bin"
   "$HOME/bin"
-  "$HOME/.yarn/bin"
-  "$HOME/.npm-global/bin"
-  "$(brew --prefix ruby)/bin"
-  "$(brew --prefix coreutils)/libexec/gnubin" # Add brew-installed GNU core utilities bin
-  "$(brew --prefix)/share/npm/bin" # Add npm-installed package bin
+  # "/usr/local/mysql/bin"
+  # "/opt/local/bin"
+  # "/opt/local/sbin"
+  # "$HOME/dotfiles/bin"
+  # "$HOME/bin"
+  # "$HOME/.yarn/bin"
+  # "$HOME/.npm-global/bin"
+  # "$(brew --prefix ruby)/bin"
+  # "$(brew --prefix coreutils)/libexec/gnubin" # Add brew-installed GNU core utilities bin
+  # "$(brew --prefix)/share/npm/bin" # Add npm-installed package bin
 )
 
 # Explicitly configured $PATH
@@ -66,7 +66,7 @@ export PATH
 ZSH_THEME="robbyrussell"
 
 # Z beats cd most of the time
-. ~/z/z.sh
+# . ~/z/z.sh
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -146,3 +146,8 @@ if [ -f '/Users/lukasz/lib/bin/google-cloud-sdk/path.zsh.inc' ]; then source '/U
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/lukasz/lib/bin/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/lukasz/lib/bin/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+
+  eval "$(rbenv init -)"
+eval "$(thefuck --alias)"
