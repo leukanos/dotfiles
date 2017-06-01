@@ -217,7 +217,7 @@ symlink_files () {
   unset FILES_TO_SYMLINK
 
   mkdir -p $HOME/.teamocil
-  ln -fs $dir/teamocil/gat_app.yml $HOME/.teamocil/gat_app
+  ln -fs $dir/teamocil/gat_app.yml $HOME/.teamocil/gat_app.yml
 
 }
 
