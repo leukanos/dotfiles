@@ -11,14 +11,19 @@ alias be="bundle exec"
 alias bez="bundle exec zeus"
 alias berc="bundle exec rails console"
 alias bers="bundle exec rails server"
+alias berm="bundle exec rake db:migrate"
+
 alias https="ruby -run -e /httpd . -p 8080"
 
 alias ne='PATH=$(npm bin):$PATH'
 
 alias gbc="git branch --no-color --merged master | grep -v master | xargs git branch -d"
-alias ggclean="gl && gfa && gbc"
+alias ggc="gl && gfa && gbc"
 
 alias weather="curl -4 http://wttr.in/"
+
+alias list-tags="gcloud beta container images list-tags eu.gcr.io/dulcet-provider-591/deployment-gat-app-image"
+alias deploy="/Users/lukasz/dev/code/helm-deployment-charts/deploy.sh"
 
 ########################################
 # Directories to be prepended to $PATH #
