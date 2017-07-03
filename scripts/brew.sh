@@ -45,6 +45,7 @@ apps=(
   libxslt
   jq
   teamocil
+  the_silver_searcher
   zsh
   zsh-completions
 )

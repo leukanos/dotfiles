@@ -65,3 +65,31 @@ function extract() {
   fi
 }
 
+function connectSQL() {
+  if [[ -z $1 || -z $2 ]]; then
+    echo 'One or more variables are undefined'
+    echo 'You should specify environment and app.\n'
+    echo "Examples:"
+    echo "  connectSQL sandbox devops"
+    return 1
+  fi
+
+  echo "Decoding mysql_password secret..."
+  local secret=$(kubectl get secret $1-$2-secrets -o yaml | awk '/mysql_password/{ print $2 }' | base64 -D && echo)
+  echo "mysql password: $secret\n"
+  
+  local mysql_pod=$(kubectl get pods -l "env=$1,app=$2,type=mysql" | tail -n 1 | awk '{print $1;}')
+
+  echo "Setting up port forwarding for $1 $2..."
+  kubectl port-forward $mysql_pod 3406:3306
+}
+
+function list-tags() {
+  if [[ -z $1 ]]; then
+    echo "Missing app name"
+    return 1
+  fi
+
+  gcloud beta container images list-tags eu.gcr.io/dulcet-provider-591/deployment-"$1"-app-image --limit unlimited
+}
+

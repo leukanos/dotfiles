@@ -17,7 +17,7 @@ windows:
     root: ~/dev/code/customer-portal-app
     layout: main-vertical-flipped
     panes:  
-      - npm start
+      - yarn start
       - echo test-runner-app
   # - name: frontend-app
   #   root: ~/dev/code/gat-frontend-app

@@ -17,7 +17,6 @@ apps=(
     google-chrome
     malwarebytes-anti-malware
     glimmerblocker
-    macdown
     opera
     spotify
     skype
