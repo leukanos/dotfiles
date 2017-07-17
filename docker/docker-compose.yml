@@ -38,7 +38,7 @@ services:
   elasticsearch:
     mem_limit: 256mb
     memswap_limit: 0mb
-    image: elasticsearch
+    image: elasticsearch:2.4.5
     ports:
       - "9200:9200"
       - "9300:9300"
