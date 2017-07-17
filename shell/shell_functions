@@ -85,11 +85,8 @@ function connectSQL() {
 }
 
 function list-tags() {
-  if [[ -z $1 ]]; then
-    echo "Missing app name"
-    return 1
-  fi
+  app_name=$1
 
-  gcloud beta container images list-tags eu.gcr.io/dulcet-provider-591/deployment-"$1"-app-image --limit unlimited
+  gcloud beta container images list-tags eu.gcr.io/dulcet-provider-591/deployment-"${app_name:?}"-app-image --limit unlimited
 }
 
