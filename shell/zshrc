@@ -23,6 +23,7 @@ alias gll="gl --no-ff origin"
 alias weather="curl -4 http://wttr.in/"
 
 alias deploy="/Users/lukasz/dev/code/helm-deployment-charts/deploy.sh"
+alias change_cluster="/Users/lukasz/dev/code/helm-deployment-charts/change_cluster.sh"
 
 alias up="cd /Users/lukasz/dev/docker && docker-compose up -d && itermocil gat_app"
 
@@ -114,9 +115,9 @@ COMPLETION_WAITING_DOTS="true"
 
 # Which   would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
+# Example format: plugins=(rails git textmate ruby lighthouse kubectl)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails ruby bundler z brew node npm history zsh-syntax-highlighting osx sublime)
+plugins=(git rails ruby bundler z brew node npm history zsh-syntax-highlighting osx sublime kubectl)
 
 ######################
 # User configuration #
@@ -157,3 +158,4 @@ if [ -f '/Users/lukasz/lib/bin/google-cloud-sdk/completion.zsh.inc' ]; then sour
 
 eval "$(rbenv init -)"
 eval "$(thefuck --alias)"
+source <(kubectl completion zsh)
