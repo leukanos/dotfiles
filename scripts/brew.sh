@@ -40,7 +40,6 @@ apps=(
   rbenv
   nvm
   tig
-  yarn
   libxml2
   libxslt
   jq

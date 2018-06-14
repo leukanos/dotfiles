@@ -4,32 +4,33 @@ windows:
     layout: main-vertical-flipped
     panes:
       - be foreman start
+      - be zeus start
       - commands:
           - ggpull
-          - bers
+          - bez s
   - name: back-end-support
     root: ~/dev/code/gat-app
     layout: even-horizontal
     panes:
-      - berc
+      - bez c
       - echo rails
   - name: customer-portal-app
     root: ~/dev/code/customer-portal-app
     layout: main-vertical-flipped
-    panes:  
-      - yarn start
+    panes: 
+      - loadnvm && yarn start
       - echo test-runner-app
-  # - name: frontend-app
-  #   root: ~/dev/code/gat-frontend-app
-  #   layout: main-vertical-flipped
-  #   panes:  
-  #     - npm start
-  #     - echo frontend-app
+  - name: frontend-app
+    root: ~/dev/code/gat-frontend-app
+    layout: main-vertical-flipped
+    panes:  
+      - loadnvm && yarn start
+      - echo frontend-app
   - name: admin
     root: ~/dev/code/admin-app
     layout: main-vertical-flipped
-    panes:  
-      - yarn start
+    panes:
+      - loadnvm && yarn start  
       - echo admin
   - name: devops
     root: ~/dev/code/devops-app

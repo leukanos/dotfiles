@@ -34,6 +34,11 @@ defaults write com.apple.LaunchServices LSQuarantine -bool false
 # Disable automatic termination of inactive apps
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
 
+# Enable focus-follows-mouse
+defaults write com.apple.Terminal FocusFollowsMouse -bool true
+defaults write com.apple.x11 wm_ffm -bool true
+defaults write org.x.X11 wm_ffm -bool true
+
 ###############################################################################
 # SSD-specific tweaks                                                         #
 ###############################################################################

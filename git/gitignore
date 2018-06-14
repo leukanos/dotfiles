@@ -9,4 +9,14 @@
 ehthumbs.db
 Thumbs.db
 
+bin/rubocop
+bin/coderay
+bin/pry
+bin/raven
+
 /.idea
+
+**/vendor/bundle
+
+.erdconfig
+erd.pdf

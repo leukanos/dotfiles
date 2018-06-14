@@ -61,6 +61,18 @@ services:
     volumes:
       - ./database/mysql:/var/lib/mysql
 
+  postgres:
+    mem_limit: 256mb
+    memswap_limit: 0mb
+    image: postgres:9.6.8
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=root
+    volumes:
+      - ./database/postgres:/var/lib/postgresql/data:z
+
 volumes:
     prometheus_data: {}
     grafana_data: {}

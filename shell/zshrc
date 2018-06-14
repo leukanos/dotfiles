@@ -31,19 +31,28 @@ alias up="cd /Users/lukasz/dev/docker && docker-compose up -d && itermocil gat_a
 # Directories to be prepended to $PATH #
 ########################################
 
+export ANDROID_HOME=$HOME/Library/Android/sdk
+
 declare -a dirs_to_prepend
 dirs_to_prepend=(
+  "/usr/local/opt/imagemagick@6/bin"
+  "/usr/local/opt/openssl/bin"
+  "/usr/local/opt/postgresql@9.6/bin"
   "/usr/local/sbin"
   # "/usr/local/git/bin"
   "/usr/local"
   "$HOME/.rbenv/bin"
   "$HOME/bin"
+  $ANDROID_HOME/tools
+  $ANDROID_HOME/platform-tools
   # "/usr/local/mysql/bin"
   # "/opt/local/bin"
   # "/opt/local/sbin"
   # "$HOME/dotfiles/bin"
   # "$HOME/bin"
-  # "$HOME/.yarn/bin"
+  "$HOME/.yarn/bin"
+  "$HOME/.config/yarn/global/node_modules/.bin"
+  z
   # "$HOME/.npm-global/bin"
   # "$(brew --prefix ruby)/bin"
   # "$(brew --prefix coreutils)/libexec/gnubin" # Add brew-installed GNU core utilities bin
@@ -65,12 +74,11 @@ unset dirs_to_prepend
 
 export PATH
 
-
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+ZSH_THEME="aussiegeek"
 
 # Z beats cd most of the time
 # . ~/z/z.sh
@@ -117,7 +125,7 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse kubectl)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails ruby bundler z brew node npm history zsh-syntax-highlighting osx sublime kubectl)
+plugins=(git rails ruby bundler z brew node history zsh-syntax-highlighting osx sublime)
 
 ######################
 # User configuration #
@@ -138,15 +146,8 @@ source $ZSH/oh-my-zsh.sh
 # Source local extra (private) settings specific to machine if it exists
 [ -f ~/.zsh.local ] && source ~/.zsh.local
 
-# npm tab completion
-. <(npm completion)
-
-
 export DEPS_AWS_CONFIG_PATH="/Users/lukasz/.aws/config"
 export DEPS_AWS_PROFILE="default"
-
-export NVM_DIR="/Users/lukasz/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/lukasz/lib/bin/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/lukasz/lib/bin/google-cloud-sdk/path.zsh.inc'; fi
@@ -154,8 +155,5 @@ if [ -f '/Users/lukasz/lib/bin/google-cloud-sdk/path.zsh.inc' ]; then source '/U
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/lukasz/lib/bin/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/lukasz/lib/bin/google-cloud-sdk/completion.zsh.inc'; fi
 
-
-
 eval "$(rbenv init -)"
-eval "$(thefuck --alias)"
 source <(kubectl completion zsh)

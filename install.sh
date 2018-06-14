@@ -168,7 +168,7 @@ declare -a FILES_TO_SYMLINK=(
 
   'git/gitattributes'
   'git/gitconfig'
-  'git/gitignore'
+  'git/gitignore_global'
 
 )
 
@@ -266,6 +266,7 @@ install_docker_compose() {
 
 # Package managers & packages
 
+curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 0.28.4
 . "$DOTFILES_DIR/scripts/brew.sh"
 . "$DOTFILES_DIR/scripts/npm.sh"
 
