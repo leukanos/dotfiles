@@ -254,6 +254,9 @@ install_zsh () {
   fi
 }
 
+git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
+
 install_docker_compose() {
   mkdir -p "$HOME/dev/docker"
   mkdir -p "$HOME/dev/docker/database"

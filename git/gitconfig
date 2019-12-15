@@ -1,6 +1,6 @@
 [user]
 	email = kontakt@lostrowski.pl
-	name = Łukasz Ostrowski
+	name = leukanos
 [alias]
 	conflicts = !git ls-files -u | cut -f 2 | sort -u
 	ignore = !git update-index --assume-unchanged
@@ -52,3 +52,5 @@
 [help]
         # Correct typos
         autocorrect = 1        
+[url "git@github.com:"]
+	insteadOf = https://github.com/

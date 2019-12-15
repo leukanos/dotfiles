@@ -4,6 +4,7 @@
 brew tap caskroom/cask
 brew install brew-cask
 brew tap caskroom/versions
+brew tap caskroom/fonts
 
 # Install packages
 apps=(
@@ -14,6 +15,7 @@ apps=(
     rubymine
     firefox
     firefoxnightly
+    font-hack-nerd-font
     google-chrome
     malwarebytes-anti-malware
     glimmerblocker

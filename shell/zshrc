@@ -27,6 +27,8 @@ alias change_cluster="/Users/lukasz/dev/code/helm-deployment-charts/change_clust
 
 alias up="cd /Users/lukasz/dev/docker && docker-compose up -d && itermocil gat_app"
 
+alias dc="docker-compose"
+
 ########################################
 # Directories to be prepended to $PATH #
 ########################################
@@ -35,6 +37,7 @@ export ANDROID_HOME=$HOME/Library/Android/sdk
 
 declare -a dirs_to_prepend
 dirs_to_prepend=(
+  "/Users/lukasz/Library/Python/3.7/bin"
   "/usr/local/opt/imagemagick@6/bin"
   "/usr/local/opt/openssl/bin"
   "/usr/local/opt/postgresql@9.6/bin"
@@ -74,38 +77,12 @@ unset dirs_to_prepend
 
 export PATH
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+########################################
+# Theme and plugins #
+########################################
+
 ZSH_THEME="aussiegeek"
 
-# Z beats cd most of the time
-# . ~/z/z.sh
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -125,7 +102,8 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse kubectl)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails ruby bundler z brew node history zsh-syntax-highlighting osx sublime)
+
+plugins=(git rails bundler z brew history osx zsh-autosuggestions zsh-syntax-highlighting)
 
 ######################
 # User configuration #
@@ -143,6 +121,18 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
+#ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+ZSH_HIGHLIGHT_STYLES[cursor]='bold'
+
+ZSH_HIGHLIGHT_STYLES[alias]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[suffix-alias]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[builtin]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[function]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[command]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[precommand]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[hashed-command]='fg=green,bold'
+ZSH_HIGHLIGHT_MAXLENGTH=300
+
 # Source local extra (private) settings specific to machine if it exists
 [ -f ~/.zsh.local ] && source ~/.zsh.local
 
@@ -157,3 +147,4 @@ if [ -f '/Users/lukasz/lib/bin/google-cloud-sdk/completion.zsh.inc' ]; then sour
 
 eval "$(rbenv init -)"
 source <(kubectl completion zsh)
+eval "$(direnv hook zsh)"
