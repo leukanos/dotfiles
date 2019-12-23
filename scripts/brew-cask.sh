@@ -11,7 +11,6 @@ apps=(
     1password
     google-drive
     iterm2
-    atom
     rubymine
     firefox
     firefoxnightly

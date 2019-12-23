@@ -159,7 +159,6 @@ echo "done"
 
 
 declare -a FILES_TO_SYMLINK=(
-
   'shell/shell_config'
   'shell/shell_exports'
   'shell/shell_functions'
@@ -255,27 +254,17 @@ install_zsh () {
 }
 
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
- git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
-
-install_docker_compose() {
-  mkdir -p "$HOME/dev/docker"
-  mkdir -p "$HOME/dev/docker/database"
-  mkdir -p "$HOME/dev/docker/elastic"
-  mkdir -p "$HOME/dev/docker/prometheus"
-  ln -fs "$dir/docker/docker-compose.yml" "$HOME/dev/docker/docker-compose.yml"
-  ln -fs "$dir/docker/elasticsearch.yml" "$HOME/dev/docker/elastic/elasticsearch.yml"
-  # docker-compose up -d
-}
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
 
 # Package managers & packages
 
-curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 0.28.4
-. "$DOTFILES_DIR/scripts/brew.sh"
-. "$DOTFILES_DIR/scripts/npm.sh"
-
 if [ "$(uname)" == "Darwin" ]; then
+    . "$DOTFILES_DIR/scripts/brew.sh"
     . "$DOTFILES_DIR/scripts/brew-cask.sh"
 fi
+
+curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 0.28.4
+. "$DOTFILES_DIR/scripts/npm.sh"
 
 mkdir -p "$HOME/dev"
 mkdir -p "$HOME/dev/code"
@@ -284,7 +273,6 @@ ln -fs "$HOME/dev/code" "$HOME/code"
 
 symlink_files
 install_zsh
-install_docker_compose
 
 source ~/.zshrc
 

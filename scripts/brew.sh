@@ -23,6 +23,7 @@ brew update
 brew upgrade --all
 
 apps=(
+  awscli
   bash-completion2
   coreutils
   moreutils
@@ -45,6 +46,7 @@ apps=(
   jq
   teamocil
   the_silver_searcher
+  z
   zsh
   zsh-completions
 )
