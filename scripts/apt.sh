@@ -8,6 +8,7 @@ apps=(
   awscli
   coreutils
   curl
+  direnv
   moreutils
   findutils
   git-extras
