@@ -42,24 +42,11 @@ dirs_to_prepend=(
   "/usr/local/opt/openssl/bin"
   "/usr/local/opt/postgresql@9.6/bin"
   "/usr/local/sbin"
-  # "/usr/local/git/bin"
   "/usr/local"
   "$HOME/.rbenv/bin"
   "$HOME/bin"
-  $ANDROID_HOME/tools
-  $ANDROID_HOME/platform-tools
-  # "/usr/local/mysql/bin"
-  # "/opt/local/bin"
-  # "/opt/local/sbin"
-  # "$HOME/dotfiles/bin"
-  # "$HOME/bin"
   "$HOME/.yarn/bin"
   "$HOME/.config/yarn/global/node_modules/.bin"
-  z
-  # "$HOME/.npm-global/bin"
-  # "$(brew --prefix ruby)/bin"
-  # "$(brew --prefix coreutils)/libexec/gnubin" # Add brew-installed GNU core utilities bin
-  # "$(brew --prefix)/share/npm/bin" # Add npm-installed package bin
 )
 
 # Explicitly configured $PATH
@@ -114,9 +101,10 @@ for file in $HOME/.{shell_exports,shell_aliases,shell_functions,shell_config}; d
   [ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
-
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+  fi
 fi
 
 source $ZSH/oh-my-zsh.sh
