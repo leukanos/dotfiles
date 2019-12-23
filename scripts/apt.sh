@@ -2,11 +2,10 @@
 
 # Update apt
 apt update
-apt dist-upgrade
+apt dist-upgrade -y
 
 apps=(
   awscli
-  bash-completion2
   coreutils
   curl
   moreutils
@@ -16,12 +15,10 @@ apps=(
   htop
   wget
   thefuck
+  tmux
   tig
-  libxml2
-  libxslt
   jq
-  z
-  zsh-completions
+  vim
 )
 
-apt install "${apps[@]}"
+apt install -y "${apps[@]}"
