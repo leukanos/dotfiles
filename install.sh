@@ -258,9 +258,12 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/
 
 # Package managers & packages
 
-if [ "$(uname)" == "Darwin" ]; then
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    . "%DOTFILES_DIR/scripts/apt.sh"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
     . "$DOTFILES_DIR/scripts/brew.sh"
     . "$DOTFILES_DIR/scripts/brew-cask.sh"
+    . "$DOTFILES_DIR/scripts/macos.sh"
 fi
 
 curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 0.28.4
