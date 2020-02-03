@@ -268,9 +268,6 @@ fi
 curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 0.28.4
 . "$DOTFILES_DIR/scripts/npm.sh"
 
-mkdir -p "$HOME/dev"
-mkdir -p "$HOME/dev/code"
-ln -fs "$HOME/dev/code" "$HOME/code"
 
 
 symlink_files

@@ -12,15 +12,11 @@ then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
-brew tap homebrew/versions
-brew tap homebrew/dupes
-brew tap Goles/battery
-
 # Make sure we’re using the latest Homebrew
 brew update
 
 # Upgrade any already-installed formulae
-brew upgrade --all
+brew upgrade
 
 apps=(
   awscli
@@ -30,10 +26,9 @@ apps=(
   findutils
   git
   git-extras
-  homebrew/completions/brew-cask-completion
-  homebrew/dupes/grep
-  homebrew/dupes/openssh
-  imagemagick --with-webp
+  brew-cask-completion
+  grep
+  openssh
   tree
   htop
   wget
@@ -44,7 +39,6 @@ apps=(
   libxml2
   libxslt
   jq
-  teamocil
   the_silver_searcher
   z
   zsh
