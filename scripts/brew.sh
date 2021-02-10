@@ -19,30 +19,82 @@ brew update
 brew upgrade
 
 apps=(
+  autoconf
+  autoenv
   awscli
-  bash-completion2
+  bash
+  bash-completion@2
+  brew-cask-completion
   coreutils
-  moreutils
+  cowsay
+  csvkit
+  ctop
+  figlet
   findutils
+  gdbm
+  gettext
+  gh
   git
   git-extras
-  brew-cask-completion
+  glances
   grep
-  openssh
-  tree
+  helm
+  ht
   htop
-  wget
-  thefuck
-  rbenv
-  nvm
-  tig
+  icu4c
+  jq
+  kubernetes-cli
+  lazydocker
+  ldns
+  libcbor
+  libfido2
+  libgcrypt
+  libgpg-error
+  libidn2
+  libunistring
   libxml2
   libxslt
-  jq
+  lzo
+  mas
+  maven
+  mkcert
+  mongocli
+  moreutils
+  ncdu
+  ncurses
+  node
+  node@12
+  node@14
+  nvm
+  oniguruma
+  openjdk
+  openssh
+  openssl@1.1
+  pcre
+  pcre2
+  pkg-config
+  python@3.9
+  rbenv
+  readline
+  ruby-build
+  sqlite
+  stern
+  tcl-tk
+  telnet
   the_silver_searcher
+  thefuck
+  tig
+  tree
+  watch
+  wget
+  xz
+  yarn
   z
   zsh
   zsh-completions
+  adoptopenjdk8
+  graphiql
+  ngrok
 )
 
 brew install "${apps[@]}"

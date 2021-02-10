@@ -8,24 +8,12 @@ brew tap caskroom/fonts
 
 # Install packages
 apps=(
-    1password
-    google-drive
-    iterm2
-    rubymine
     firefox
-    firefoxnightly
     font-hack-nerd-font
-    google-chrome
-    malwarebytes-anti-malware
     glimmerblocker
     opera
-    spotify
-    skype
     slack
-    tower
-    transmit
     vlc
-    utorrent
     caffeine
     fantastical
     bartender

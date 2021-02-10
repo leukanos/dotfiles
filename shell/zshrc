@@ -17,7 +17,8 @@ alias https="ruby -run -e /httpd . -p 8080"
 alias ne='PATH=$(npm bin):$PATH'
 
 alias gbc="git branch --no-color --merged master | grep -v master | xargs git branch -d"
-alias ggc="gl && gfa && gbc"
+alias gbcs='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+alias ggc="gl && gfa && gbc && gbcs"
 alias gll="gl --no-ff origin"
 
 alias weather="curl -4 http://wttr.in/"
@@ -33,11 +34,19 @@ alias dc="docker-compose"
 alias jenkins-e="ssh -t lostrowski@54.175.178.84 -A -N -L 8085:localhost:8080"
 alias jenkins-w="ssh -t lostrowski@54.183.184.33 -A -N -L 8086:localhost:8080"
 
+alias keast2='kubectl --context=e --user=lukasz.ostrowski@searchspring.com'
+alias kwest2='kubectl --context=w --user=lukasz.ostrowski@searchspring.com'
+
+alias kdacq='kubectl -n dacq-streaming'
+alias hdacq='helm -n dacq-streaming'
+alias w2='watch -n2'
+
 ########################################
 # Directories to be prepended to $PATH #
 ########################################
 
 export ANDROID_HOME=$HOME/Library/Android/sdk
+export GOPATH=/usr/local/go
 
 declare -a dirs_to_prepend
 dirs_to_prepend=(
@@ -49,8 +58,8 @@ dirs_to_prepend=(
   "/usr/local"
   "$HOME/.rbenv/bin"
   "$HOME/bin"
-  "$HOME/.yarn/bin"
-  "$HOME/.config/yarn/global/node_modules/.bin"
+  "$GOPATH/bin"
+  "$HOME/go/bin"
 )
 
 # Explicitly configured $PATH
@@ -67,6 +76,23 @@ done
 unset dirs_to_prepend
 
 export PATH
+export JAVA_HOME_8=$(/usr/libexec/java_home -v1.8)
+export JAVA_HOME_14=$(/usr/libexec/java_home -v14)
+
+export JAVA_HOME=$JAVA_HOME_8
+
+
+########################################
+# Scripts #
+########################################
+
+# Automatically list directory contents on `cd`.
+auto-ls () {
+	emulate -L zsh;
+	# explicit sexy ls'ing as aliases arent honored in here.
+	hash gls >/dev/null 2>&1 && CLICOLOR_FORCE=1 gls -aFh --color --group-directories-first || ls
+}
+chpwd_functions=( auto-ls $chpwd_functions )
 
 ########################################
 # Theme and plugins #
@@ -94,7 +120,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse kubectl)
 # Add wisely, as too many plugins slow down shell startup.
 
-plugins=(git rails bundler z brew history osx zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(git rails bundler z brew history osx zsh-autosuggestions zsh-syntax-highlighting kubectl dotenv helm)
 
 ######################
 # User configuration #
@@ -131,10 +157,16 @@ ZSH_HIGHLIGHT_MAXLENGTH=300
 export DEPS_AWS_CONFIG_PATH="~/.aws/config"
 export DEPS_AWS_PROFILE="default"
 
+export SS_ANALYTICS_TUNNEL_USERNAME=lostrowski
+export SS_TUNNEL_USERNAME=lostrowski
+export SS_ANALYTICS_TUNNEL_KEY_FILENAME=id_rsa
+
 eval "$(rbenv init -)"
 
+
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '~/code/google-cloud-sdk/path.zsh.inc' ]; then . '~/code/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/lukasz/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/lukasz/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '~/code/google-cloud-sdk/completion.zsh.inc' ]; then . '~/code/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/lukasz/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/lukasz/google-cloud-sdk/completion.zsh.inc'; fi
+export PATH="/usr/local/opt/node@14/bin:$PATH"
