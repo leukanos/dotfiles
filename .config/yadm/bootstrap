@@ -19,4 +19,13 @@ fi
 
 if [ "$system_type" = "Linux" ]; then
   sh <(curl -sS https://starship.rs/install.sh) -y
+
+  sudo apt-get install zsh
+  chsh -s $(which zsh)
+fi
+
+if [ ! -d ~/.zinit ]; then
+  mkdir ~/.zinit
+  chmod go-w ~/.zinit # to avoid insecure directories complaint
+  git clone https://github.com/zdharma-continuum/zinit.git ~/.zinit/bin
 fi
