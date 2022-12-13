@@ -16,3 +16,7 @@ if [ "$system_type" = "Darwin" ]; then
   fi
 
 fi
+
+if [ "$system_type" = "Linux" ]; then
+  sh <(curl -sS https://starship.rs/install.sh) -y
+fi
