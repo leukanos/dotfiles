@@ -86,7 +86,7 @@ disabled = true
 
 [time]
 disabled = false
-format = '🕙[\[](white)[ $time ]($style)[\]](white) '
+format = '[\[](white)[ $time ]($style)[\]](white) '
 time_format = "%T"
 utc_time_offset = "+2"
 
