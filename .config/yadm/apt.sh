@@ -1,6 +1,10 @@
 #!/bin/bash
 
 if [[ $(uname) == 'Linux' ]]; then
+  if ! [ -x "$(command -v add-apt-repository)" ]; then
+    sudo apt install -y software-properties-common
+  fi
+  set +e
 
   # add repo to get newest git
   sudo add-apt-repository -y ppa:git-core/ppa

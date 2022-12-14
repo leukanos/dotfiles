@@ -18,7 +18,7 @@ if [ "$system_type" = "Darwin" ]; then
 fi
 
 if [ "$system_type" = "Linux" ]; then
-  sudo ./apt.sh
+  sudo ~/.config/yadm/apt.sh
 
   if ! hash starship 2>/dev/null; then
     sh <(curl -sS https://starship.rs/install.sh) -y
