@@ -26,6 +26,7 @@ if [[ $(uname) == 'Linux' ]]; then
     findutils
     fzf
     gh
+    git
     git-extras
     htop
     jq
@@ -39,6 +40,7 @@ if [[ $(uname) == 'Linux' ]]; then
     wget
     yadm
     yarn
+    zsh
   )
 
   apt install -y "${apps[@]}"

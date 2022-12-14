@@ -249,6 +249,8 @@ if [ -f '/Users/lukaszostrowski/google-cloud-sdk/completion.zsh.inc' ]; then . '
 
 export NPM_AUTH_TOKEN="ee25a6015f97db39fa648645083147b1669b0757"
 
-complete -o nospace -C /usr/local/bin/terraform terraform
+if hash complete 2/dev/null; then
+  complete -o nospace -C /usr/local/bin/terraform terraform
+fi
 
 eval "$(starship init zsh)"

@@ -34,11 +34,7 @@ if [ ! -d ~/.zinit ]; then
 fi
 
 ###############################################################################
-# development
+# custom
 ###############################################################################
-set +e
-gh extension install dlvhdr/gh-dash
-gh extension install gennaro-tedesco/gh-f
-gh extension install meiji163/gh-notify
-set -e
-gh extension upgrade --all
+
+sudo ln -s $(which python3) /usr/local/bin/python
