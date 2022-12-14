@@ -44,4 +44,6 @@ if [[ $(uname) == 'Linux' ]]; then
   )
 
   apt install -y "${apps[@]}"
+
+  sudo ln -s $(which batcat) /usr/local/bin/bat
 fi
