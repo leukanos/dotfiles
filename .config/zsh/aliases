@@ -1,0 +1,43 @@
+alias ls="exa"
+alias la="ls -a"
+alias lla="ls -la"
+
+alias tree="exa --tree"
+
+alias cat="bat"
+
+alias bez="bundle exec zeus"
+alias berc="bundle exec rails console"
+alias bers="bundle exec rails server"
+alias berm="bundle exec rake db:migrate"
+
+alias e=vim
+
+alias https="ruby -run -e /httpd . -p 8080"
+
+alias ne='PATH=$(npm bin):$PATH'
+
+alias gbc="git branch --no-color --merged master | grep -v master | xargs git branch -d"
+alias gbcs='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch\^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+alias ggc="gl && gfa && gbc && gbcs && git pull --recurse-submodules"
+alias ggp="gsta && git pull && gstp"
+alias gll="gl --no-ff origin"
+
+alias weather="curl -4 http://wttr.in/"
+
+alias deploy="~/dev/code/helm-deployment-charts/deploy.sh"
+alias change_cluster="~/dev/code/helm-deployment-charts/change_cluster.sh"
+
+alias up="cd ~/dev/docker && docker-compose up -d && itermocil gat_app"
+
+alias dc="docker-compose"
+
+alias w2='watch -n2'
+
+############# kafka
+alias kutility="kubectl exec -n dacq-streaming --context keast3 dacq-utility -it --"
+alias kafkacg="kutility ./bin/kafka-consumer-groups.sh --bootstrap-server kafka-0.kafka-headless.kafka.svc.cluster.local:9092"
+alias kafkat="kutility ./bin/kafka-topics.sh --bootstrap-server kafka-0.kafka-headless.kafka.svc.cluster.local:9092"
+
+alias ns="kubens"
+alias ctx="kubectx"

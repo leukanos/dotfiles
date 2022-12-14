@@ -5,22 +5,25 @@ system_type=$(uname -s)
 if [ "$system_type" = "Darwin" ]; then
 
   # install homebrew if it's missing
-  if ! command -v brew >/dev/null 2>&1; then
+  if ! hash brew 2/dev/null; then
     echo "Installing homebrew"
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
 
   if [ -f "$HOME/Brewfile" ]; then
     echo "Updating homebrew bundle"
-    brew bundle --global
+    brew bundle
   fi
 
 fi
 
 if [ "$system_type" = "Linux" ]; then
-  sh <(curl -sS https://starship.rs/install.sh) -y
+  sudo ./apt.sh
 
-  sudo apt-get install zsh
+  if ! hash starship 2>/dev/null; then
+    sh <(curl -sS https://starship.rs/install.sh) -y
+  fi
+
   chsh -s $(which zsh)
 fi
 
@@ -29,3 +32,13 @@ if [ ! -d ~/.zinit ]; then
   chmod go-w ~/.zinit # to avoid insecure directories complaint
   git clone https://github.com/zdharma-continuum/zinit.git ~/.zinit/bin
 fi
+
+###############################################################################
+# development
+###############################################################################
+set +e
+gh extension install dlvhdr/gh-dash
+gh extension install gennaro-tedesco/gh-f
+gh extension install meiji163/gh-notify
+set -e
+gh extension upgrade --all
