@@ -31,6 +31,7 @@ if [[ $(uname) == 'Linux' ]]; then
     htop
     jq
     moreutils
+    mosh
     neovim
     thefuck
     tig
@@ -44,6 +45,6 @@ if [[ $(uname) == 'Linux' ]]; then
   )
 
   apt install -y "${apps[@]}"
-
   sudo ln -s $(which batcat) /usr/local/bin/bat
 fi
+
