@@ -19,6 +19,7 @@ if [[ $(uname) == 'Linux' ]]; then
   apps=(
     awscli
     bat
+    build-essential
     coreutils
     curl
     direnv
@@ -46,7 +47,7 @@ if [[ $(uname) == 'Linux' ]]; then
     zsh
   )
 
-  apt install -y "${apps[@]}"
+  sudo apt install -y "${apps[@]}"
   sudo ln -s $(which batcat) /usr/local/bin/bat
 fi
 

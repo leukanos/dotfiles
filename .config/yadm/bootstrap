@@ -38,7 +38,7 @@ if [ "$system_type" = "Linux" ]; then
 
   # setup locale for mosh-server
   sudo locale-gen "en_US.UTF-8"
-  update-locale LC_ALL="en_US.UTF-8"
+  sudo update-locale LC_ALL="en_US.UTF-8"
 fi
 
 if [ ! -d ~/.zinit ]; then
