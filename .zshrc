@@ -129,6 +129,22 @@ fi' for RobSis/zsh-completion-generator
 
 ###############################################################################
 
+setopt promptsubst
+
+zinit wait lucid for \
+    OMZL::git.zsh \
+  atload"unalias grv" \
+    OMZP::git
+
+zinit ice svn pick"functions.zsh" lucid
+zinit snippet OMZ::lib
+
+zinit wait'1' lucid for OMZP::kubectl
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  zinit ice svn
+  zinit snippet OMZP::macos
+fi
 
 zinit wait'1' lucid light-mode for "cedi/meaningful-error-codes"
 
