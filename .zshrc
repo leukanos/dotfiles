@@ -250,10 +250,7 @@ export GOPATH=~/go
 
 declare -a dirs_to_prepend
 dirs_to_prepend=(
-  "~/Library/Python/3.7/bin"
-  "/usr/local/opt/imagemagick@6/bin"
   "/usr/local/opt/openssl/bin"
-  "/usr/local/opt/postgresql@9.6/bin"
   "/usr/local/sbin"
   "/usr/local"
   "$HOME/bin"

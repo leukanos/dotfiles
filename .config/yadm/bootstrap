@@ -25,6 +25,16 @@ if [ "$system_type" = "Linux" ]; then
   fi
 
   chsh -s $(which zsh)
+
+  if hash lsd 2>/dev/null; then
+    # install lsd
+    SYSTEM_DEB_SUFFIX=$(dpkg --print-architecture)
+    TEMP_DEB="$(mktemp)" &&
+      echo https://github.com/Peltoche/lsd/releases/download/0.23.1/lsd_0.23.1_$SYSTEM_DEB_SUFFIX.deb |
+      wget --show-progress -O "$TEMP_DEB" -qNi - &&
+      sudo dpkg --skip-same-version -i "$TEMP_DEB"
+      rm -f "$TEMP_DEB"
+  fi
 fi
 
 if [ ! -d ~/.zinit ]; then
@@ -37,4 +47,6 @@ fi
 # custom
 ###############################################################################
 
-sudo ln -s $(which python3) /usr/local/bin/python
+if hash python 2>/dev/null; then
+  sudo ln -s $(which python3) /usr/local/bin/python
+fi
