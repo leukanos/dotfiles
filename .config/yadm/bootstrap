@@ -26,7 +26,7 @@ if [ "$system_type" = "Linux" ]; then
 
   chsh -s $(which zsh)
 
-  if hash lsd 2>/dev/null; then
+  if ! hash lsd 2>/dev/null; then
     # install lsd
     SYSTEM_DEB_SUFFIX=$(dpkg --print-architecture)
     TEMP_DEB="$(mktemp)" &&
@@ -47,6 +47,6 @@ fi
 # custom
 ###############################################################################
 
-if hash python 2>/dev/null; then
+if ! hash python 2>/dev/null; then
   sudo ln -s $(which python3) /usr/local/bin/python
 fi

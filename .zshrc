@@ -174,7 +174,7 @@ zinit wait'1' lucid for \
     OMZL::directories.zsh\
     OMZP::git
 
-if kubectl complete 2>/dev/null; then
+if hash kubectl complete 2>/dev/null; then
   zinit wait'1' lucid for atload"unalias k" OMZP::kubectl
 fi
 
