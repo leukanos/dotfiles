@@ -131,13 +131,10 @@ fi' for RobSis/zsh-completion-generator
 
 setopt promptsubst
 
-zinit wait lucid for \
+zinit wait'1' lucid for \
     OMZL::git.zsh \
-  atload"unalias grv" \
+    OMZL::functions.zsh \
     OMZP::git
-
-zinit ice svn pick"functions.zsh" lucid
-zinit snippet OMZ::lib
 
 zinit wait'1' lucid for OMZP::kubectl
 
