@@ -31,6 +31,7 @@ if [[ $(uname) == 'Linux' ]]; then
     htop
     jq
     moreutils
+    make
     mosh
     neovim
     thefuck
