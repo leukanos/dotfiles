@@ -35,6 +35,10 @@ if [ "$system_type" = "Linux" ]; then
       sudo dpkg --skip-same-version -i "$TEMP_DEB"
       rm -f "$TEMP_DEB"
   fi
+
+  # setup locale for mosh-server
+  sudo locale-gen "en_US.UTF-8"
+  update-locale LC_ALL="en_US.UTF-8"
 fi
 
 if [ ! -d ~/.zinit ]; then

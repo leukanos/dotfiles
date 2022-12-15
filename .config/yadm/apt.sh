@@ -30,6 +30,7 @@ if [[ $(uname) == 'Linux' ]]; then
     git-extras
     htop
     jq
+    locales
     moreutils
     make
     mosh
