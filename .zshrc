@@ -27,6 +27,7 @@ setopt hist_save_no_dups
 setopt extended_history
 setopt hist_reduce_blanks
 setopt hist_verify hist_fcntl_lock
+setopt auto_cd
 
 unsetopt share_history # Disable sharing history between terminals (sessions)
 
@@ -74,7 +75,7 @@ zinit wait'0' lucid atload"!_zsh_autosuggest_start" for zsh-users/zsh-autosugges
 
 zinit wait'1' lucid for supercrabtree/k
 
-zinit wait'1' lucid light-mode for lukechilds/zsh-better-npm-completion
+zinit ice wait'1' lucid light-mode for lukechilds/zsh-better-npm-completion
 zinit wait'1' atclone'./zplug.zsh' lucid for g-plane/zsh-yarn-autocompletions
 
 if [ ! -x "$(command -v dircolors)" ]; then
@@ -126,6 +127,42 @@ zinit wait'2' lucid atclone'if [ ! -d "$GENCOMPL_FPATH" ]; then
   mkdir -p $GENCOMPL_FPATH
 fi' for RobSis/zsh-completion-generator
 
+# fzf-tab doesn't currently work in Ubuntu https://github.com/Aloxaf/fzf-tab/issues/189
+zinit wait'1' lucid atclone'source fzf-tab.zsh && build-fzf-tab-module' atpull'%atclone' for Aloxaf/fzf-tab
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -l --blocks name,permission,size,date --color=always --icon=always $realpath'
+zstyle ':fzf-tab:complete:ls:*' fzf-preview '[ -f "$realpath" ] && bat --color=always $realpath || lsd -l --blocks name,permission,size,date --color=always --icon=always $realpath'
+zstyle ':fzf-tab:complete:export:*' fzf-preview 'printenv $word'
+zstyle ':fzf-tab:complete:ssh:*' fzf-preview 'ping -c1 $word'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
+if [ -x "$(command -v bat)" ]; then
+# this MUST be run after woefe/git-prompt.zsh
+alias cat=bat
+# this function does not work for piping to less with (less) arguments (any flags will become bat flags)
+function less() {
+local filename="${@:$#}" # last parameter, MUST be the filename
+local flaglength=$(($# - 1))
+if ((flaglength > 0)); then
+local other="${@:1:$flaglength}"
+bat $filename --pager "less $LESS $other"
+elif ((flaglength == 0)); then
+bat $filename --pager "less $LESS"
+else
+# no arg at all -> piping
+command less
+fi
+}
+fi
+if [ -x "$(command -v lsd)" ]; then
+alias ls=lsd
+alias ll='ls -l --date relative --blocks permission,size,date,name'
+fi
 
 ###############################################################################
 
@@ -134,9 +171,10 @@ setopt promptsubst
 zinit wait'1' lucid for \
     OMZL::git.zsh \
     OMZL::functions.zsh \
+    OMZL::directories.zsh\
     OMZP::git
 
-zinit wait'1' lucid for OMZP::kubectl
+zinit wait'1' lucid for atload"unalias k" OMZP::kubectl
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   zinit ice svn

@@ -11,7 +11,7 @@ alias berc="bundle exec rails console"
 alias bers="bundle exec rails server"
 alias berm="bundle exec rake db:migrate"
 
-alias e=vim
+alias e=nvim
 
 alias https="ruby -run -e /httpd . -p 8080"
 
@@ -41,3 +41,11 @@ alias kafkat="kutility ./bin/kafka-topics.sh --bootstrap-server kafka-0.kafka-he
 
 alias ns="kubens"
 alias ctx="kubectx"
+
+############# directories
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+
+
