@@ -143,25 +143,25 @@ zstyle ':fzf-tab:*' switch-group ',' '.'
 
 if [ -x "$(command -v bat)" ]; then
 # this MUST be run after woefe/git-prompt.zsh
-alias cat=bat
-# this function does not work for piping to less with (less) arguments (any flags will become bat flags)
-function less() {
-local filename="${@:$#}" # last parameter, MUST be the filename
-local flaglength=$(($# - 1))
-if ((flaglength > 0)); then
-local other="${@:1:$flaglength}"
-bat $filename --pager "less $LESS $other"
-elif ((flaglength == 0)); then
-bat $filename --pager "less $LESS"
-else
-# no arg at all -> piping
-command less
-fi
-}
+  alias cat=bat
+  # this function does not work for piping to less with (less) arguments (any flags will become bat flags)
+  function less() {
+    local filename="${@:$#}" # last parameter, MUST be the filename
+    local flaglength=$(($# - 1))
+    if ((flaglength > 0)); then
+      local other="${@:1:$flaglength}"
+      bat $filename --pager "less $LESS $other"
+    elif ((flaglength == 0)); then
+      bat $filename --pager "less $LESS"
+    else
+    # no arg at all -> piping
+      command less
+    fi
+  }
 fi
 if [ -x "$(command -v lsd)" ]; then
-alias ls=lsd
-alias ll='ls -l --date relative --blocks permission,size,date,name'
+  alias ls=lsd
+  alias ll='ls -l --date relative --blocks permission,size,date,name'
 fi
 
 ###############################################################################
@@ -174,7 +174,9 @@ zinit wait'1' lucid for \
     OMZL::directories.zsh\
     OMZP::git
 
-zinit wait'1' lucid for atload"unalias k" OMZP::kubectl
+if kubectl complete 2>/dev/null; then
+  zinit wait'1' lucid for atload"unalias k" OMZP::kubectl
+fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   zinit ice svn
