@@ -1,2 +1,2 @@
 [yadm]
-	cipher = openssl
+	gpg-recipient = leukanos@lostrowski.pl
