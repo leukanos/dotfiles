@@ -100,7 +100,7 @@ fi
 
 # fuzzy completion: ^R, ^T, ⌥C, **
 export FZF_DEFAULT_COMMAND="$FD --type file"
-export FZF_DEFAULT_OPTS='--height ~30% --layout=reverse'
+export FZF_DEFAULT_OPTS='--height 30% --layout=reverse'
 export FZF_TMUX_OPTS="-d 70%"
 FZF=fzf
 export FZF_ALT_C_COMMAND='$FD --type directory'
@@ -110,7 +110,7 @@ if [ -x "$(command -v bat)" ]; then
   export FZF_CTRL_T_OPTS="--preview 'bat --color always {} | head -120' --preview-window=right:33%"
 fi
 zinit wait'1' lucid as'null' \
-  atinit"[ -f ~/.fzf.$SHELLNAME ] && source ~/.fzf.$SHELLNAME && bindkey 'ç' fzf-cd-widget #option-c" light-mode for zdharma-continuum/null
+  atinit"[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh && bindkey 'ç' fzf-cd-widget #option-c" light-mode for zdharma-continuum/null
 
 # history search has to be loaded aftr fzf, so that it overwrites ^R
 if [[ -x $(command -v atuin) ]]; then
