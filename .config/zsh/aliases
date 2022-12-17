@@ -51,4 +51,5 @@ alias ys="yadm status"
 alias ycm='yadm commit -m'
 alias ypl='yadm pull'
 alias ypp='yadm push'
-
+alias ysta='yadm stash'
+alias ystp='yadm stash pop'
