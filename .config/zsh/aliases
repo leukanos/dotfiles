@@ -44,4 +44,8 @@ alias -g ....='../../..'
 alias -g .....='../../../..'
 alias -g ......='../../../../..'
 
-
+############# yadm
+alias y="yadm"
+alias ya="yadm add"
+alias ys="yadm status"
+alias ycm='yadm commit -a -m'

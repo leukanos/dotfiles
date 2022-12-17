@@ -195,7 +195,6 @@ zinit lucid light-mode for agkozak/zsh-z
 
 zinit wait'2' lucid --atinit="ZINIT[COMPINIT_OPTS]=-C; zicompinit; autoload -U +X bashcompinit && bashcompinit; zicdreplay" --atload="fast-theme XDG:improved-default >> /tmp/fast-theme.log" light-mode for zdharma-continuum/fast-syntax-highlighting
 
-
 # zsh-notify (as opposed to zbell) only notifies when the pane with the command is not focused
 # icons (whether remote or local) affects performance noticably
 # silent because zsh-notify does not work on raspberry pi

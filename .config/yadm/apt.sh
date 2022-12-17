@@ -35,6 +35,7 @@ if [[ $(uname) == 'Linux' ]]; then
     moreutils
     make
     mosh
+		ncdu
     neovim
     thefuck
     tig
