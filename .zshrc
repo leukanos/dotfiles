@@ -127,7 +127,6 @@ zinit wait'2' lucid atclone'if [ ! -d "$GENCOMPL_FPATH" ]; then
   mkdir -p $GENCOMPL_FPATH
 fi' for RobSis/zsh-completion-generator
 
-# fzf-tab doesn't currently work in Ubuntu https://github.com/Aloxaf/fzf-tab/issues/189
 zinit wait'1' lucid atclone'source fzf-tab.zsh && build-fzf-tab-module' atpull'%atclone' for Aloxaf/fzf-tab
 # disable sort when completing `git checkout`
 zstyle ':completion:*:git-checkout:*' sort false

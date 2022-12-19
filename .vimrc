@@ -1,5 +1,6 @@
 scriptencoding utf-8
 set encoding=utf-8
+set nocompatible
 
 " Keep at least 5 lines anove or below the cursor
 set scrolloff=5

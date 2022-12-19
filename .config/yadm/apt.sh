@@ -24,6 +24,7 @@ if [[ $(uname) == 'Linux' ]]; then
     curl
     direnv
     exa
+    fd-find
     findutils
     fzf
     gh
