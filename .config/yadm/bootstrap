@@ -66,3 +66,8 @@ fi
 mkdir -p ~/.config/nvim/autoload
 wget --show-progress -qNP ~/.config/nvim/autoload https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+if [ "$system_type" = "Darwin" ]; then
+	wget --shop-progress -qNP /tmp https://invisible-island.net/datafiles/current/terminfo.src.gz
+	gunzip /tmp/terminfo.src.gz
+	/usr/bin/tic -xe tmux-256color /tmp/terminfo.src
+fi
