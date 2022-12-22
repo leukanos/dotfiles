@@ -22,6 +22,7 @@ if [[ $(uname) == 'Linux' ]]; then
     build-essential
     coreutils
     curl
+    cmake
     direnv
     exa
     fd-find
@@ -38,6 +39,9 @@ if [[ $(uname) == 'Linux' ]]; then
     mosh
 		ncdu
     neovim
+    nodejs
+    npm
+    ripgrep
     thefuck
     tig
     tmux
@@ -45,7 +49,6 @@ if [[ $(uname) == 'Linux' ]]; then
     vim
     wget
     yadm
-    yarn
     zsh
   )
 
