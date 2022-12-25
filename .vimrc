@@ -1,6 +1,9 @@
 scriptencoding utf-8
 set encoding=utf-8
 set nocompatible
+set background=dark
+syntax enable
+colorscheme monokai
 
 " Keep at least 5 lines anove or below the cursor
 set scrolloff=5
@@ -19,6 +22,7 @@ set softtabstop=2
 let mapleader=' '
 
 call plug#begin('~/.config/nvim/site/autoload')
+Plug 'junegunn/vim-plug'
 
 nnoremap <C-f> :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
@@ -32,11 +36,21 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>fa <cmd>Telescope commands<cr>
 
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+
+" For ultisnips users.
+Plug 'SirVer/ultisnips'
+Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+
 Plug 'vim-airline/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree' " NerdTree
 
-Plug 'junegunn/vim-plug'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
 
@@ -53,6 +67,8 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCM
 
 " If you have nodejs and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+
+Plug 'tmux-plugins/vim-tmux'
 
 call plug#end()
 
