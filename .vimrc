@@ -1,3 +1,7 @@
+"*****************************************************************************
+" defaults "
+"*****************************************************************************
+
 scriptencoding utf-8
 set encoding=utf-8
 set nocompatible
@@ -24,20 +28,13 @@ set smartindent
 " Use space as a <leader>
 let mapleader=' '
 
+"*****************************************************************************
+" Plugins 
+"*****************************************************************************
+
 call plug#begin('~/.config/nvim/site/autoload')
 Plug 'junegunn/vim-plug'
-
-nnoremap <C-f> :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
-
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>fa <cmd>Telescope commands<cr>
+Plug 'tpope/vim-sensible'
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -58,7 +55,6 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'preservim/nerdtree' " NerdTree
 
-Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
 
 Plug 'ryanoasis/vim-devicons' " Developer Icons
@@ -82,7 +78,36 @@ Plug 'windwp/nvim-autopairs'
 
 call plug#end()
 
+"*****************************************************************************
+" NERDTree
+"*****************************************************************************
+
+nnoremap <C-f> :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
+
+"*****************************************************************************
+" telescope
+"*****************************************************************************
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>fa <cmd>Telescope commands<cr>
+
+lua require('telescope-config')
+
+"*****************************************************************************
+" airline
+"*****************************************************************************
+
 let g:airline_theme='molokai'
 let g:airline_powerline_fonts = 1
 
 lua require('config')
+lua require('autopairs-config')
+lua require('treesitter-config')
+

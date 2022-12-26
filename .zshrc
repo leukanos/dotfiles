@@ -140,6 +140,11 @@ zstyle ':fzf-tab:complete:ssh:*' fzf-preview 'ping -c1 $word'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
+
+#######
+# bat #
+#######
+
 if [ -x "$(command -v bat)" ]; then
 # this MUST be run after woefe/git-prompt.zsh
   alias cat=bat
@@ -244,7 +249,8 @@ fi
 # Directories to be prepended to $PATH #
 ########################################
 
-export GOPATH=~/go
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/go
 
 declare -a dirs_to_prepend
 dirs_to_prepend=(
@@ -255,6 +261,8 @@ dirs_to_prepend=(
   "$GOPATH/bin"
   "$HOME/go/bin"
   "/usr/local/go/bin"
+  "$GOPATH"
+  "$GOROOT"
 )
 
 # Explicitly configured $PATH
