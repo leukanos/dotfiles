@@ -10,13 +10,16 @@ set scrolloff=5
 
 " Show line numbers
 set number
-set autoindent
+set relativenumber
 set smarttab
 set mouse=a
 
+set autoindent
+set expandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
+set smartindent
 
 " Use space as a <leader>
 let mapleader=' '
@@ -41,6 +44,9 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/cmp-emoji'
+Plug 'hrsh7th/cmp-look'
+Plug 'hrsh7th/cmp-calc'
 Plug 'hrsh7th/nvim-cmp'
 
 " For ultisnips users.
@@ -49,6 +55,7 @@ Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
 Plug 'vim-airline/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes'
+
 Plug 'preservim/nerdtree' " NerdTree
 
 Plug 'tpope/vim-sensible'
@@ -69,6 +76,9 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCM
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 
 Plug 'tmux-plugins/vim-tmux'
+Plug 'github/copilot.vim'
+
+Plug 'windwp/nvim-autopairs'
 
 call plug#end()
 
