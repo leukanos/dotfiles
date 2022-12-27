@@ -107,7 +107,7 @@ lua require('telescope-config')
 let g:airline_theme='molokai'
 let g:airline_powerline_fonts = 1
 
-lua require('config')
+lua require('cmp-config')
 lua require('autopairs-config')
 lua require('treesitter-config')
 

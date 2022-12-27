@@ -17,9 +17,11 @@ require'nvim-treesitter.configs'.setup {
   highlight = {
     -- `false` will disable the whole extension
     enable = true,
+    disable = { "bash" },  -- list of language that will be disabled
 	},
 
   indent = {
     enable = true
   }
+
 }
