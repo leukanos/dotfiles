@@ -1,5 +1,5 @@
 "*****************************************************************************
-" defaults "
+" Defaults 
 "*****************************************************************************
 
 scriptencoding utf-8
@@ -45,6 +45,9 @@ Plug 'hrsh7th/cmp-emoji'
 Plug 'hrsh7th/cmp-look'
 Plug 'hrsh7th/cmp-calc'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'onsails/lspkind.nvim'
+Plug 'ray-x/cmp-treesitter'
+Plug 'f3fora/cmp-spell'
 
 " For ultisnips users.
 Plug 'SirVer/ultisnips'
@@ -107,7 +110,30 @@ lua require('telescope-config')
 let g:airline_theme='molokai'
 let g:airline_powerline_fonts = 1
 
+"*****************************************************************************
+" nvim-cmp
+"*****************************************************************************
+
+" gray
+highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
+" blue
+highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+highlight! link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch
+" light blue
+highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+highlight! link CmpItemKindInterface CmpItemKindVariable
+highlight! link CmpItemKindText CmpItemKindVariable
+" pink
+highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+highlight! link CmpItemKindMethod CmpItemKindFunction
+" front
+highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
+highlight! link CmpItemKindProperty CmpItemKindKeyword
+highlight! link CmpItemKindUnit CmpItemKindKeyword
+
 lua require('cmp-config')
+
+"*****************************************************************************
 lua require('autopairs-config')
 lua require('treesitter-config')
 
