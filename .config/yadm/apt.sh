@@ -40,7 +40,8 @@ if [[ $(uname) == 'Linux' ]]; then
 		ncdu
     neovim
     nodejs
-    npm
+    python3
+    python3-pip
     ripgrep
     thefuck
     tig
@@ -53,6 +54,9 @@ if [[ $(uname) == 'Linux' ]]; then
   )
 
   sudo apt install -y "${apps[@]}"
-  sudo ln -s $(which batcat) /usr/local/bin/bat
+  
+  if ! hash bat 2>/dev/null; then
+    sudo ln -s $(which batcat) /usr/local/bin/bat
+  fi
 fi
 

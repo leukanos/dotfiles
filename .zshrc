@@ -280,6 +280,12 @@ unset dirs_to_prepend
 
 export PATH
 
+#######################
+# Local configuration #
+#######################
+
+source ~/.zshrc_local
+
 ######################
 # User configuration #
 ######################
