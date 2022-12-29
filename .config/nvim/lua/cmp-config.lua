@@ -17,6 +17,10 @@ cmp.setup({
     end,
   },
 
+  window = {
+    documentation = cmp.config.window.bordered()
+  },
+
   formatting = {
       
     format = lspkind.cmp_format({
@@ -130,7 +134,7 @@ cmp.setup({
   sources = cmp.config.sources({
 		{ name = 'buffer' }, { name = 'look' }, { name = 'calc' }, { name = 'emoji' }, { name = 'spell' },
 		{ name = 'path' }, { name = 'ultisnips' }, { name = 'nvim_lsp' }, { name = 'nvim_lua' }, { name = 'treesitter' },
-    { name = 'ctags' }
+    { name = 'ctags' }, { name = 'luasnip' }
   }),
 	completion = { completeopt = 'menu,menuone,noinsert' } 
 })
@@ -157,14 +161,16 @@ cmp.setup.cmdline(':', {
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 --local servers = { 'bashls', 'clangd', 'cmake', 'dockerls', 'gopls', 'html', 'jsonls', 'sumneko_lua', 'texlab', 'tsserver', 'vimls', 'yamlls' }
-local servers = { 'gopls' }
+local servers = { 'gopls', 'luau_lsp', 'tsserver', 'vimls', 'html' , 'cssls', 'jsonls', 'eslint', 'bashls', 
+  'cmake', 'yamlls', 'grammarly', 'dockerls', 'tsserver'
+}
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     capabilities = capabilities,
   }
 end 
 
-require('lspconfig')['gopls'].setup {
-  capabilities = capabilities
-}   
+-- require('lspconfig')['gopls'].setup {
+--   capabilities = capabilities
+-- }   
 

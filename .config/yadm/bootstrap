@@ -41,11 +41,14 @@ if [ "$system_type" = "Linux" ]; then
   sudo update-locale LC_ALL="en_US.UTF-8"
 fi
 
-if [ "$system_type" = "Darwin" ]; then
-  $(brew --prefix)/opt/fzf/install --completion --key-bindings --no-update-rc
-else
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  ~/.fzf/install --completion --key-bindings --no-update-rc
+
+if [ ! -d ~/.fzf ]; then
+  if [ "$system_type" = "Darwin" ]; then
+   $(brew --prefix)/opt/fzf/install --completion --key-bindings --no-update-rc
+  else
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    ~/.fzf/install --completion --key-bindings --no-update-rc
+  fi
 fi
 
 
@@ -63,11 +66,40 @@ if ! hash python 2>/dev/null; then
   sudo ln -s $(which python3) /usr/local/bin/python
 fi
 
-mkdir -p ~/.config/nvim/autoload
-wget --show-progress -qNP ~/.config/nvim/autoload https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if [ ! -d ~/.config/nvim/autoload ]; then
+  mkdir -p ~/.config/nvim/autoload
+  wget --show-progress -qNP ~/.config/nvim/autoload https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
 
 if [ "$system_type" = "Darwin" ]; then
 	wget --shop-progress -qNP /tmp https://invisible-island.net/datafiles/current/terminfo.src.gz
 	gunzip /tmp/terminfo.src.gz
 	/usr/bin/tic -xe tmux-256color /tmp/terminfo.src
+fi
+
+if hash npm 2>/dev/null; then
+  if ! hash vim-language-server 2>/dev/null; then
+    echo "installing vim-language-server..."
+    sudo npm install -g vim-language-server
+  fi
+
+  if ! hash vscode-html-language-server 2>/dev/null; then
+    echo "installing vscode-langservers-extracted..."
+    sudo npm install -g vscode-langservers-extracted
+  fi
+
+  if ! hash grammarly-languageserver 2>/dev/null; then
+    echo "installing grammarly-languageserver..."
+    sudo npm install -g grammarly-languageserver
+  fi
+
+  if ! hash bash-language-server 2>/dev/null; then
+    echo "installing bash-language-server..."
+    sudo npm install -g bash-language-server
+  fi
+
+  if ! hash dockerfile-language-server-nodejs 2>/dev/null; then
+    echo "installing dockerfile-language-server-nodejs..."
+    sudo npm install -g dockerfile-language-server-nodejs
+  fi
 fi

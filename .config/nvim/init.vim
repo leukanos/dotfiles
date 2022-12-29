@@ -2,31 +2,48 @@
 " Defaults 
 "*****************************************************************************
 
+lua require('core/keymaps')
+
 scriptencoding utf-8
 set encoding=utf-8
 set nocompatible
+
+" -- apperance
 set background=dark
+set signcolumn=yes
+set termguicolors
 syntax enable
 colorscheme monokai
 
-" Keep at least 5 lines anove or below the cursor
-set scrolloff=5
+" -- backspace
+set backspace=indent,eol,start
 
-" Show line numbers
+
+" -- keep at least 5 lines anove or below the cursor
+set clipboard^=unnamed,unnamedplus
+
+" -- line numbers 
 set number
 set relativenumber
-set smarttab
+
+" -- mouse mode
 set mouse=a
 
+" -- tabs & indentation
 set autoindent
 set expandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
 set smartindent
+set smarttab
 
-" Use space as a <leader>
-let mapleader=' '
+" -- search settings
+set ignorecase
+set smartcase
+
+" -- cursor line 
+set cursorline
 
 "*****************************************************************************
 " Plugins 
@@ -49,6 +66,8 @@ Plug 'onsails/lspkind.nvim'
 Plug 'ray-x/cmp-treesitter'
 Plug 'f3fora/cmp-spell'
 Plug 'delphinus/cmp-ctags'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'L3MON4D3/LuaSnip'
 
 Plug 'ludovicchabant/vim-gutentags' " Automatically generate ctags
 
@@ -84,16 +103,9 @@ Plug 'github/copilot.vim'
 
 Plug 'windwp/nvim-autopairs'
 
+Plug 'christoomey/vim-tmux-navigator'
+
 call plug#end()
-
-"*****************************************************************************
-" NERDTree
-"*****************************************************************************
-
-nnoremap <C-f> :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
 
 "*****************************************************************************
 " telescope
@@ -160,4 +172,3 @@ lua require('cmp-config')
 "*****************************************************************************
 lua require('autopairs-config')
 lua require('treesitter-config')
-
