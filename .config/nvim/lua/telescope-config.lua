@@ -1,5 +1,6 @@
 -- -----------------------
 -- Telescope configuration
+-- great resource: https://github.com/whatsthatsmell/dots/blob/master/public%20dots/vim-nvim/lua/joel/telescope/init.lua
 -- -----------------------
 
 local actions = require('telescope.actions')
@@ -33,10 +34,38 @@ require('telescope').setup {
       override_file_sorter = true,     -- override the file sorter
       case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
                                        -- the default case_mode is "smart_case"
+    },
+    command_palette = {
+      {
+        "NVim",
+        { "source", ":source %" },
+        { "checkhealth", ":checkhealth" },
+        { "Browse config", "lua require('telescope-config').nvim_config()" }
+      }
     }
   }
 }
 -- To get fzf loaded and working with telescope, you need to call
 -- load_extension, somewhere after setup function:
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('file_browser')
+require('telescope').load_extension('command_palette')
 
+local M = {}
+
+function M.grep_prompt()
+  require('telescope.builtin').grep_string {
+    shorten_path = true,
+    search = vim.fn.input('Rg> '),
+  }
+end
+
+function M.nvim_config()
+  require("telescope").extensions.file_browser.file_browser {
+    prompt_title = " NVim Config Browse",
+    cwd = "~/.config/nvim/",
+    layout_config = { preview_width = 0.65, width = 0.75 },
+  }
+end
+
+return M

@@ -6,17 +6,14 @@ if [[ $(uname) == 'Linux' ]]; then
   fi
   set +e
 
-  # add repo to get newest git
-  sudo add-apt-repository -y ppa:git-core/ppa
-  # add repo to get newest tmux
-  sudo add-apt-repository -y ppa:pi-rho/dev
   # add repo to get gh
   sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-key C99B11DEB97541F0
-  sudo apt-add-repository -y https://cli.github.com/packages
   sudo apt update
   sudo apt full-upgrade -y
 
   apps=(
+    autoconf
+    automake
     awscli
     bat
     build-essential
@@ -28,11 +25,16 @@ if [[ $(uname) == 'Linux' ]]; then
     fd-find
     findutils
     fzf
+    gcc
     gh
     git
     git-extras
     htop
     jq
+    libseccomp-dev
+    libjansson-dev
+    libyaml-dev
+    libxml2-dev
     locales
     moreutils
     make
@@ -42,6 +44,8 @@ if [[ $(uname) == 'Linux' ]]; then
     nodejs
     python3
     python3-pip
+    python3-docutils
+    pkg-config
     ripgrep
     thefuck
     tig
