@@ -19,6 +19,6 @@ keymap.set("n", "<leader>sx", ":close<CR>")
 
 -- NERDTree
 
-keymap.set("n", "<C-f>", ":NERDTreeFocus<CR>", { silent = true })
-keymap.set("n", "<C-n>", ":NERDTree<CR>", { silent = true })
-keymap.set("n", "<C-t>", ":NERDTreeToggle<CR>", { silent = true })
+keymap.set("n", "<C-f>", ":Neotree focus reveal<CR>", { silent = true })
+keymap.set("n", "<C-t>", ":Neotree toggle reveal<CR>", { silent = true })
+keymap.set("n", "<leader>nr", ":Neotree reveal_force_cwd<CR>", { silent = true })

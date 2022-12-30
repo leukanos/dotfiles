@@ -8,6 +8,8 @@ scriptencoding utf-8
 set encoding=utf-8
 set nocompatible
 
+set modifiable
+
 " -- apperance
 set background=dark
 set signcolumn=yes
@@ -78,8 +80,6 @@ Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'vim-airline/vim-airline' " Status bar
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'preservim/nerdtree' " NerdTree
-
 Plug 'tpope/vim-commentary'
 
 Plug 'ryanoasis/vim-devicons' " Developer Icons
@@ -104,6 +104,10 @@ Plug 'github/copilot.vim'
 Plug 'windwp/nvim-autopairs'
 
 Plug 'christoomey/vim-tmux-navigator'
+
+Plug 'nvim-neo-tree/neo-tree.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
 
 call plug#end()
 
@@ -172,3 +176,4 @@ lua require('cmp-config')
 "*****************************************************************************
 lua require('autopairs-config')
 lua require('treesitter-config')
+lua require('plugins/neo-tree')
