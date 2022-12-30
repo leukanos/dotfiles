@@ -8,8 +8,6 @@ scriptencoding utf-8
 set encoding=utf-8
 set nocompatible
 
-set modifiable
-
 " -- apperance
 set background=dark
 set signcolumn=yes
@@ -101,6 +99,8 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 Plug 'tmux-plugins/vim-tmux'
 Plug 'github/copilot.vim'
 
+Plug 'lewis6991/gitsigns.nvim'
+
 Plug 'windwp/nvim-autopairs'
 
 Plug 'christoomey/vim-tmux-navigator'
@@ -176,4 +176,5 @@ lua require('cmp-config')
 "*****************************************************************************
 lua require('autopairs-config')
 lua require('treesitter-config')
+lua require('plugins/gitsigns')
 lua require('plugins/neo-tree')
