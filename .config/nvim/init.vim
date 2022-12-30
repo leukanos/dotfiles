@@ -53,6 +53,8 @@ call plug#begin('~/.config/nvim/site/autoload')
 Plug 'junegunn/vim-plug'
 Plug 'tpope/vim-sensible'
 
+Plug 'rebelot/kanagawa.nvim'
+
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -75,8 +77,9 @@ Plug 'ludovicchabant/vim-gutentags' " Automatically generate ctags
 Plug 'SirVer/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
-Plug 'vim-airline/vim-airline' " Status bar
-Plug 'vim-airline/vim-airline-themes'
+Plug 'rebelot/heirline.nvim'
+" Plug 'vim-airline/vim-airline' " Status bar
+" Plug 'vim-airline/vim-airline-themes'
 
 Plug 'tpope/vim-commentary'
 
@@ -174,6 +177,8 @@ highlight! link CmpItemKindUnit CmpItemKindKeyword
 lua require('cmp-config')
 
 "*****************************************************************************
+lua require('colors/kanagawa')
+
 lua require('autopairs-config')
 lua require('treesitter-config')
 lua require('plugins/gitsigns')
