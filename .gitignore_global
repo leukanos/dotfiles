@@ -19,6 +19,7 @@ gcr-secret.yaml
 /.idea
 
 **/vendor/bundle
+**/site/autoload
 
 .erdconfig
 erd.pdf

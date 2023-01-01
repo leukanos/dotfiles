@@ -119,44 +119,6 @@ Plug 'nvim-tree/nvim-web-devicons'
 
 call plug#end()
 
-"*****************************************************************************
-" telescope
-"*****************************************************************************
-
-" Find files using Telescope command-line sugar.
-nnoremap <leader>ff <cmd>Telescope find_files<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-nnoremap <leader>fa <cmd>Telescope commands<cr>
-nnoremap <leader>fn <cmd>lua require('telescope-config').grep_prompt()<cr>
-nnoremap <leader>nv <cmd>lua require('telescope-config').nvim_config()<cr>
-nnoremap <leader>k <cmd> lua require('telescope').extensions.command_palette.command_palette()<cr>
-nnoremap <leader>g <cmd> :lua require('telescope.builtin').grep_string{}<cr>
-
-lua require('telescope-config')
-
-"*****************************************************************************
-" airline
-"*****************************************************************************
-
-let g:airline_theme='molokai'
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#buffer_nr_show = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <leader>0 <Plug>AirlineSelectTab0
-nmap <leader>- <Plug>AirlineSelectPrevTab
-nmap <leader>+ <Plug>AirlineSelectNextTab
 
 "*****************************************************************************
 " nvim-cmp
@@ -179,13 +141,14 @@ highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
 highlight! link CmpItemKindProperty CmpItemKindKeyword
 highlight! link CmpItemKindUnit CmpItemKindKeyword
 
-lua require('cmp-config')
 
 "*****************************************************************************
 lua require('colors/kanagawa')
 
-lua require('autopairs-config')
-lua require('treesitter-config')
+lua require('plugins/autopairs-config')
+lua require('plugins/cmp-config')
+lua require('plugins/treesitter-config')
 lua require('plugins/gitsigns')
 lua require('plugins/neo-tree')
 lua require('plugins/heirline')
+lua require('plugins/telescope-config')

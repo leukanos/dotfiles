@@ -17,9 +17,9 @@ if [[ $(uname) == 'Linux' ]]; then
     awscli
     bat
     build-essential
+    cmake
     coreutils
     curl
-    cmake
     direnv
     exa
     fd-find
@@ -31,22 +31,22 @@ if [[ $(uname) == 'Linux' ]]; then
     git-extras
     htop
     jq
-    libseccomp-dev
     libjansson-dev
-    libyaml-dev
+    libseccomp-dev
     libxml2-dev
+    libyaml-dev
     locales
-    moreutils
     make
+    moreutils
     mosh
-		ncdu
+    ncdu
     neovim
     ninja-build
     nodejs
-    python3
-    python3-pip
-    python3-docutils
     pkg-config
+    python3
+    python3-docutils
+    python3-pip
     ripgrep
     thefuck
     tig
