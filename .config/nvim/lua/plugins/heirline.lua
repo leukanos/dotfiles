@@ -1,32 +1,29 @@
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
-local vim = vim
-
-local TabLine = {}
 
 local colors = require'kanagawa.colors'.setup()
 require('heirline').load_colors(colors)
 
 local function setup_colors()
-    return {
-        bright_bg = utils.get_highlight("Folded").bg,
-        bright_fg = utils.get_highlight("Folded").fg,
-        red = utils.get_highlight("DiagnosticError").fg,
-        dark_red = utils.get_highlight("DiffDelete").bg,
-        green = utils.get_highlight("String").fg,
-        blue = utils.get_highlight("Function").fg,
-        gray = utils.get_highlight("NonText").fg,
-        orange = utils.get_highlight("Constant").fg,
-        purple = utils.get_highlight("Statement").fg,
-        cyan = utils.get_highlight("Special").fg,
-        diag_warn = utils.get_highlight("DiagnosticWarn").fg,
-        diag_error = utils.get_highlight("DiagnosticError").fg,
-        diag_hint = utils.get_highlight("DiagnosticHint").fg,
-        diag_info = utils.get_highlight("DiagnosticInfo").fg,
-        git_del = utils.get_highlight("diffDeleted").fg,
-        git_add = utils.get_highlight("diffAdded").fg,
-        git_change = utils.get_highlight("diffChanged").fg,
-    }
+  return {
+    bright_bg = utils.get_highlight("Folded").bg,
+    bright_fg = utils.get_highlight("Folded").fg,
+    red = utils.get_highlight("DiagnosticError").fg,
+    dark_red = utils.get_highlight("DiffDelete").bg,
+    green = utils.get_highlight("String").fg,
+    blue = utils.get_highlight("Function").fg,
+    gray = utils.get_highlight("NonText").fg,
+    orange = utils.get_highlight("Constant").fg,
+    purple = utils.get_highlight("Statement").fg,
+    cyan = utils.get_highlight("Special").fg,
+    diag_warn = utils.get_highlight("DiagnosticWarn").fg,
+    diag_error = utils.get_highlight("DiagnosticError").fg,
+    diag_hint = utils.get_highlight("DiagnosticHint").fg,
+    diag_info = utils.get_highlight("DiagnosticInfo").fg,
+    git_del = utils.get_highlight("diffDeleted").fg,
+    git_add = utils.get_highlight("diffAdded").fg,
+    git_change = utils.get_highlight("diffChanged").fg,
+  }
 end
 require('heirline').load_colors(setup_colors())
 
@@ -105,8 +102,7 @@ local ViMode = {
     -- control the padding and make sure our string is always at least 2
     -- characters long. Plus a nice Icon.
     provider = function(self)
-        return " %2("..self.mode_names[self.mode].."%)"
-
+        return " %2("..self.mode_names[self.mode].."%)"
     end,
     -- Same goes for the highlight. Now the foreground will change according to the current mode.
     hl = function(self)
@@ -150,7 +146,7 @@ local FileName = {
     end,
     hl = { fg = utils.get_highlight("Directory").fg },
 
-    flexible = 11,
+    flexible = 2,
     {
         provider = function(self)
             return self.lfilename
@@ -233,6 +229,48 @@ FileNameBlock = utils.insert(FileNameBlock,
     { provider = '%<'} -- this means that the statusline is cut here when there's not enough space
 )
 
+local TerminalName = {
+    -- we could add a condition to check that buftype == 'terminal'
+    -- or we could do that later (see #conditional-statuslines below)
+    provider = function()
+        local tname, _ = vim.api.nvim_buf_get_name(0):gsub(".*:", "")
+        return " " .. tname
+    end,
+    hl = { fg = "blue", bold = true },
+}
+
+local HelpFileName = {
+    condition = function()
+        return vim.bo.filetype == "help"
+    end,
+    provider = function()
+        local filename = vim.api.nvim_buf_get_name(0)
+        return vim.fn.fnamemodify(filename, ":t")
+    end,
+    hl = { fg = colors.blue },
+}
+
+local Snippets = {
+    -- check that we are in insert or select mode
+    condition = function()
+        return vim.tbl_contains({'s', 'i'}, vim.fn.mode())
+    end,
+    provider = function()
+        local forward = (vim.fn["UltiSnips#CanJumpForwards"]() == 1) and "" or ""
+        local backward = (vim.fn["UltiSnips#CanJumpBackwards"]() == 1) and " " or ""
+        return backward .. forward
+    end,
+    hl = { fg = "red", bold = true },
+}
+
+local Spell = {
+    condition = function()
+        return vim.wo.spell
+    end,
+    provider = 'SPELL ',
+    hl = { bold = true, fg = "orange"}
+}
+
 local LSPActive = {
     condition = conditions.lsp_attached,
     update = {'LspAttach', 'LspDetach'},
@@ -243,7 +281,7 @@ local LSPActive = {
     -- Or complicate things a bit and get the servers names
     provider  = function()
         local names = {}
-        for i, server in pairs(vim.lsp.buf_get_clients(0)) do
+        for _i, server in pairs(vim.lsp.buf_get_clients(0)) do
             table.insert(names, server.name)
         end
         return " [" .. table.concat(names, " ") .. "]"
@@ -357,6 +395,16 @@ local Diagnostics = {
     },
 }
 
+local Navic = {
+    condition = require("nvim-navic").is_available,
+    provider = function()
+        require("nvim-navic").get_location({highlight=true})
+    end,
+    update = 'CursorMoved'
+}
+
+Navic = { flexible = 22, Navic, { provider = "" } }
+
 local Ruler = {
     -- %l = current line number
     -- %L = number of lines in the buffer
@@ -365,19 +413,26 @@ local Ruler = {
     provider = "%7(%l/%3L%):%2c %P",
 }
 
-local ScrollBar ={
-    static = {
-        sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
-        -- Another variant, because the more choice the better.
-        -- sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
-    },
-    provider = function(self)
-        local curr_line = vim.api.nvim_win_get_cursor(0)[1]
-        local lines = vim.api.nvim_buf_line_count(0)
-        local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
-        return string.rep(self.sbar[i], 2)
+-- local ScrollBar ={
+--     static = {
+--         sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
+--         -- Another variant, because the more choice the better.
+--         -- sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
+--     },
+--     provider = function(self)
+--         local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+--         local lines = vim.api.nvim_buf_line_count(0)
+--         local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
+--         return string.rep(self.sbar[i], 2)
+--     end,
+--     hl = { fg = "blue", bg = "bright_bg" },
+-- }
+
+local FileType = {
+    provider = function()
+        return string.upper(vim.bo.filetype)
     end,
-    hl = { fg = "blue", bg = "bright_bg" },
+    hl = { fg = utils.get_highlight("Type").fg, bold = true },
 }
 
 ViMode = utils.surround({ "", "" }, "bright_bg", { ViMode })
@@ -385,10 +440,55 @@ ViMode = utils.surround({ "", "" }, "bright_bg", { ViMode })
 local Align = { provider = "%=" }
 local Space = { provider = " " }
 
+local DefaultStatusLine = {
+  ViMode, Space, WorkDir, FileNameBlock, Space, Git, Space, Diagnostics, Align,
+  Navic, Space, Align,
+  LSPActive, Space, FileType, Space, Ruler, Space,
+}
+
+local InactiveStatusline = {
+    condition = conditions.is_not_active,
+    FileType, Space, FileNameBlock, Align,
+}
+
+local SpecialStatusline = {
+    condition = function()
+        return conditions.buffer_matches({
+            buftype = { "nofile", "prompt", "help", "quickfix" },
+            filetype = { "^git.*", "fugitive" },
+        })
+    end,
+
+    FileType, Space, HelpFileName, Align
+}
+
+local TerminalStatusline = {
+
+    condition = function()
+        return conditions.buffer_matches({ buftype = { "terminal" } })
+    end,
+
+    hl = { bg = "dark_red" },
+
+    -- Quickly add a condition to the ViMode to only show it when buffer is active!
+    { condition = conditions.is_active, ViMode, Space }, FileType, Space, TerminalName, Align,
+}
+
 local StatusLine = {
+  hl = function()
+      if conditions.is_active() then
+          return "StatusLine"
+      else
+          return "StatusLineNC"
+      end
+  end,
+
+  -- the first statusline with no condition, or which condition returns true is used.
+  -- think of it as a switch case with breaks to stop fallthrough.
+  fallthrough = false,
   static = {
     mode_colors_map = {
-            n = "dragonBlue",
+            n = "crystalBlue",
             i = "springGreen",
             v = "oniViolet",
             V = "oniViolet",
@@ -407,10 +507,7 @@ local StatusLine = {
         return self.mode_colors_map[mode]
     end,
   },
-  ViMode, Space, WorkDir, FileNameBlock, Space, Git, Space, Diagnostics, Align,
-  LSPActive, Space, Align,
-  Ruler, Space,
-  -- ScrollBar
+  SpecialStatusline, TerminalStatusline, InactiveStatusline, DefaultStatusLine,
 }
 
 require('heirline').setup(StatusLine)

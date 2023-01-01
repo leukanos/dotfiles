@@ -33,3 +33,4 @@ I actively watch the following repositories and add the best changes to this rep
 - [Jacob Gillespie’s dotfiles](https://github.com/jacobwg/dotfiles)
 - [Nick Plekhanov's Dotfiles](https://github.com/nicksp/dotfiles)
 - [Mellbourn's dotifles](https://github.com/Mellbourn/dotfiles)
+- [alisnic dotfiles - vimrc](https://github.com/alisnic/.dotfiles/blob/cmp/.vimrc)

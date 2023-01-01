@@ -9,6 +9,7 @@ set encoding=utf-8
 set nocompatible
 
 " -- apperance
+set title
 set background=dark
 set signcolumn=yes
 set termguicolors
@@ -18,6 +19,9 @@ colorscheme monokai
 " -- backspace
 set backspace=indent,eol,start
 
+" -- allow autowriteall
+set autowriteall
+set secure
 
 " -- keep at least 5 lines anove or below the cursor
 set clipboard^=unnamed,unnamedplus
@@ -70,6 +74,7 @@ Plug 'f3fora/cmp-spell'
 Plug 'delphinus/cmp-ctags'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
+Plug 'SmiteshP/nvim-navic'
 
 Plug 'ludovicchabant/vim-gutentags' " Automatically generate ctags
 

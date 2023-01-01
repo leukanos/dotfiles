@@ -164,13 +164,22 @@ local lspconfig = require('lspconfig')
 local servers = { 'gopls', 'luau_lsp', 'tsserver', 'vimls', 'html' , 'cssls', 'jsonls', 'eslint', 'bashls',
   'cmake', 'yamlls', 'grammarly', 'dockerls', 'tsserver', 'sumneko_lua',
 }
+
 for _, lsp in ipairs(servers) do
+
   lspconfig[lsp].setup {
     capabilities = capabilities,
   }
-end 
+end
 
--- require('lspconfig')['gopls'].setup {
---   capabilities = capabilities
--- }   
+require'lspconfig'.sumneko_lua.setup {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    },
+  capabilities = capabilities,
+}
 
