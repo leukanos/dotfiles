@@ -41,6 +41,7 @@ if [[ $(uname) == 'Linux' ]]; then
     mosh
 		ncdu
     neovim
+    ninja-build
     nodejs
     python3
     python3-pip

@@ -103,3 +103,17 @@ if hash npm 2>/dev/null; then
     sudo npm install -g dockerfile-language-server-nodejs
   fi
 fi
+
+if [ ! -d ~/.lua-language-server ]; then
+  echo "installing lua-language-server..."
+
+  if [ "$system_type" = "Darwin" ]; then
+    wget --show-progress -O /tmp/lua-language-server.tar.gz https://github.com/sumneko/lua-language-server/releases/download/3.6.4/lua-language-server-3.6.4-darwin-x64.tar.gz
+  else
+    wget --show-progress -O /tmp/lua-language-server.tar.gz https://github.com/sumneko/lua-language-server/releases/download/3.6.4/lua-language-server-3.6.4-linux-x64.tar.gz
+  fi
+
+  mkdir ~/.lua-language-server
+
+  tar -C ~/.lua-language-server -xzf /tmp/lua-language-server.tar.gz
+fi

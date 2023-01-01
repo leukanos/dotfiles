@@ -263,6 +263,7 @@ dirs_to_prepend=(
   "/usr/local/go/bin"
   "$GOPATH"
   "$GOROOT"
+  "$HOME/.lua-language-server/bin"
 )
 
 # Explicitly configured $PATH
@@ -316,3 +317,4 @@ if hash complete 2>/dev/null; then
 fi
 
 eval "$(starship init zsh)"
+alias luamake=/tmp/lua-language-server/3rd/luamake/luamake

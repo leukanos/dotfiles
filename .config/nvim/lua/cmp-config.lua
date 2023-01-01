@@ -4,6 +4,7 @@
 
 local cmp = require'cmp'
 local lspkind = require('lspkind')
+local vim = vim
 
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
@@ -22,7 +23,6 @@ cmp.setup({
   },
 
   formatting = {
-      
     format = lspkind.cmp_format({
       mode = 'symbol_text',
       menu = ({
@@ -136,7 +136,7 @@ cmp.setup({
 		{ name = 'path' }, { name = 'ultisnips' }, { name = 'nvim_lsp' }, { name = 'nvim_lua' }, { name = 'treesitter' },
     { name = 'ctags' }, { name = 'luasnip' }
   }),
-	completion = { completeopt = 'menu,menuone,noinsert' } 
+	completion = { completeopt = 'menu,menuone,noinsert' }
 })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
@@ -161,8 +161,8 @@ cmp.setup.cmdline(':', {
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 local lspconfig = require('lspconfig')
 --local servers = { 'bashls', 'clangd', 'cmake', 'dockerls', 'gopls', 'html', 'jsonls', 'sumneko_lua', 'texlab', 'tsserver', 'vimls', 'yamlls' }
-local servers = { 'gopls', 'luau_lsp', 'tsserver', 'vimls', 'html' , 'cssls', 'jsonls', 'eslint', 'bashls', 
-  'cmake', 'yamlls', 'grammarly', 'dockerls', 'tsserver'
+local servers = { 'gopls', 'luau_lsp', 'tsserver', 'vimls', 'html' , 'cssls', 'jsonls', 'eslint', 'bashls',
+  'cmake', 'yamlls', 'grammarly', 'dockerls', 'tsserver', 'sumneko_lua',
 }
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
