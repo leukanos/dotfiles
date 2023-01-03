@@ -49,6 +49,22 @@ set smartcase
 " -- cursor line 
 set cursorline
 
+if has("persistent_undo")
+   let target_path = expand('~/.undodir')
+
+    " create the directory and any parent directories
+    " if the location does not exist.
+    if !isdirectory(target_path)
+        call mkdir(target_path, "p", 0700)
+    endif
+
+    let &undodir=target_path
+    set undofile
+    set noswapfile
+    set nobackup
+endif
+
+
 "*****************************************************************************
 " Plugins 
 "*****************************************************************************
@@ -75,16 +91,19 @@ Plug 'delphinus/cmp-ctags'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'SmiteshP/nvim-navic'
+" Plug 'github/copilot.vim'
+Plug 'zbirenbaum/copilot.lua'
+Plug 'zbirenbaum/copilot-cmp'
 
 Plug 'ludovicchabant/vim-gutentags' " Automatically generate ctags
+
+Plug 'mbbill/undotree'
 
 " For ultisnips users.
 Plug 'SirVer/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
 Plug 'rebelot/heirline.nvim'
-" Plug 'vim-airline/vim-airline' " Status bar
-" Plug 'vim-airline/vim-airline-themes'
 
 Plug 'tpope/vim-commentary'
 
@@ -105,7 +124,6 @@ Plug 'LinArcX/telescope-command-palette.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 
 Plug 'tmux-plugins/vim-tmux'
-Plug 'github/copilot.vim'
 
 Plug 'lewis6991/gitsigns.nvim'
 
@@ -146,9 +164,13 @@ highlight! link CmpItemKindUnit CmpItemKindKeyword
 lua require('colors/kanagawa')
 
 lua require('plugins/autopairs-config')
+lua require('plugins/copilot')
 lua require('plugins/cmp-config')
-lua require('plugins/treesitter-config')
 lua require('plugins/gitsigns')
 lua require('plugins/neo-tree')
-lua require('plugins/heirline')
 lua require('plugins/telescope-config')
+lua require('plugins/treesitter-config')
+lua require('plugins/undotree')
+
+" Require heirline at the end to avoid race conditions
+lua require('plugins/heirline')

@@ -396,21 +396,21 @@ local Diagnostics = {
 }
 
 local Navic = {
-    condition = require("nvim-navic").is_available,
-    provider = function()
-        require("nvim-navic").get_location({highlight=true})
-    end,
-    update = 'CursorMoved'
+  condition = require("nvim-navic").is_available,
+  provider = function()
+    require("nvim-navic").get_location({highlight=true})
+  end,
+  update = 'CursorMoved'
 }
 
 Navic = { flexible = 22, Navic, { provider = "" } }
 
 local Ruler = {
-    -- %l = current line number
-    -- %L = number of lines in the buffer
-    -- %c = column number
-    -- %P = percentage through file of displayed window
-    provider = "%7(%l/%3L%):%2c %P",
+  -- %l = current line number
+  -- %L = number of lines in the buffer
+  -- %c = column number
+  -- %P = percentage through file of displayed window
+  provider = "%7(%l/%3L%):%2c %P",
 }
 
 -- local ScrollBar ={
@@ -435,7 +435,7 @@ local FileType = {
     hl = { fg = utils.get_highlight("Type").fg, bold = true },
 }
 
-ViMode = utils.surround({ "", "" }, "bright_bg", { ViMode })
+ViMode = utils.surround({ "", "" }, "bright_bg", { ViMode, Snippets })
 
 local Align = { provider = "%=" }
 local Space = { provider = " " }
@@ -443,7 +443,7 @@ local Space = { provider = " " }
 local DefaultStatusLine = {
   ViMode, Space, WorkDir, FileNameBlock, Space, Git, Space, Diagnostics, Align,
   Navic, Space, Align,
-  LSPActive, Space, FileType, Space, Ruler, Space,
+  LSPActive, Space, Spell, Space, FileType, Space, Ruler, Space,
 }
 
 local InactiveStatusline = {

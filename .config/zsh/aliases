@@ -37,6 +37,7 @@ alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
 alias -g ......='../../../../..'
+alias -g fd="fdfind --type f --exclude go/ --exclude autoload/ --hidden | fzf-tmux -p | xargs nvim"
 
 ############# yadm
 alias y="yadm"

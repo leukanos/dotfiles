@@ -4,8 +4,11 @@
 
 local cmp = require'cmp'
 local lspkind = require('lspkind')
+local navic = require("nvim-navic")
+require("copilot_cmp").setup {
+  method = "getCompletionsCycling",
+}
 local vim = vim
-
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
@@ -134,7 +137,7 @@ cmp.setup({
   sources = cmp.config.sources({
 		{ name = 'buffer' }, { name = 'look' }, { name = 'calc' }, { name = 'emoji' }, { name = 'spell' },
 		{ name = 'path' }, { name = 'ultisnips' }, { name = 'nvim_lsp' }, { name = 'nvim_lua' }, { name = 'treesitter' },
-    { name = 'ctags' }, { name = 'luasnip' }
+    { name = 'ctags' }, { name = 'luasnip' }, { name = 'copilot' }
   }),
 	completion = { completeopt = 'menu,menuone,noinsert' }
 })
@@ -165,9 +168,16 @@ local servers = { 'gopls', 'luau_lsp', 'tsserver', 'vimls', 'html' , 'cssls', 'j
   'cmake', 'yamlls', 'grammarly', 'dockerls', 'tsserver', 'sumneko_lua',
 }
 
+local on_attach = function(client, bufnr)
+    if client.server_capabilities.documentSymbolProvider then
+        navic.attach(client, bufnr)
+    end
+end
+
 for _, lsp in ipairs(servers) do
 
   lspconfig[lsp].setup {
+    on_attach = on_attach,
     capabilities = capabilities,
   }
 end
@@ -180,6 +190,7 @@ require'lspconfig'.sumneko_lua.setup {
             }
         }
     },
+  on_attach = on_attach,
   capabilities = capabilities,
 }
 
