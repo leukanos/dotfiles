@@ -310,6 +310,10 @@ if [ -f '/Users/lukaszostrowski/google-cloud-sdk/path.zsh.inc' ]; then . '/Users
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/lukaszostrowski/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/lukaszostrowski/google-cloud-sdk/completion.zsh.inc'; fi
 
+if hash op 2>/dev/null; then
+  eval "$(op completion zsh)"; compdef _op op
+fi
+
 export NPM_AUTH_TOKEN="ee25a6015f97db39fa648645083147b1669b0757"
 
 if hash complete 2>/dev/null; then

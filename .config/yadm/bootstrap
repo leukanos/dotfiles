@@ -1,11 +1,28 @@
 #!/bin/bash
 
+ask_for_sudo() {
+
+  # Ask for the administrator password upfront
+  sudo -v
+
+  # Update existing `sudo` time stamp until this script has finished
+  # https://gist.github.com/cowboy/3118588
+  while true; do
+    sudo -n true
+    sleep 60
+    kill -0 "$$" || exit
+  done &> /dev/null &
+
+}
+
 system_type=$(uname -s)
+
+ask_for_sudo
 
 if [ "$system_type" = "Darwin" ]; then
 
   # install homebrew if it's missing
-  if ! hash brew 2/dev/null; then
+  if ! hash brew 2>/dev/null; then
     echo "Installing homebrew"
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
@@ -18,13 +35,15 @@ if [ "$system_type" = "Darwin" ]; then
 fi
 
 if [ "$system_type" = "Linux" ]; then
-  sudo ~/.config/yadm/apt.sh
+  ~/.config/yadm/apt.sh
 
   if ! hash starship 2>/dev/null; then
     sh <(curl -sS https://starship.rs/install.sh) -y
   fi
 
-  chsh -s $(which zsh)
+  if ! [ "$SHELL" = "$(which zsh)" ]; then
+    chsh -s $(which zsh)
+  fi
 
   if ! hash lsd 2>/dev/null; then
     # install lsd
@@ -36,9 +55,11 @@ if [ "$system_type" = "Linux" ]; then
       rm -f "$TEMP_DEB"
   fi
 
+  if ! [ "$LC_ALL" = "en_US.UTF-8" ]; then
   # setup locale for mosh-server
-  sudo locale-gen "en_US.UTF-8"
-  sudo update-locale LC_ALL="en_US.UTF-8"
+    sudo locale-gen en_US.UTF-8
+    sudo update-locale LC_ALL="en_US.UTF-8"
+  fi
 fi
 
 
@@ -98,7 +119,7 @@ if hash npm 2>/dev/null; then
     sudo npm install -g bash-language-server
   fi
 
-  if ! hash dockerfile-language-server-nodejs 2>/dev/null; then
+  if ! hash docker-langserver 2>/dev/null; then
     echo "installing dockerfile-language-server-nodejs..."
     sudo npm install -g dockerfile-language-server-nodejs
   fi
