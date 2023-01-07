@@ -1,7 +1,7 @@
 "*****************************************************************************
 " Defaults 
 "*****************************************************************************
-
+  
 lua require('core/keymaps')
 
 scriptencoding utf-8
@@ -50,18 +50,18 @@ set smartcase
 set cursorline
 
 if has("persistent_undo")
-   let target_path = expand('~/.undodir')
+  let target_path = expand('~/.undodir')
 
-    " create the directory and any parent directories
-    " if the location does not exist.
-    if !isdirectory(target_path)
-        call mkdir(target_path, "p", 0700)
-    endif
+  " create the directory and any parent directories
+  " if the location does not exist.
+  if !isdirectory(target_path)
+    call mkdir(target_path, "p", 0700)
+  endif
 
-    let &undodir=target_path
-    set undofile
-    set noswapfile
-    set nobackup
+  let &undodir=target_path
+  set undofile
+  set noswapfile
+  set nobackup
 endif
 
 
@@ -73,7 +73,7 @@ call plug#begin('~/.config/nvim/site/autoload')
 Plug 'junegunn/vim-plug'
 Plug 'tpope/vim-sensible'
 
-Plug 'rebelot/kanagawa.nvim'
+Plug 'rebelot/kanagawa.nvim' " theme
 
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -91,9 +91,11 @@ Plug 'delphinus/cmp-ctags'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'SmiteshP/nvim-navic'
-" Plug 'github/copilot.vim'
 Plug 'zbirenbaum/copilot.lua'
 Plug 'zbirenbaum/copilot-cmp'
+
+Plug 'tpope/vim-commentary' " commenting
+Plug 'tpope/vim-sleuth' " automatically adjusts tabstop, softtabstop, shiftwidth, and expandtab
 
 Plug 'ludovicchabant/vim-gutentags' " Automatically generate ctags
 
@@ -103,14 +105,14 @@ Plug 'mbbill/undotree'
 Plug 'SirVer/ultisnips'
 Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 
-Plug 'rebelot/heirline.nvim'
+Plug 'rebelot/heirline.nvim' " statusline
 
-Plug 'tpope/vim-commentary'
 
 Plug 'ryanoasis/vim-devicons' " Developer Icons
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'gfanto/fzf-lsp.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -119,6 +121,9 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'LinArcX/telescope-command-palette.nvim'
+
+Plug 'folke/trouble.nvim'
+  nnoremap <leader>ce :TroubleToggle<cr>
 
 " If you have nodejs and yarn
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
@@ -129,11 +134,13 @@ Plug 'lewis6991/gitsigns.nvim'
 
 Plug 'windwp/nvim-autopairs'
 
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'christoomey/vim-tmux-navigator' " vim + tmux navigation
 
 Plug 'nvim-neo-tree/neo-tree.nvim'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-tree/nvim-web-devicons'
+
+Plug 'sickill/vim-pasta' " better pasting
 
 call plug#end()
 
@@ -174,3 +181,5 @@ lua require('plugins/undotree')
 
 " Require heirline at the end to avoid race conditions
 lua require('plugins/heirline')
+lua require'fzf_lsp'.setup()
+

@@ -19,6 +19,10 @@ keymap.set("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 keymap.set("n", "n", "nzzzv")
 keymap.set("n", "N", "nzzzv")
 
+keymap.set("n", "<leader>[", ":bprevious<CR>", { silent = true })
+keymap.set("n", "<leader>]", ":bnext<CR>", { silent = true })
+keymap.set("n", "<leader>p", ":bprevious<CR>", { silent = true })
+
 -- split window
 
 keymap.set("n", "<leader>sv", "<C-w>v")
@@ -49,3 +53,15 @@ keymap.set("n", "<leader>g", ":lua require('telescope.builtin').grep_string{}<cr
 -- UndoTree
 
 keymap.set("n", "<leader>u", ":UndotreeToggle<CR>", { silent = true })
+
+-- fzf-lsp
+
+keymap.set('n', '<leader>fs', ':DocumentSymbol<CR>')
+keymap.set('n', '<leader>fw', ':WorkspaceSymbol<CR>')
+keymap.set('n', '<leader>fd', ':Definition<CR>')
+keymap.set('n', '<leader>fdc', ':Declarations<CR>')
+keymap.set('n', '<leader>fr', ':References<CR>')
+keymap.set('n', '<leader>fi', ':Implementation<CR>')
+keymap.set('n', '<leader>ft', ':TypeDefinition<CR>')
+keymap.set('n', '<leader>fa', ':CodeAction<CR>')
+keymap.set('n', '<leader>fe', ':Diagnostics<CR>')
