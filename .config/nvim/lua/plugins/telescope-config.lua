@@ -81,11 +81,9 @@ function config.telescope ()
           ["data"] = home .. "/.local/share",
           ["nvim"] = home .. "/.config/nvim",
           ["code"] = home .. "/code",
-          ["c"] = home .. "/code/c",
           ["cpp"] = home .. "/code/cpp",
           ["go"] = home .. "/go/src",
-          ["rust"] = home .. "/code/rs"
-        }
+        },
       },
       command_palette = {
         {

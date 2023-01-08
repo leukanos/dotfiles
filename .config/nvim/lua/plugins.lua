@@ -34,6 +34,14 @@ return require('packer').startup(function(use)
   -- Theme
   use 'rebelot/kanagawa.nvim'
 
+  -- Auto save
+  use {
+    "Pocco81/auto-save.nvim",
+    config = function()
+      require("auto-save").setup {}
+    end,
+  }
+
   -- Awesome status bar
   use {
     'rebelot/heirline.nvim',
@@ -178,6 +186,7 @@ return require('packer').startup(function(use)
   use {
     'kosayoda/nvim-lightbulb',
     opt = true,
+    config = lightbulb_config,
     after = 'nvim-lspconfig',
   }
 

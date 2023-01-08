@@ -13,8 +13,7 @@ local t = function(str)
 end
 
 vim.cmd([[
-
-  " gray
+" gray
 highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
 " blue
 highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
