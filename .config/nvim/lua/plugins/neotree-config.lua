@@ -3,6 +3,10 @@ vim.fn.sign_define("DiagnosticSignWarn", {text = " ", texthl = "DiagnosticSig
 vim.fn.sign_define("DiagnosticSignInfo", {text = " ", texthl = "DiagnosticSignInfo"})
 vim.fn.sign_define("DiagnosticSignHint", {text = "", texthl = "DiagnosticSignHint"})
 
+local config = {}
+
+function config.neotree()
+
 require('neo-tree').setup({
   close_if_last_window = true,
   popup_border_style = 'rounded',
@@ -59,4 +63,6 @@ require('neo-tree').setup({
     winbar = true
   }
 })
+end
 
+return config

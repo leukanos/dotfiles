@@ -5,7 +5,7 @@
 local cmp = require'cmp'
 require('nvim-autopairs').setup({
   map_cr = true, --  map <CR> on insert mode
-  map_complete = true, -- it will auto insert `(` after select function or method items
+  map_complete = true, -- it willf auto insert `(` after select function or method items
   auto_select = true, -- automatically select the first item 
   disable_filetype = { "TelescopePrompt" , "vim" },
 

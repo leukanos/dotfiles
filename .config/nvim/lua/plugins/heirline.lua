@@ -28,13 +28,6 @@ end
 require('heirline').load_colors(setup_colors())
 
 vim.api.nvim_create_augroup("Heirline", { clear = true })
-vim.api.nvim_create_autocmd("ColorScheme", {
-    callback = function()
-        local colors = setup_colors()
-        utils.on_colorscheme(colors)
-    end,
-    group = "Heirline",
-})
 
 local ViMode = {
     -- get vim current mode, this information will be required by the provider
@@ -488,7 +481,7 @@ local StatusLine = {
   fallthrough = false,
   static = {
     mode_colors_map = {
-            n = "crystalBlue",
+            n = "blue",
             i = "springGreen",
             v = "oniViolet",
             V = "oniViolet",

@@ -21,7 +21,7 @@ keymap.set("n", "N", "nzzzv")
 
 keymap.set("n", "<leader>[", ":bprevious<CR>", { silent = true })
 keymap.set("n", "<leader>]", ":bnext<CR>", { silent = true })
-keymap.set("n", "<leader>p", ":bprevious<CR>", { silent = true })
+keymap.set("n", "<leader>p", ":blast<CR>", { silent = true })
 
 -- split window
 
@@ -45,6 +45,7 @@ keymap.set("n", "<leader>fg", ":Telescope live_grep<cr>")
 keymap.set("n", "<leader>fb", ":Telescope buffers<cr>")
 keymap.set("n", "<leader>fh", ":Telescope help_tags<cr>")
 keymap.set("n", "<leader>fa", ":Telescope commands<cr>")
+keymap.set("n", "<leader>fr", ":Telescope frecency<cr>")
 keymap.set("n", "<leader>fn", ":lua require('plugins/telescope-config').grep_prompt()<cr>")
 keymap.set("n", "<leader>nv", ":lua require('plugins/telescope-config').nvim_config()<cr>")
 keymap.set("n", "<leader>k", ":lua require('telescope').extensions.command_palette.command_palette()<cr>")
@@ -56,12 +57,12 @@ keymap.set("n", "<leader>u", ":UndotreeToggle<CR>", { silent = true })
 
 -- fzf-lsp
 
-keymap.set('n', '<leader>fs', ':DocumentSymbol<CR>')
-keymap.set('n', '<leader>fw', ':WorkspaceSymbol<CR>')
-keymap.set('n', '<leader>fd', ':Definition<CR>')
-keymap.set('n', '<leader>fdc', ':Declarations<CR>')
-keymap.set('n', '<leader>fr', ':References<CR>')
-keymap.set('n', '<leader>fi', ':Implementation<CR>')
-keymap.set('n', '<leader>ft', ':TypeDefinition<CR>')
-keymap.set('n', '<leader>fa', ':CodeAction<CR>')
-keymap.set('n', '<leader>fe', ':Diagnostics<CR>')
+-- keymap.set('n', '<leader>fs', ':DocumentSymbol<CR>')
+-- keymap.set('n', '<leader>fw', ':WorkspaceSymbol<CR>')
+-- keymap.set('n', '<leader>fd', ':Definition<CR>')
+-- keymap.set('n', '<leader>fdc', ':Declarations<CR>')
+-- keymap.set('n', '<leader>fr', ':References<CR>')
+-- keymap.set('n', '<leader>fi', ':Implementation<CR>')
+-- keymap.set('n', '<leader>ft', ':TypeDefinition<CR>')
+-- keymap.set('n', '<leader>fa', ':CodeAction<CR>')
+-- keymap.set('n', '<leader>fe', ':Diagnostics<CR>')
