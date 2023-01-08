@@ -6,6 +6,18 @@ vim.fn.sign_define("DiagnosticSignHint", {text = "", texthl = "DiagnosticSign
 local config = {}
 
 function config.neotree()
+  if not packer_plugins['neo-tree.nvim'].loaded then
+    vim.cmd [[packadd neo-tree.nvim]]
+  end
+
+  if not packer_plugins['nvim-web-devicons'].loaded then
+    vim.cmd [[packadd nvim-web-devicons]]
+  end
+
+  if not packer_plugins['nui.nvim'].loaded then
+    vim.cmd [[packadd nui.nvim]]
+  end
+
   require('neo-tree').setup({
     close_if_last_window = true,
     popup_border_style = 'rounded',

@@ -20,7 +20,7 @@ o.autowriteall = true
 o.compatible = false
 o.secure = true
 o.syntax = 'enable'
-o.timeoutlen = 500
+o.timeoutlen = 250
 
 -- vim.cmd('scriptencoding utf-8')
 o.encoding = 'utf-8'
