@@ -34,3 +34,4 @@ I actively watch the following repositories and add the best changes to this rep
 - [Nick Plekhanov's Dotfiles](https://github.com/nicksp/dotfiles)
 - [Mellbourn's dotifles](https://github.com/Mellbourn/dotfiles)
 - [alisnic dotfiles - vimrc](https://github.com/alisnic/.dotfiles/blob/cmp/.vimrc)
+- [FLDPM_Neovim](https://gitee.com/fldpmpang/Neovim_config/tree/main#https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdstein64%2Fvim-startuptime)

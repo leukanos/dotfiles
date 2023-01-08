@@ -48,10 +48,10 @@ return require('packer').startup(function(use)
   -- Navigation 
   use {
     'nvim-neo-tree/neo-tree.nvim',
-    opt = true,
+    opt = false,
     cmd = 'Neotree',
-    config = neotree_config.neotreei,
-    requires = {{'kyazdani42/nvim-web-devicons', opt = true}, {'MunifTanjim/nui.nvim', opt = true}}
+    config = neotree_config.neotree,
+    requires = {{'kyazdani42/nvim-web-devicons', opt = false}, {'MunifTanjim/nui.nvim', opt = false}}
   }
 
   -- Icons
@@ -63,12 +63,14 @@ return require('packer').startup(function(use)
   -- Vim + tmux navigation
   use 'christoomey/vim-tmux-navigator'
 
+  -- Markdown preview
   use {
     'iamcco/markdown-preview.nvim',
     opt = true,
     run = 'cd app && yarn install',
     cmd = 'MarkdownPreview'
   }
+
   -- Plenery 
   use 'nvim-lua/plenary.nvim'
 
@@ -80,6 +82,16 @@ return require('packer').startup(function(use)
 
   -- Tmux integration
   use 'tmux-plugins/vim-tmux'
+
+  -- Key bindings help
+  use {
+    'folke/which-key.nvim',
+    opt = true,
+    keys = ',',
+    config = function ()
+      require('which-key').setup {}
+    end
+  }
 
   -- Telescope
   use {
@@ -166,6 +178,9 @@ return require('packer').startup(function(use)
   use 'SirVer/ultisnips'
   use 'quangnguyen30192/cmp-nvim-ultisnips'
   use 'windwp/nvim-autopairs'
+
+  use 'ray-x/lsp_signature.nvim'
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then

@@ -6,63 +6,62 @@ vim.fn.sign_define("DiagnosticSignHint", {text = "", texthl = "DiagnosticSign
 local config = {}
 
 function config.neotree()
-
-require('neo-tree').setup({
-  close_if_last_window = true,
-  popup_border_style = 'rounded',
-  enable_git_status = true,
-  sort_case_insensitive = false,
-  default_component_configs = {
-    container = {
-      enable_character_fade = true
+  require('neo-tree').setup({
+    close_if_last_window = true,
+    popup_border_style = 'rounded',
+    enable_git_status = true,
+    sort_case_insensitive = false,
+    default_component_configs = {
+      container = {
+        enable_character_fade = true
+      },
+      indent = {
+        indent_size = 2,
+        padding = 1,
+        with_marker = '|',
+        highlight = 'NeoTreeIndentMarker',
+        with_expanders = nil,
+        expander_collapsed = "",
+        expander_expanded = "",
+        expander_highliight = 'NeoTreeExpander',
+      },
+      icon = {
+        folder_closed = "",
+        folder_open = "",
+        older_empty = "ﰊ",
+        default = "*",
+        highlight = "NeoTreeFileIcon"
+      },
+      modified = {
+        symbol = "[+]",
+        highlight = "NeoTreeModified",
+      },
+      name = {
+        trailing_slash = true,
+        use_git_status_colors = true,
+        highlight = "NeoTreeFileName"
+      },
     },
-    indent = {
-      indent_size = 2,
-      padding = 1,
-      with_marker = '|',
-      highlight = 'NeoTreeIndentMarker',
-      with_expanders = nil,
-      expander_collapsed = "",
-      expander_expanded = "",
-      expander_highliight = 'NeoTreeExpander',
+    window = {
+      mappings = {
+        ["ss"] = "open_split",
+        ["sv"] = "open_vsplit"
+      }
     },
-    icon = {
-      folder_closed = "",
-      folder_open = "",
-      older_empty = "ﰊ",
-      default = "*",
-      highlight = "NeoTreeFileIcon"
+    filesystem = {
+      filtered_items = {
+        hide_dotfiles = false
+      },
+      follow_current_file = true,
+      use_libuv_file_watcher = true,
     },
-    modified = {
-      symbol = "[+]",
-      highlight = "NeoTreeModified",
+    buffer = {
+      follow_current_file = true,
     },
-    name = {
-      trailing_slash = true,
-      use_git_status_colors = true,
-      highlight = "NeoTreeFileName"
-    },
-  },
-  window = {
-    mappings = {
-      ["ss"] = "open_split",
-      ["sv"] = "open_vsplit"
+    source_selector = {
+      winbar = true
     }
-  },
-  filesystem = {
-    filtered_items = {
-      hide_dotfiles = false
-    },
-    follow_current_file = true,
-    use_libuv_file_watcher = true,
-  },
-  buffer = {
-    follow_current_file = true,
-  },
-  source_selector = {
-    winbar = true
-  }
-})
+  })
 end
 
 return config

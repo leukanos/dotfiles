@@ -192,6 +192,13 @@ local on_attach = function(client, bufnr)
     if client.server_capabilities.documentSymbolProvider then
         navic.attach(client, bufnr)
     end
+
+    require "lsp_signature".on_attach({
+        bind = true,
+        handler_opts = {
+            border = "rounded"
+        }
+    }, bufnr)
 end
 
 for _, lsp in ipairs(servers) do
