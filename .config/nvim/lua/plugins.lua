@@ -10,14 +10,17 @@ local ensure_packer = function()
 end
 
 local packer_bootstrap = ensure_packer()
-local telescope_config = require('plugins.telescope-config')
+
+local autopairs_config = require('plugins/autopairs-config')
 local neotree_config = require('plugins.neotree-config')
+local telescope_config = require('plugins.telescope-config')
 local treesitter_config = require('plugins/treesitter-config')
+local nvim_lspconfig = require('plugins/nvim-lspconfig')
+local lightbulb_config = require('plugins/lightbulb-config')
 
 require('colors/kanagawa')
 require('plugins/undotree')
-require('plugins/autopairs-config')
-require('plugins/copilot')
+local copilot_config = require('plugins/copilot')
 require('plugins/cmp-config')
 require('plugins/gitsigns')
 
@@ -48,10 +51,10 @@ return require('packer').startup(function(use)
   -- Navigation 
   use {
     'nvim-neo-tree/neo-tree.nvim',
-    opt = false,
+    opt = true,
     cmd = 'Neotree',
     config = neotree_config.neotree,
-    requires = {{'kyazdani42/nvim-web-devicons', opt = false}, {'MunifTanjim/nui.nvim', opt = false}}
+    requires = {{'kyazdani42/nvim-web-devicons', opt = true}, {'MunifTanjim/nui.nvim', opt = true}}
   }
 
   -- Icons
@@ -156,7 +159,29 @@ return require('packer').startup(function(use)
   }
 
   -- CMP and completion plugins
-  use 'neovim/nvim-lspconfig'
+  use {
+    'neovim/nvim-lspconfig',
+    opt = true,
+    event = 'BufReadPre',
+    config = nvim_lspconfig
+  }
+  use {
+    'tami5/lspsaga.nvim',
+    opt = true,
+    after = 'nvim-lspconfig',
+  }
+  use {
+    'SmiteshP/nvim-navic',
+    opt = false,
+    -- after = 'nvim-lspconfig', -- TODO: still required by hearline
+  }
+  use {
+    'kosayoda/nvim-lightbulb',
+    opt = true,
+    after = 'nvim-lspconfig',
+  }
+
+
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
@@ -171,13 +196,23 @@ return require('packer').startup(function(use)
   use 'delphinus/cmp-ctags'
   use 'saadparwaiz1/cmp_luasnip'
   use 'L3MON4D3/LuaSnip'
-  use 'SmiteshP/nvim-navic'
-  use 'zbirenbaum/copilot.lua'
+  use {
+    'zbirenbaum/copilot.lua',
+    opt = true,
+    config = copilot_config,
+    cmd = 'Copilot',
+    event = "InsertEnter",
+  }
   use 'zbirenbaum/copilot-cmp'
 
   use 'SirVer/ultisnips'
   use 'quangnguyen30192/cmp-nvim-ultisnips'
-  use 'windwp/nvim-autopairs'
+
+  use {
+    'windwp/nvim-autopairs',
+    after = 'nvim-cmp',
+    config = autopairs_config
+  }
 
   use 'ray-x/lsp_signature.nvim'
 
