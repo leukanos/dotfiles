@@ -37,7 +37,9 @@ o.colorcolumn = '100'
 
 vim.cmd([[
 highlight IndentBlanklineChar guifg=#658594 gui=nocombine "kanagawa dragonBlue
+highlight IndentBlanklineSpaceChar guifg=#658594 gui=nocombine "kanagawa dragonBlue
 highlight IndentBlanklineContextChar guifg=#957FB8 gui=nocombine "kanagawa oniViolet
+highlight IndentBlinklineContextSpaceChar guifg=#957FB8 gui=nocombine "kanagawa oniViolet
 highlight IndentBlanklineContextStart guisp=#957FB8 gui=underline
 highlight IndentBlanklineContextEnd guisp=#957FB8 gui=underline
 let g:indent_blankline_context_char = '┃'

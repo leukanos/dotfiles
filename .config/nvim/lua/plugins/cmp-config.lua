@@ -54,91 +54,91 @@ cmp.setup({
     })
   },
 
-	mapping = cmp.mapping.preset.insert({
+  mapping = cmp.mapping.preset.insert({
     ["<Tab>"] = cmp.mapping({
       c = function()
-          if cmp.visible() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-          else
-              cmp.complete()
-          end
+        if cmp.visible() then
+          cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+        else
+          cmp.complete()
+        end
       end,
       i = function(fallback)
-          if cmp.visible() then
-              cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
-          elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-              vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
-          else
-              fallback()
-          end
+        if cmp.visible() then
+          cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+        elseif vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+          vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
+        else
+          fallback()
+        end
       end,
       s = function(fallback)
-          if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
-              vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
-          else
-              fallback()
-          end
+        if vim.fn["UltiSnips#CanJumpForwards"]() == 1 then
+          vim.api.nvim_feedkeys(t("<Plug>(ultisnips_jump_forward)"), 'm', true)
+        else
+          fallback()
+        end
       end
     }),
     ["<S-Tab>"] = cmp.mapping({
       c = function()
-          if cmp.visible() then
-              cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-          else
-              cmp.complete()
-          end
+        if cmp.visible() then
+          cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+        else
+          cmp.complete()
+        end
       end,
       i = function(fallback)
-          if cmp.visible() then
-              cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
-          elseif vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-              return vim.api.nvim_feedkeys( t("<Plug>(ultisnips_jump_backward)"), 'm', true)
-          else
-              fallback()
-          end
+        if cmp.visible() then
+          cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+        elseif vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+          return vim.api.nvim_feedkeys( t("<Plug>(ultisnips_jump_backward)"), 'm', true)
+        else
+          fallback()
+        end
       end,
       s = function(fallback)
-          if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
-              return vim.api.nvim_feedkeys( t("<Plug>(ultisnips_jump_backward)"), 'm', true)
-          else
-              fallback()
-          end
+        if vim.fn["UltiSnips#CanJumpBackwards"]() == 1 then
+          return vim.api.nvim_feedkeys( t("<Plug>(ultisnips_jump_backward)"), 'm', true)
+        else
+          fallback()
+        end
       end
     }),
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-	  ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Enter>'] = cmp.mapping(cmp.mapping.complete(), {'i', 'c'}),
     ['<C-n>'] = cmp.mapping({
-        c = function()
-            if cmp.visible() then
-                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-            else
-                vim.api.nvim_feedkeys(t('<Down>'), 'n', true)
-            end
-        end,
-        i = function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-            else
-                fallback()
-            end
+      c = function()
+        if cmp.visible() then
+          cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+        else
+          vim.api.nvim_feedkeys(t('<Down>'), 'n', true)
         end
+      end,
+      i = function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+        else
+          fallback()
+        end
+      end
     }),
     ['<C-p>'] = cmp.mapping({
-        c = function()
-            if cmp.visible() then
-                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-            else
-                vim.api.nvim_feedkeys(t('<Up>'), 'n', true)
-            end
-        end,
-        i = function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
-            else
-                fallback()
-            end
+      c = function()
+        if cmp.visible() then
+          cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+        else
+          vim.api.nvim_feedkeys(t('<Up>'), 'n', true)
         end
+      end,
+      i = function(fallback)
+        if cmp.visible() then
+          cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
+        else
+          fallback()
+        end
+      end
     }),
     ['<C-e>'] = cmp.mapping({ i = cmp.mapping.close(), c = cmp.mapping.close() }),
     ['<CR>'] = cmp.mapping({
@@ -153,11 +153,11 @@ cmp.setup({
     }),
   }),
   sources = cmp.config.sources({
-      { name = 'buffer' }, { name = 'look' }, { name = 'calc' }, { name = 'emoji' }, { name = 'spell' },
-      { name = 'path' }, { name = 'ultisnips' }, { name = 'nvim_lsp' }, { name = 'nvim_lua' }, { name = 'treesitter' },
-      { name = 'ctags' }, { name = 'luasnip' }, { name = 'copilot' }
+    { name = 'buffer' }, { name = 'look' }, { name = 'calc' }, { name = 'emoji' }, { name = 'spell' },
+    { name = 'path' }, { name = 'ultisnips' }, { name = 'nvim_lsp' }, { name = 'nvim_lua' }, { name = 'treesitter' },
+    { name = 'ctags' }, { name = 'luasnip' }, { name = 'copilot' }
   }),
-	completion = { completeopt = 'menu,menuone,noinsert' }
+  completion = { completeopt = 'menu,menuone,noinsert' }
 })
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
