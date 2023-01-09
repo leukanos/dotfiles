@@ -153,9 +153,9 @@ cmp.setup({
     }),
   }),
   sources = cmp.config.sources({
-		{ name = 'buffer' }, { name = 'look' }, { name = 'calc' }, { name = 'emoji' }, { name = 'spell' },
-		{ name = 'path' }, { name = 'ultisnips' }, { name = 'nvim_lsp' }, { name = 'nvim_lua' }, { name = 'treesitter' },
-    { name = 'ctags' }, { name = 'luasnip' }, { name = 'copilot' }
+      { name = 'buffer' }, { name = 'look' }, { name = 'calc' }, { name = 'emoji' }, { name = 'spell' },
+      { name = 'path' }, { name = 'ultisnips' }, { name = 'nvim_lsp' }, { name = 'nvim_lua' }, { name = 'treesitter' },
+      { name = 'ctags' }, { name = 'luasnip' }, { name = 'copilot' }
   }),
 	completion = { completeopt = 'menu,menuone,noinsert' }
 })

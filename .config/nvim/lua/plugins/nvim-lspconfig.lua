@@ -18,7 +18,7 @@ return function()
   local lspconfig = require('lspconfig')
   --local servers = { 'bashls', 'clangd', 'cmake', 'dockerls', 'gopls', 'html', 'jsonls', 'sumneko_lua', 'texlab', 'tsserver', 'vimls', 'yamlls' }
   local servers = { 'gopls', 'luau_lsp', 'tsserver', 'vimls', 'html' , 'cssls', 'jsonls', 'eslint', 'bashls',
-    'cmake', 'yamlls', 'grammarly', 'dockerls', 'tsserver', 'sumneko_lua',
+    'cmake', 'yamlls', 'grammarly', 'dockerls', 'tsserver', 'sumneko_lua', "intelephense"
   }
 
   local on_attach = function(client, bufnr)

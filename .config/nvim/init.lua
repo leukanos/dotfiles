@@ -8,7 +8,6 @@ vim.cmd([[
 ]])
 
 require('plugins')
-require('plugins/telescope-config')
 
 -- Global
 
@@ -20,7 +19,7 @@ o.autowriteall = true
 o.compatible = false
 o.secure = true
 o.syntax = 'enable'
-o.timeoutlen = 250
+o.timeoutlen = 500
 
 -- vim.cmd('scriptencoding utf-8')
 o.encoding = 'utf-8'
@@ -35,6 +34,14 @@ o.title = true
 o.wrap = false
 o.textwidth = 100
 o.colorcolumn = '100'
+
+vim.cmd([[
+highlight IndentBlanklineChar guifg=#658594 gui=nocombine "kanagawa dragonBlue
+highlight IndentBlanklineContextChar guifg=#957FB8 gui=nocombine "kanagawa oniViolet
+highlight IndentBlanklineContextStart guisp=#957FB8 gui=underline
+highlight IndentBlanklineContextEnd guisp=#957FB8 gui=underline
+let g:indent_blankline_context_char = '┃'
+]])
 
 -- Search
 

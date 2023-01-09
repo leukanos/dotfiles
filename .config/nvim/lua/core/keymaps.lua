@@ -55,6 +55,14 @@ keymap.set("n", "<leader>g", ":lua require('telescope.builtin').grep_string{}<cr
 
 keymap.set("n", "<leader>u", ":UndotreeToggle<CR>", { silent = true })
 
+-- lsp
+
+keymap.set("n", "gd", ":Lspsaga preview_definition<CR>", { silent = true })
+keymap.set("n", "gD", ":lua vim.lsp.buf.definition()<CR>", { silent = true })
+keymap.set("n", "gr", ":Lspsaga rename<CR>", { silent = true })
+keymap.set("n", "K", ":Lspsaga hover_doc<CR>", { silent = true })
+keymap.set("n", "<C-k>", ":Lspsaga signature_help<CR>", { silent = true })
+
 -- fzf-lsp
 
 -- keymap.set('n', '<leader>fs', ':DocumentSymbol<CR>')

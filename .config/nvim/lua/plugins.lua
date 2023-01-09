@@ -12,15 +12,15 @@ end
 local packer_bootstrap = ensure_packer()
 
 local autopairs_config = require('plugins/autopairs-config')
+local copilot_config = require('plugins/copilot')
+local lightbulb_config = require('plugins/lightbulb-config')
 local neotree_config = require('plugins.neotree-config')
+local nvim_lspconfig = require('plugins/nvim-lspconfig')
 local telescope_config = require('plugins.telescope-config')
 local treesitter_config = require('plugins/treesitter-config')
-local nvim_lspconfig = require('plugins/nvim-lspconfig')
-local lightbulb_config = require('plugins/lightbulb-config')
 
 require('colors/kanagawa')
 require('plugins/undotree')
-local copilot_config = require('plugins/copilot')
 require('plugins/cmp-config')
 require('plugins/gitsigns')
 
@@ -55,6 +55,27 @@ return require('packer').startup(function(use)
 
   -- Automatically adjusts tabstop, softtabstop, shiftwidth, and expandtab
   use 'tpope/vim-sleuth'
+
+  -- Add indentation guides to all lines (including empty lines)
+  use {
+    "lukas-reineke/indent-blankline.nvim",
+    opt = true,
+
+    after = "nvim-treesitter",
+    config = function()
+      require("indent_blankline").setup {
+        buftype_exclude = {"terminal"},
+        filetype_exclude = {"help", "packer", "dashboard", "neogitstatus", "NvimTree", "Trouble", "TelescopePrompt", "TelescopeResults"},
+        show_current_context = true,
+        show_current_context_start = true,
+        show_current_context_end = true,
+        show_end_of_line = true,
+        space_char_blankline = " ",
+        show_trailing_blankline_indent = false,
+        show_first_indent_level = false,
+      }
+    end,
+  }
 
   -- Navigation 
   use {
