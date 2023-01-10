@@ -58,9 +58,13 @@ if [[ $(uname) == 'Linux' ]]; then
     neovim
     ninja-build
     nodejs
+<<<<<<< Updated upstream
     pkg-config
     python3
     python3-docutils
+=======
+    python3
+>>>>>>> Stashed changes
     python3-pip
     ripgrep
     thefuck

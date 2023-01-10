@@ -42,6 +42,12 @@ return require('packer').startup(function(use)
     end,
   }
 
+  use {
+    'dstein64/vim-startuptime',
+    cmd = 'StartupTime',
+    opt = true,
+  }
+
   -- Awesome status bar
   use {
     'rebelot/heirline.nvim',
@@ -54,13 +60,12 @@ return require('packer').startup(function(use)
   use 'tpope/vim-commentary'
 
   -- Automatically adjusts tabstop, softtabstop, shiftwidth, and expandtab
-  -- use 'tpope/vim-sleuth'
+  use 'tpope/vim-sleuth'
 
   -- Add indentation guides to all lines (including empty lines)
   use {
     "lukas-reineke/indent-blankline.nvim",
     opt = true,
-
     after = "nvim-treesitter",
     config = function()
       require("indent_blankline").setup {
