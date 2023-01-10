@@ -39,12 +39,6 @@ function config.telescope ()
     vim.cmd [[packadd telescope-zoxide]]
   end
 
-  require("telescope").load_extension("fzy_native")
-  require('telescope').load_extension('file_browser')
-  require('telescope').load_extension('command_palette')
-  require("telescope").load_extension('frecency')
-  require("telescope").load_extension("media_files")
-  require("telescope").load_extension("zoxide")
 
   require('telescope').setup {
 
@@ -95,6 +89,13 @@ function config.telescope ()
       }
     }
   }
+
+  require("telescope").load_extension("fzy_native")
+  require('telescope').load_extension('file_browser')
+  require('telescope').load_extension('command_palette')
+  require("telescope").load_extension('frecency')
+  require("telescope").load_extension("media_files")
+  require("telescope").load_extension("zoxide")
 end
 
 function config.grep_prompt()

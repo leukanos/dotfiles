@@ -503,4 +503,6 @@ local StatusLine = {
   SpecialStatusline, TerminalStatusline, InactiveStatusline, DefaultStatusLine,
 }
 
-require('heirline').setup(StatusLine)
+require('heirline').setup({
+    statusline = StatusLine
+})
