@@ -15,8 +15,8 @@ function config.telescope ()
     vim.cmd [[packadd popup.nvim]]
   end
 
-  if not packer_plugins["telescope-fzy-native.nvim"].loaded then
-    vim.cmd [[packadd telescope-fzy-native.nvim]]
+  if not packer_plugins["telescope-fzf-native.nvim"].loaded then
+    vim.cmd [[packadd telescope-fzf-native.nvim]]
   end
 
   if not packer_plugins["sql.nvim"].loaded then
@@ -34,11 +34,6 @@ function config.telescope ()
   if not packer_plugins["telescope-media-files.nvim"].loaded then
     vim.cmd [[packadd telescope-media-files.nvim]]
   end
-
-  if not packer_plugins["telescope-zoxide"].loaded then
-    vim.cmd [[packadd telescope-zoxide]]
-  end
-
 
   require('telescope').setup {
 
@@ -62,9 +57,11 @@ function config.telescope ()
     },
 
     extensions = {
-      fzy_native = {
-        override_generic_sorter = false,
-        override_file_sorter = true,
+      fzf = {
+        fuzzy = true,                    -- false will only do exact matching
+        override_generic_sorter = false, -- override the generic sorter
+        override_file_sorter = true,     -- override the file sorter
+        case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
       },
       frecency = {
         show_scores = true,
@@ -90,12 +87,11 @@ function config.telescope ()
     }
   }
 
-  require("telescope").load_extension("fzy_native")
+  require("telescope").load_extension("fzf")
   require('telescope').load_extension('file_browser')
   require('telescope').load_extension('command_palette')
   require("telescope").load_extension('frecency')
   require("telescope").load_extension("media_files")
-  require("telescope").load_extension("zoxide")
 end
 
 function config.grep_prompt()

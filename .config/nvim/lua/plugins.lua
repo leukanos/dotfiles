@@ -140,9 +140,9 @@ return require('packer').startup(function(use)
     requires = {{'nvim-lua/popup.nvim', opt = true}, {'nvim-lua/plenary.nvim'}}
   }
   use {
-    'nvim-telescope/telescope-fzy-native.nvim',
+    'nvim-telescope/telescope-fzf-native.nvim',
     opt = true,
-    after = 'telescope.nvim'
+    run = 'make',
   }
   use {
     'nvim-telescope/telescope-project.nvim',
@@ -160,7 +160,6 @@ return require('packer').startup(function(use)
     opt = true,
     after = 'telescope.nvim'
   }
-  use {'jvgrootveld/telescope-zoxide', opt = true, after = 'telescope.nvim'}
   use 'nvim-telescope/telescope-file-browser.nvim'
   use 'LinArcX/telescope-command-palette.nvim'
 
