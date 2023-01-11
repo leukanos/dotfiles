@@ -40,16 +40,16 @@ keymap.set("n", "<leader>nr", ":Neotree reveal_force_cwd<CR>", { silent = true }
 
 -- Telescope
 
-keymap.set("n", "<leader>ff", ":Telescope find_files<cr>")
-keymap.set("n", "<leader>fg", ":Telescope live_grep<cr>")
-keymap.set("n", "<leader>fb", ":Telescope buffers<cr>")
-keymap.set("n", "<leader>fh", ":Telescope help_tags<cr>")
-keymap.set("n", "<leader>fa", ":Telescope commands<cr>")
-keymap.set("n", "<leader>fr", ":Telescope frecency<cr>")
-keymap.set("n", "<leader>fn", ":lua require('plugins/telescope-config').grep_prompt()<cr>")
-keymap.set("n", "<leader>nv", ":Telescope frecency wokspace=nvim<cr>")
-keymap.set("n", "<leader>k", ":lua require('telescope').extensions.command_palette.command_palette()<cr>")
-keymap.set("n", "<leader>g", ":lua require('telescope.builtin').grep_string{}<cr>")
+keymap.set("n", "<leader>ff", ":Telescope find_files<cr>", { silent = true })
+keymap.set("n", "<leader>fg", ":Telescope live_grep<cr>, { silent = true }")
+keymap.set("n", "<leader>fb", ":Telescope buffers<cr>", { silent = true })
+keymap.set("n", "<leader>fh", ":Telescope help_tags<cr>", { silent = true })
+keymap.set("n", "<leader>fa", ":Telescope commands<cr>", { silent = true })
+keymap.set("n", "<leader>fr", ":Telescope frecency<cr>", { silent = true })
+keymap.set("n", "<leader>fn", ":lua require('plugins/telescope-config').grep_prompt()<cr>", { silent = true })
+keymap.set("n", "<leader>nv", ":Telescope frecency wokspace=nvim<cr>", { silent = true })
+keymap.set("n", "<leader>k", ":lua require('telescope').extensions.command_palette.command_palette()<cr>", { silent = true })
+keymap.set("n", "<leader>g", ":lua require('telescope.builtin').grep_string{}<cr>", { silent = true })
 
 -- UndoTree
 
