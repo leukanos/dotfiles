@@ -34,6 +34,17 @@ return require('packer').startup(function(use)
   -- Theme
   use 'rebelot/kanagawa.nvim'
 
+  -- Transparent
+
+  use {
+    'xiyaowong/nvim-transparent',
+    config = function()
+      require('transparent').setup({
+        enable = true,
+      })
+    end,
+  }
+
   -- Auto save
   use {
     "Pocco81/auto-save.nvim",
