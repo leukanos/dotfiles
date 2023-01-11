@@ -63,6 +63,16 @@ keymap.set("n", "gr", ":Lspsaga rename<CR>", { silent = true })
 keymap.set("n", "K", ":Lspsaga hover_doc<CR>", { silent = true })
 keymap.set("n", "<C-k>", ":Lspsaga signature_help<CR>", { silent = true })
 
+-- Trouble
+
+keymap.set("n", "<leader>xx", ":TroubleToggle<CR>", { silent = true })
+keymap.set("n", "<leader>xw", ":TroubleToggle workspace_diagnostics<CR>", { silent = true })
+keymap.set("n", "<leader>xd", ":TroubleToggle document_diagnosticsCR>", { silent = true })
+keymap.set("n", "<leader>xl", ":TroubleToggle loclist<CR>", { silent = true })
+keymap.set("n", "<leader>xq", ":TroubleToggle quickfix<CR>", { silent = true })
+keymap.set("n", "gR", ":TroubleToggle lsp_references<CR>", { silent = true })
+
+
 -- fzf-lsp
 
 -- keymap.set('n', '<leader>fs', ':DocumentSymbol<CR>')

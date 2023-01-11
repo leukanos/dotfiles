@@ -265,6 +265,14 @@ local Spell = {
 }
 
 local LSPActive = {
+    on_click = {
+        callback = function()
+            vim.defer_fn(function()
+                vim.cmd("LspInfo")
+            end, 100)
+        end,
+        name = "heirline_LSP",
+    },
     condition = conditions.lsp_attached,
     update = {'LspAttach', 'LspDetach'},
 
@@ -274,7 +282,7 @@ local LSPActive = {
     -- Or complicate things a bit and get the servers names
     provider  = function()
         local names = {}
-        for _i, server in pairs(vim.lsp.buf_get_clients(0)) do
+        for _, server in pairs(vim.lsp.buf_get_clients(0)) do
             table.insert(names, server.name)
         end
         return " [" .. table.concat(names, " ") .. "]"
@@ -336,7 +344,6 @@ local Git = {
 }
 
 local Diagnostics = {
-
     condition = conditions.has_diagnostics,
 
     static = {
@@ -388,15 +395,109 @@ local Diagnostics = {
     },
 }
 
+-- local Navic = {
+--   condition = require("nvim-navic").is_available,
+--   provider = function()
+--     require("nvim-navic").get_location({highlight=true})
+--   end,
+--   update = 'CursorMoved'
+-- }
+
 local Navic = {
-  condition = require("nvim-navic").is_available,
-  provider = function()
-    require("nvim-navic").get_location({highlight=true})
-  end,
-  update = 'CursorMoved'
+    condition = require("nvim-navic").is_available,
+    static = {
+        -- create a type highlight map
+        type_hl = {
+            File = "Directory",
+            Module = "@include",
+            Namespace = "@namespace",
+            Package = "@include",
+            Class = "@structure",
+            Method = "@method",
+            Property = "@property",
+            Field = "@field",
+            Constructor = "@constructor",
+            Enum = "@field",
+            Interface = "@type",
+            Function = "@function",
+            Variable = "@variable",
+            Constant = "@constant",
+            String = "@string",
+            Number = "@number",
+            Boolean = "@boolean",
+            Array = "@field",
+            Object = "@type",
+            Key = "@keyword",
+            Null = "@comment",
+            EnumMember = "@field",
+            Struct = "@structure",
+            Event = "@keyword",
+            Operator = "@operator",
+            TypeParameter = "@type",
+        },
+        -- bit operation dark magic, see below...
+        enc = function(line, col, winnr)
+            return bit.bor(bit.lshift(line, 16), bit.lshift(col, 6), winnr)
+        end,
+        -- line: 16 bit (65535); col: 10 bit (1023); winnr: 6 bit (63)
+        dec = function(c)
+            local line = bit.rshift(c, 16)
+            local col = bit.band(bit.rshift(c, 6), 1023)
+            local winnr = bit.band(c,  63)
+            return line, col, winnr
+        end
+    },
+    init = function(self)
+        local data = require("nvim-navic").get_data() or {}
+        local children = {}
+        -- create a child for each level
+        for i, d in ipairs(data) do
+            -- encode line and column numbers into a single integer
+            local pos = self.enc(d.scope.start.line, d.scope.start.character, self.winnr)
+            local child = {
+                {
+                    provider = d.icon,
+                    hl = self.type_hl[d.type],
+                },
+                {
+                    -- escape `%`s (elixir) and buggy default separators
+                    provider = d.name:gsub("%%", "%%%%"):gsub("%s*->%s*", ''),
+                    -- highlight icon only or location name as well
+                    -- hl = self.type_hl[d.type],
+
+                    on_click = {
+                        -- pass the encoded position through minwid
+                        minwid = pos,
+                        callback = function(_, minwid)
+                            -- decode
+                            local line, col, winnr = self.dec(minwid)
+                            vim.api.nvim_win_set_cursor(vim.fn.win_getid(winnr), {line, col})
+                        end,
+                        name = "heirline_navic",
+                    },
+                },
+            }
+            -- add a separator only if needed
+            if #data > 1 and i < #data then
+                table.insert(child, {
+                    provider = " > ",
+                    hl = { fg = 'bright_fg' },
+                })
+            end
+            table.insert(children, child)
+        end
+        -- instantiate the new child, overwriting the previous one
+        self.child = self:new(children, 1)
+    end,
+    -- evaluate the children containing navic components
+    provider = function(self)
+        return self.child:eval()
+    end,
+    -- hl = { fg = "gray" },
+    update = 'CursorMoved'
 }
 
-Navic = { flexible = 22, Navic, { provider = "" } }
+-- Navic = { flexible = 22, Navic, { provider = "" } }
 
 local Ruler = {
   -- %l = current line number
@@ -435,12 +536,13 @@ local Space = { provider = " " }
 
 local DefaultStatusLine = {
   ViMode, Space, WorkDir, FileNameBlock, Space, Git, Space, Diagnostics, Align,
-  Navic, Space, Align,
+  Space, Align,
   LSPActive, Space, Spell, Space, FileType, Space, Ruler, Space,
 }
 
 local InactiveStatusline = {
     condition = conditions.is_not_active,
+    hl = { fg = "gray", bg = "bright_bg", force = true },
     FileType, Space, FileNameBlock, Align,
 }
 
@@ -503,6 +605,56 @@ local StatusLine = {
   SpecialStatusline, TerminalStatusline, InactiveStatusline, DefaultStatusLine,
 }
 
+vim.api.nvim_create_autocmd("User", {
+    pattern = 'HeirlineInitWinbar',
+    callback = function(args)
+        local buf = args.buf
+        local buftype = vim.tbl_contains(
+            { "prompt", "nofile", "help", "quickfix" },
+            vim.bo[buf].buftype
+        )
+        local filetype = vim.tbl_contains({ "gitcommit", "fugitive" }, vim.bo[buf].filetype)
+        if buftype or filetype then
+            vim.opt_local.winbar = nil
+        end
+    end,
+})
+
+local WinBars = {
+    fallthrough = false,
+    {   -- Hide the winbar for special buffers
+        condition = function()
+            return conditions.buffer_matches({
+                buftype = { "nofile", "prompt", "help", "quickfix" },
+                filetype = { "^git.*", "fugitive" },
+            })
+        end,
+        init = function()
+            vim.opt_local.winbar = nil
+        end
+    },
+    {   -- A special winbar for terminals
+        condition = function()
+            return conditions.buffer_matches({ buftype = { "terminal" } })
+        end,
+        utils.surround({ "", "" }, "dark_red", {
+            FileType,
+            Space,
+            TerminalName,
+        }),
+    },
+    {   -- An inactive winbar for regular files
+        condition = function()
+            return not conditions.is_active()
+        end,
+        utils.surround({ "", "" }, "bright_bg", { hl = { fg = "gray", force = true }, InactiveStatusline }),
+    },
+    -- A winbar for regular files
+    utils.surround({ "", "" }, "bright_bg", Navic),
+}
+
+
 require('heirline').setup({
-    statusline = StatusLine
+    statusline = StatusLine,
+    winbar = WinBars,
 })

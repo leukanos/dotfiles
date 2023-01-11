@@ -13,11 +13,11 @@ local packer_bootstrap = ensure_packer()
 
 local autopairs_config = require('plugins/autopairs-config')
 local copilot_config = require('plugins/copilot')
-local lightbulb_config = require('plugins/lightbulb-config')
 local neotree_config = require('plugins.neotree-config')
 local nvim_lspconfig = require('plugins/nvim-lspconfig')
 local telescope_config = require('plugins.telescope-config')
 local treesitter_config = require('plugins/treesitter-config')
+local trouble_config = require('plugins/trouble-config')
 
 require('colors/kanagawa')
 require('plugins/undotree')
@@ -130,6 +130,14 @@ return require('packer').startup(function(use)
     end
   }
 
+  use {
+    'folke/trouble.nvim',
+    opt = false,
+    cmd = 'TroubleToggle',
+    module_pattern = 'trouble.*',
+    config = trouble_config,
+  }
+
   -- Telescope
   use {
     'nvim-telescope/telescope.nvim',
@@ -205,16 +213,7 @@ return require('packer').startup(function(use)
   }
   use {
     'SmiteshP/nvim-navic',
-    opt = false,
-    -- after = 'nvim-lspconfig', -- TODO: still required by hearline
   }
-  use {
-    'kosayoda/nvim-lightbulb',
-    opt = true,
-    config = lightbulb_config,
-    after = 'nvim-lspconfig',
-  }
-
 
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
