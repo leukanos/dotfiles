@@ -106,6 +106,8 @@ function config.nvim_config()
     prompt_title = " NVim Config Browse",
     cwd = "~/.config/nvim/",
     layout_config = { preview_width = 0.65, width = 0.75 },
+    depth = 1,
+    use_fd = true,
   }
 end
 

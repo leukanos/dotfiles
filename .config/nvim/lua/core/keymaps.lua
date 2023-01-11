@@ -47,7 +47,7 @@ keymap.set("n", "<leader>fh", ":Telescope help_tags<cr>")
 keymap.set("n", "<leader>fa", ":Telescope commands<cr>")
 keymap.set("n", "<leader>fr", ":Telescope frecency<cr>")
 keymap.set("n", "<leader>fn", ":lua require('plugins/telescope-config').grep_prompt()<cr>")
-keymap.set("n", "<leader>nv", ":lua require('plugins/telescope-config').nvim_config()<cr>")
+keymap.set("n", "<leader>nv", ":Telescope frecency wokspace=nvim<cr>")
 keymap.set("n", "<leader>k", ":lua require('telescope').extensions.command_palette.command_palette()<cr>")
 keymap.set("n", "<leader>g", ":lua require('telescope.builtin').grep_string{}<cr>")
 
