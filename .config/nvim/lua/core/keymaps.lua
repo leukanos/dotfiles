@@ -4,7 +4,7 @@ local keymap = vim.keymap
 
 -- general keymaps
 
-keymap.set("n", "<leader>nh", ":nohl<cr>", { silent = true })
+keymap.set("n", "<leader>nh", ":nohl<CR>", { silent = true })
 
 keymap.set("n", "x", '"_x')
 
@@ -40,16 +40,16 @@ keymap.set("n", "<leader>nr", ":Neotree reveal_force_cwd<CR>", { silent = true }
 
 -- Telescope
 
-keymap.set("n", "<leader>ff", ":Telescope find_files<cr>", { silent = true })
-keymap.set("n", "<leader>fg", ":Telescope live_grep<cr>, { silent = true }")
-keymap.set("n", "<leader>fb", ":Telescope buffers<cr>", { silent = true })
-keymap.set("n", "<leader>fh", ":Telescope help_tags<cr>", { silent = true })
-keymap.set("n", "<leader>fa", ":Telescope commands<cr>", { silent = true })
-keymap.set("n", "<leader>fr", ":Telescope frecency<cr>", { silent = true })
-keymap.set("n", "<leader>fn", ":lua require('plugins/telescope-config').grep_prompt()<cr>", { silent = true })
-keymap.set("n", "<leader>nv", ":Telescope frecency wokspace=nvim<cr>", { silent = true })
-keymap.set("n", "<leader>k", ":lua require('telescope').extensions.command_palette.command_palette()<cr>", { silent = true })
-keymap.set("n", "<leader>g", ":lua require('telescope.builtin').grep_string{}<cr>", { silent = true })
+keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { silent = true })
+keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>, { silent = true }")
+keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { silent = true })
+keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { silent = true })
+keymap.set("n", "<leader>fa", ":Telescope commands<CR>", { silent = true })
+keymap.set("n", "<leader>fr", ":Telescope frecency<CR>", { silent = true })
+keymap.set("n", "<leader>fn", ":lua require('plugins/telescope-config').grep_prompt()<CR>", { silent = true })
+keymap.set("n", "<leader>nv", ":Telescope frecency wokspace=nvim<CR>", { silent = true })
+keymap.set("n", "<leader>k", ":lua require('telescope').extensions.command_palette.command_palette()<CR>", { silent = true })
+keymap.set("n", "<leader>g", ":lua require('telescope.builtin').grep_string{}<CR>", { silent = true })
 
 -- UndoTree
 
@@ -57,11 +57,16 @@ keymap.set("n", "<leader>u", ":UndotreeToggle<CR>", { silent = true })
 
 -- lsp
 
+keymap.set('n', 'gh', ':Lspsaga lsp_finder<CR>', { silent = true })
+
 keymap.set("n", "gd", ":Lspsaga preview_definition<CR>", { silent = true })
 keymap.set("n", "gD", ":lua vim.lsp.buf.definition()<CR>", { silent = true })
 keymap.set("n", "gr", ":Lspsaga rename<CR>", { silent = true })
 keymap.set("n", "K", ":Lspsaga hover_doc<CR>", { silent = true })
 keymap.set("n", "<C-k>", ":Lspsaga signature_help<CR>", { silent = true })
+
+keymap.set("n", "]e", ":Lspsaga diagnostic_jump_next<CR>", { silent = true })
+keymap.set("n", "[e", ":Lspsaga diagnostic_jump_prev<CR>", { silent = true })
 
 -- Trouble
 

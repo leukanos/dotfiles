@@ -50,6 +50,9 @@ cmp.setup({
         calc = "[Calc]",
         nvim_lsp = "[LSP]",
         buffer = "[Buffer]",
+        treesitter = "[Treesitter]",
+        path = "[Path]",
+        ultisnips = "[Ultisnips]",
       })
     })
   },
