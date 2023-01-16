@@ -45,18 +45,21 @@ return require('packer').startup(function(use)
     end,
   }
 
-  -- Auto save
-  use {
-    "Pocco81/auto-save.nvim",
-    config = function()
-      require("auto-save").setup {}
-    end,
-  }
-
   use {
     'dstein64/vim-startuptime',
     cmd = 'StartupTime',
     opt = true,
+  }
+
+  use {
+    'dominikduda/vim_current_word',
+    opt = true,
+    event = 'BufRead',
+    config = function()
+      vim.cmd(':let g:vim_current_word#highlight_delay = 250')
+      vim.cmd[[ hi CurrentWord gui=none guibg=#5f5f5f]]
+      vim.cmd[[ hi CurrentWordTwins gui=none guibg=#5f5f5f]]
+    end,
   }
 
   -- Awesome status bar
@@ -221,6 +224,36 @@ return require('packer').startup(function(use)
     'tami5/lspsaga.nvim',
     opt = true,
     after = 'nvim-lspconfig',
+    config = function()
+      require('lspsaga').init_lsp_saga({
+        border_style = "round",
+        finder_action_keys = {
+          open = 'o', vsplit = 'v',split = 's',quit = '<ESC>'
+        },
+        code_action_lightbulb = {
+          enable = true,
+          enable_in_insert = true,
+          cache_code_action = true,
+          sign = true,
+          update_time = 150,
+          sign_priority = 20,
+          virtual_text = true,
+        },
+        show_outline = {
+          win_position = 'right',
+          --set special filetype win that outline window split.like NvimTree neotree
+          -- defx, db_ui
+          win_with = '',
+          win_width = 30,
+          auto_enter = true,
+          auto_preview = true,
+          virt_text = '┃',
+          jump_key = 'o',
+          -- auto refresh when change buffer
+          auto_refresh = true,
+        },
+      })
+    end
   }
   use {
     'SmiteshP/nvim-navic',
@@ -250,6 +283,7 @@ return require('packer').startup(function(use)
   use 'zbirenbaum/copilot-cmp'
 
   use 'SirVer/ultisnips'
+  use 'honza/vim-snippets'
   use 'quangnguyen30192/cmp-nvim-ultisnips'
 
   use {
