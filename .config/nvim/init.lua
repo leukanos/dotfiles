@@ -26,7 +26,7 @@ o.timeoutlen = 500
 o.encoding = 'utf-8'
 o.fileencoding = 'utf-8'
 
--- Apperance
+-- Appearance
 
 o.background = 'dark'
 o.signcolumn = 'yes'
