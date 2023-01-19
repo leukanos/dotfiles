@@ -9,6 +9,8 @@ local ensure_packer = function()
   return false
 end
 
+vim.cmd [[packadd packer.nvim]]
+
 local packer_bootstrap = ensure_packer()
 
 local autopairs_config = require('plugins/autopairs-config')
@@ -30,6 +32,8 @@ require('plugins/heirline')
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'tpope/vim-sensible'
+
+  use 'lewis6991/impatient.nvim'
 
   -- Theme
   use 'rebelot/kanagawa.nvim'
@@ -221,37 +225,15 @@ return require('packer').startup(function(use)
     config = nvim_lspconfig
   }
   use {
-    'tami5/lspsaga.nvim',
+    'glepnir/lspsaga.nvim',
+    branch = 'main',
     opt = true,
     after = 'nvim-lspconfig',
     config = function()
-      require('lspsaga').init_lsp_saga({
-        border_style = "round",
-        finder_action_keys = {
-          open = 'o', vsplit = 'v',split = 's',quit = '<ESC>'
-        },
-        code_action_lightbulb = {
-          enable = true,
-          enable_in_insert = true,
-          cache_code_action = true,
-          sign = true,
-          update_time = 150,
-          sign_priority = 20,
-          virtual_text = true,
-        },
-        show_outline = {
-          win_position = 'right',
-          --set special filetype win that outline window split.like NvimTree neotree
-          -- defx, db_ui
-          win_with = '',
-          win_width = 30,
-          auto_enter = true,
-          auto_preview = true,
-          virt_text = '┃',
-          jump_key = 'o',
-          -- auto refresh when change buffer
-          auto_refresh = true,
-        },
+      require('lspsaga').setup({
+        ui = {
+          theme = 'round'
+        }
       })
     end
   }
@@ -293,6 +275,21 @@ return require('packer').startup(function(use)
   }
 
   use 'ray-x/lsp_signature.nvim'
+
+  use {
+    'fatih/vim-go',
+    ft = {'go'},
+    opt = true,
+    run = ':GoUpdateBinaries',
+    config = function()
+      vim.cmd(':let g:go_fmt_command = "goimports"')
+      vim.cmd('let g:go_fmt_autosave = 1')
+      vim.cmd('let g:go_highlight_functions = 1')
+      vim.cmd('let g:go_highlight_methods = 1')
+      vim.cmd('let g:go_highlight_structs = 1')
+      vim.cmd('let g:go_highlight_operators = 1')
+    end
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
