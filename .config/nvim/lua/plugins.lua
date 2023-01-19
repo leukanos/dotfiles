@@ -16,7 +16,6 @@ local packer_bootstrap = ensure_packer()
 local autopairs_config = require('plugins/autopairs-config')
 local copilot_config = require('plugins/copilot')
 local neotree_config = require('plugins.neotree-config')
-local nvim_lspconfig = require('plugins/nvim-lspconfig')
 local telescope_config = require('plugins.telescope-config')
 local treesitter_config = require('plugins/treesitter-config')
 local trouble_config = require('plugins/trouble-config')
@@ -143,9 +142,7 @@ return require('packer').startup(function(use)
     'folke/which-key.nvim',
     opt = true,
     keys = ',',
-    config = function ()
-      require('which-key').setup {}
-    end
+    config = function () require('which-key').setup() end
   }
 
   use {
@@ -222,11 +219,9 @@ return require('packer').startup(function(use)
     'neovim/nvim-lspconfig',
     opt = true,
     event = 'BufReadPre',
-    config = nvim_lspconfig
   }
   use {
     'glepnir/lspsaga.nvim',
-    branch = 'main',
     opt = true,
     after = 'nvim-lspconfig',
     config = function()
@@ -270,8 +265,8 @@ return require('packer').startup(function(use)
 
   use {
     'windwp/nvim-autopairs',
-    after = 'nvim-cmp',
-    config = autopairs_config
+    config = autopairs_config,
+    event = "InsertEnter",
   }
 
   use 'ray-x/lsp_signature.nvim'
@@ -290,6 +285,112 @@ return require('packer').startup(function(use)
       vim.cmd('let g:go_highlight_operators = 1')
     end
   }
+
+  use {
+    'williamboman/mason.nvim',
+    opt = true,
+    module = "mason",
+    cmd = {
+      "Mason",
+      "MasonInstall",
+      "MasonUninstall",
+      "MasonUninstallAll",
+      "MasonLog",
+      "MasonUpdate", -- astronvim command
+      "MasonUpdateAll", -- astronvim command
+    },
+    config = function()
+      require('mason').setup()
+    end
+  }
+
+  use {
+    'williamboman/mason-lspconfig.nvim',
+    opt = true,
+    after = 'nvim-lspconfig',
+    config = function()
+      local navic = require("nvim-navic")
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+      local on_attach = function(client, bufnr)
+        if client.server_capabilities.documentSymbolProvider then
+          navic.attach(client, bufnr)
+        end
+
+        require "lsp_signature".on_attach({
+          bind = true,
+          handler_opts = {
+            border = "rounded"
+          }
+        }, bufnr)
+      end
+
+      require('mason-lspconfig').setup({
+        ensure_installed = {
+          'bashls',
+          'dockerls',
+          'gopls',
+          'grammarly',
+          'jsonls',
+          'sumneko_lua',
+          'terraformls',
+          'vimls',
+          'yamlls',
+          'html',
+          'cmake',
+          'intelephense',
+          'tsserver',
+          'cssls',
+          'eslint',
+        },
+      })
+
+      require('mason-lspconfig').setup_handlers {
+        after = 'nvim-lspconfig',
+        function(server_name)
+          require("lspconfig")[server_name].setup {
+            on_attach = on_attach,
+            capabilities = capabilities,
+          }
+        end,
+        ['sumneko_lua'] = function()
+          require'lspconfig'.sumneko_lua.setup {
+            settings = {
+              Lua = {
+                diagnostics = {
+                  globals = { 'vim', 'packer_plugins' }
+                }
+              }
+            },
+            on_attach = on_attach,
+            capabilities = capabilities,
+          }
+
+        end
+      }
+    end
+  }
+
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    after = 'mason-lspconfig.nvim',
+    module = "null-ls",
+    config = function() require("null-ls").setup() end
+  }
+
+  use {
+    'jay-babu/mason-null-ls.nvim',
+    opt = true,
+    after = 'null-ls.nvim',
+    config = function()
+      local mason_null_ls = require "mason-null-ls"
+      mason_null_ls.setup({
+        automatic_setup = true,
+      })
+      mason_null_ls.setup_handlers()
+    end,
+  }
+
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
