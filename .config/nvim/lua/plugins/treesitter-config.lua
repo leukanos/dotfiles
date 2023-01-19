@@ -20,7 +20,7 @@ function config.nvim_treesitter()
     highlight = {
       -- `false` will disable the whole extension
       enable = true,
-      additional_vim_regex_highlighting = false,
+      additional_vim_regex_highlighting = { 'markdown' },
     },
 
     indent = {

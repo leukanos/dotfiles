@@ -64,6 +64,7 @@ keymap.set("n", "gD", ":lua vim.lsp.buf.definition()<CR>", { silent = true })
 keymap.set("n", "gr", ":Lspsaga rename<CR>", { silent = true })
 keymap.set("n", "K", ":Lspsaga hover_doc<CR>", { silent = true })
 keymap.set("n", "<C-k>", ":Lspsaga signature_help<CR>", { silent = true })
+keymap.set("n", "<leader>o", ":Lspsaga outline<CR>", { silent = true })
 
 keymap.set("n", "]e", ":Lspsaga diagnostic_jump_next<CR>", { silent = true })
 keymap.set("n", "[e", ":Lspsaga diagnostic_jump_prev<CR>", { silent = true })
