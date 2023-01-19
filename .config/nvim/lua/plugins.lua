@@ -346,7 +346,6 @@ return require('packer').startup(function(use)
       })
 
       require('mason-lspconfig').setup_handlers {
-        after = 'nvim-lspconfig',
         function(server_name)
           require("lspconfig")[server_name].setup {
             on_attach = on_attach,
