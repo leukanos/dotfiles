@@ -269,6 +269,16 @@ return require('packer').startup(function(use)
     event = "InsertEnter",
   }
 
+-- Autotag - auto close html tags
+  use {
+    'windwp/nvim-ts-autotag',
+    opt = true,
+    after = 'nvim-treesitter',
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end
+  }
+
   use 'ray-x/lsp_signature.nvim'
 
   use {
@@ -374,7 +384,14 @@ return require('packer').startup(function(use)
     'jose-elias-alvarez/null-ls.nvim',
     after = 'mason-lspconfig.nvim',
     module = "null-ls",
-    config = function() require("null-ls").setup() end
+    config = function()
+       local null_ls = require("null-ls")
+       null_ls.setup({
+         sources = {
+           null_ls.builtins.code_actions.gitsigns,
+         }
+       })
+    end
   }
 
   use {

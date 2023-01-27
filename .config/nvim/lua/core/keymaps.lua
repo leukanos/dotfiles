@@ -59,7 +59,7 @@ keymap.set("n", "<leader>u", ":UndotreeToggle<CR>", { silent = true })
 
 keymap.set('n', 'gh', ':Lspsaga lsp_finder<CR>', { silent = true })
 
-keymap.set("n", "gd", ":Lspsaga preview_definition<CR>", { silent = true })
+keymap.set("n", "gd", ":Lspsaga peek_definition<CR>", { silent = true })
 keymap.set("n", "gD", ":lua vim.lsp.buf.definition()<CR>", { silent = true })
 keymap.set("n", "gr", ":Lspsaga rename<CR>", { silent = true })
 keymap.set("n", "K", ":Lspsaga hover_doc<CR>", { silent = true })
