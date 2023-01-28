@@ -41,7 +41,7 @@ keymap.set("n", "<leader>nr", ":Neotree reveal_force_cwd<CR>", { silent = true }
 -- Telescope
 
 keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { silent = true })
-keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>, { silent = true }")
+keymap.set("n", "<leader>fg", ":Telescope live_grep<CR>", { silent = true })
 keymap.set("n", "<leader>fb", ":Telescope buffers<CR>", { silent = true })
 keymap.set("n", "<leader>fh", ":Telescope help_tags<CR>", { silent = true })
 keymap.set("n", "<leader>fa", ":Telescope commands<CR>", { silent = true })
@@ -73,11 +73,16 @@ keymap.set("n", "[e", ":Lspsaga diagnostic_jump_prev<CR>", { silent = true })
 
 keymap.set("n", "<leader>xx", ":TroubleToggle<CR>", { silent = true })
 keymap.set("n", "<leader>xw", ":TroubleToggle workspace_diagnostics<CR>", { silent = true })
-keymap.set("n", "<leader>xd", ":TroubleToggle document_diagnosticsCR>", { silent = true })
+keymap.set("n", "<leader>xd", ":TroubleToggle document_diagnostics<CR>", { silent = true })
 keymap.set("n", "<leader>xl", ":TroubleToggle loclist<CR>", { silent = true })
 keymap.set("n", "<leader>xq", ":TroubleToggle quickfix<CR>", { silent = true })
 keymap.set("n", "gR", ":TroubleToggle lsp_references<CR>", { silent = true })
 
+-- Gitsigns
+
+keymap.set("n", "<leader>hr", ":lua require('gitsigns').reset_hunk()<CR>", { silent = true })
+keymap.set("n", "<leader>hs", ":lua require('gitsigns').stage_hunk()<CR>", { silent = true })
+keymap.set("n", "<leader>hS", ":lua require('gitsigns').stage_buffer()<CR>", { silent = true })
 
 -- fzf-lsp
 

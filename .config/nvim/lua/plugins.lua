@@ -15,8 +15,9 @@ local packer_bootstrap = ensure_packer()
 
 local autopairs_config = require('plugins/autopairs-config')
 local copilot_config = require('plugins/copilot')
-local neotree_config = require('plugins.neotree-config')
-local telescope_config = require('plugins.telescope-config')
+local mason_config = require('plugins/mason-config')
+local neotree_config = require('plugins/neotree-config')
+local telescope_config = require('plugins/telescope-config')
 local treesitter_config = require('plugins/treesitter-config')
 local trouble_config = require('plugins/trouble-config')
 
@@ -42,17 +43,19 @@ return require('packer').startup(function(use)
   use {
     'xiyaowong/nvim-transparent',
     config = function()
-      require('transparent').setup({
-        enable = true,
-      })
+      require('transparent').setup({ enable = true })
     end,
   }
+
+  -- Measure startup time
 
   use {
     'dstein64/vim-startuptime',
     cmd = 'StartupTime',
     opt = true,
   }
+
+  -- Highlight current word
 
   use {
     'dominikduda/vim_current_word',
@@ -236,6 +239,8 @@ return require('packer').startup(function(use)
     'SmiteshP/nvim-navic',
   }
 
+  -- Code completion
+
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
@@ -274,12 +279,12 @@ return require('packer').startup(function(use)
     'windwp/nvim-ts-autotag',
     opt = true,
     after = 'nvim-treesitter',
-    config = function()
-      require('nvim-ts-autotag').setup()
-    end
+    config = function() require('nvim-ts-autotag').setup() end
   }
 
   use 'ray-x/lsp_signature.nvim'
+
+  -- Golang support
 
   use {
     'fatih/vim-go',
@@ -295,6 +300,8 @@ return require('packer').startup(function(use)
       vim.cmd('let g:go_highlight_operators = 1')
     end
   }
+
+  -- LSP servers manager
 
   use {
     'williamboman/mason.nvim',
@@ -340,6 +347,7 @@ return require('packer').startup(function(use)
           'bashls',
           'dockerls',
           'gopls',
+          'graphql',
           'grammarly',
           'jsonls',
           'sumneko_lua',
@@ -347,7 +355,6 @@ return require('packer').startup(function(use)
           'vimls',
           'yamlls',
           'html',
-          'cmake',
           'intelephense',
           'tsserver',
           'cssls',
@@ -374,10 +381,16 @@ return require('packer').startup(function(use)
             on_attach = on_attach,
             capabilities = capabilities,
           }
-
         end
       }
     end
+  }
+
+  use {
+    'jay-babu/mason-null-ls.nvim',
+    opt = true,
+    after = 'null-ls.nvim',
+    config = mason_config.mason_null_ls
   }
 
   use {
@@ -393,20 +406,6 @@ return require('packer').startup(function(use)
        })
     end
   }
-
-  use {
-    'jay-babu/mason-null-ls.nvim',
-    opt = true,
-    after = 'null-ls.nvim',
-    config = function()
-      local mason_null_ls = require "mason-null-ls"
-      mason_null_ls.setup({
-        automatic_setup = true,
-      })
-      mason_null_ls.setup_handlers()
-    end,
-  }
-
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
