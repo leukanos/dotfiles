@@ -81,8 +81,12 @@ keymap.set("n", "gR", ":TroubleToggle lsp_references<CR>", { silent = true })
 -- Gitsigns
 
 keymap.set("n", "<leader>hr", ":lua require('gitsigns').reset_hunk()<CR>", { silent = true })
+keymap.set("n", "<leader>hR", ":lua require('gitsigns').reset_buffer()<CR>", { silent = true })
 keymap.set("n", "<leader>hs", ":lua require('gitsigns').stage_hunk()<CR>", { silent = true })
 keymap.set("n", "<leader>hS", ":lua require('gitsigns').stage_buffer()<CR>", { silent = true })
+keymap.set("n", "<leader>hu", ":lua require('gitsigns').undo_stage_hunk()<CR>", { silent = true })
+keymap.set("n", "<leader>hU", ":lua require('gitsigns').reset_buffer_index()<CR>", { silent = true })
+keymap.set("n", "<leader>hp", ":lua require('gitsigns').preview_hunk()<CR>", { silent = true })
 
 -- fzf-lsp
 

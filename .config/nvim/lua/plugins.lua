@@ -42,9 +42,7 @@ return require('packer').startup(function(use)
 
   use {
     'xiyaowong/nvim-transparent',
-    config = function()
-      require('transparent').setup({ enable = true })
-    end,
+    config = function() require('transparent').setup({ enable = true }) end
   }
 
   -- Measure startup time
@@ -227,13 +225,7 @@ return require('packer').startup(function(use)
     'glepnir/lspsaga.nvim',
     opt = true,
     after = 'nvim-lspconfig',
-    config = function()
-      require('lspsaga').setup({
-        ui = {
-          theme = 'round'
-        }
-      })
-    end
+    config = function() require('lspsaga').setup({ ui = { theme = 'round' } }) end
   }
   use {
     'SmiteshP/nvim-navic',
@@ -316,9 +308,7 @@ return require('packer').startup(function(use)
       "MasonUpdate", -- astronvim command
       "MasonUpdateAll", -- astronvim command
     },
-    config = function()
-      require('mason').setup()
-    end
+    config = function() require('mason').setup() end
   }
 
   use {
