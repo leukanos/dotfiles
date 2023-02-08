@@ -1,6 +1,7 @@
 vim.g.mapleader = " "
 
 local keymap = vim.keymap
+local wk = require("which-key")
 
 -- general keymaps
 
@@ -80,13 +81,34 @@ keymap.set("n", "gR", ":TroubleToggle lsp_references<CR>", { silent = true })
 
 -- Gitsigns
 
+wk.register({
+  ["<leader>"] = {
+    h = { name = "+Git" },
+  }
+})
 keymap.set("n", "<leader>hr", ":lua require('gitsigns').reset_hunk()<CR>", { silent = true })
 keymap.set("n", "<leader>hR", ":lua require('gitsigns').reset_buffer()<CR>", { silent = true })
 keymap.set("n", "<leader>hs", ":lua require('gitsigns').stage_hunk()<CR>", { silent = true })
 keymap.set("n", "<leader>hS", ":lua require('gitsigns').stage_buffer()<CR>", { silent = true })
 keymap.set("n", "<leader>hu", ":lua require('gitsigns').undo_stage_hunk()<CR>", { silent = true })
 keymap.set("n", "<leader>hU", ":lua require('gitsigns').reset_buffer_index()<CR>", { silent = true })
-keymap.set("n", "<leader>hp", ":lua require('gitsigns').preview_hunk()<CR>", { silent = true })
+keymap.set("n", "<leader>hp", ":lua require('gitsigns').preview_hunk()<CR>", { silent = true, desc = "Preview hunk"})
+keymap.set("n", "<leader>hd", ":lua require('gitsigns').diffthis()<CR>", { silent = true, desc = "Diff hunk"})
+
+
+
+-- Code Runner
+
+wk.register({
+  ["<leader>"] = {
+    r = { name = "+Code Runner"},
+  },
+})
+vim.keymap.set('n', '<leader>r', ':RunCode<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rf', ':RunFile<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rft', ':RunFile tab<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rp', ':RunProject<CR>', { noremap = true, silent = false })
+vim.keymap.set('n', '<leader>rc', ':RunClose<CR>', { noremap = true, silent = false })
 
 -- fzf-lsp
 

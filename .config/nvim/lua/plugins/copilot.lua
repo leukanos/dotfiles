@@ -4,8 +4,9 @@ return function()
       enabled = true,
       auto_trigger = true,
       keymap = {
-        accept = "<C-l>",
+        accept = "<A-l>",
         debounce = 100,
+        enable = true,
       },
     }
   })

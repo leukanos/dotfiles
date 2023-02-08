@@ -266,6 +266,18 @@ return require('packer').startup(function(use)
     event = "InsertEnter",
   }
 
+  -- Code runner 
+  use {
+    'CRAG666/code_runner.nvim',
+    requires = {'nvim-lua/plenary.nvim'},
+    config = function() require('code_runner').setup({
+      filetype = {
+        go = "go run",
+      },
+      mode = "term",
+    }) end
+  }
+
 -- Autotag - auto close html tags
   use {
     'windwp/nvim-ts-autotag',
@@ -392,6 +404,16 @@ return require('packer').startup(function(use)
        null_ls.setup({
          sources = {
            null_ls.builtins.code_actions.gitsigns,
+           null_ls.builtins.code_actions.gomodifytags,
+           null_ls.builtins.completion.spell,
+           null_ls.builtins.diagnostics.cspell,
+           null_ls.builtins.diagnostics.golangci_lint,
+           null_ls.builtins.diagnostics.eslint_d,
+           null_ls.builtins.diagnostics.shellcheck,
+           null_ls.formatters.stylua,
+           null_ls.builtins.formatting.gofmt,
+           null_ls.builtins.formatting.goimports,
+           null_ls.builtins.formatting.golines
          }
        })
     end
