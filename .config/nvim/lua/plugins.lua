@@ -17,6 +17,7 @@ local autopairs_config = require('plugins/autopairs-config')
 local copilot_config = require('plugins/copilot')
 local mason_config = require('plugins/mason-config')
 local neotree_config = require('plugins/neotree-config')
+local null_ls_config = require('plugins/null-ls-config')
 local telescope_config = require('plugins/telescope-config')
 local treesitter_config = require('plugins/treesitter-config')
 local trouble_config = require('plugins/trouble-config')
@@ -327,65 +328,7 @@ return require('packer').startup(function(use)
     'williamboman/mason-lspconfig.nvim',
     opt = true,
     after = 'nvim-lspconfig',
-    config = function()
-      local navic = require("nvim-navic")
-      local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-      local on_attach = function(client, bufnr)
-        if client.server_capabilities.documentSymbolProvider then
-          navic.attach(client, bufnr)
-        end
-
-        require "lsp_signature".on_attach({
-          bind = true,
-          handler_opts = {
-            border = "rounded"
-          }
-        }, bufnr)
-      end
-
-      require('mason-lspconfig').setup({
-        ensure_installed = {
-          'bashls',
-          'dockerls',
-          'gopls',
-          'graphql',
-          'grammarly',
-          'jsonls',
-          'sumneko_lua',
-          'terraformls',
-          'vimls',
-          'yamlls',
-          'html',
-          'intelephense',
-          'tsserver',
-          'cssls',
-          'eslint',
-        },
-      })
-
-      require('mason-lspconfig').setup_handlers {
-        function(server_name)
-          require("lspconfig")[server_name].setup {
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }
-        end,
-        ['sumneko_lua'] = function()
-          require'lspconfig'.sumneko_lua.setup {
-            settings = {
-              Lua = {
-                diagnostics = {
-                  globals = { 'vim', 'packer_plugins' }
-                }
-              }
-            },
-            on_attach = on_attach,
-            capabilities = capabilities,
-          }
-        end
-      }
-    end
+    config = mason_config.mason_lspconfig
   }
 
   use {
@@ -399,24 +342,7 @@ return require('packer').startup(function(use)
     'jose-elias-alvarez/null-ls.nvim',
     after = 'mason-lspconfig.nvim',
     module = "null-ls",
-    config = function()
-       local null_ls = require("null-ls")
-       null_ls.setup({
-         sources = {
-           null_ls.builtins.code_actions.gitsigns,
-           null_ls.builtins.code_actions.gomodifytags,
-           null_ls.builtins.completion.spell,
-           null_ls.builtins.diagnostics.cspell,
-           null_ls.builtins.diagnostics.golangci_lint,
-           null_ls.builtins.diagnostics.eslint_d,
-           null_ls.builtins.diagnostics.shellcheck,
-           null_ls.formatters.stylua,
-           null_ls.builtins.formatting.gofmt,
-           null_ls.builtins.formatting.goimports,
-           null_ls.builtins.formatting.golines
-         }
-       })
-    end
+    config = null_ls_config
   }
 
   -- Automatically set up your configuration after cloning packer.nvim
