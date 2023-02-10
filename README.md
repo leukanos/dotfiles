@@ -8,7 +8,7 @@ This is a collection of dotfiles and scripts I use for customizing OS X to my li
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 brew install yadm git-crypt
-yadm clone -b yadm https://github.com/leukanos/dotfiles.git --bootstrap
+yadm clone https://github.com/leukanos/dotfiles.git --bootstrap
 ```
 
 ## Linux
@@ -16,7 +16,7 @@ yadm clone -b yadm https://github.com/leukanos/dotfiles.git --bootstrap
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt install -y git yadm
-yadm clone -b yadm https://github.com/leukanos/dotfiles.git --bootstrap
+yadm clone https://github.com/leukanos/dotfiles.git --bootstrap
 ```
 
 
