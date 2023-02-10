@@ -42,7 +42,6 @@ function config.mason_lspconfig()
       'tsserver',
       'cssls',
       'eslint',
-      'luacheck'
     },
   })
 

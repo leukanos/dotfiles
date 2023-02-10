@@ -1,14 +1,17 @@
 -- Packer
-
 require('impatient')
 require('plugins')
 
-vim.cmd([[
-  augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
+if not vim.g.vscode then
+  vim.cmd([[
+    augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+    augroup end
+  ]])
+  
+  require('packer_compiled')
+end
 
 -- Global
 
