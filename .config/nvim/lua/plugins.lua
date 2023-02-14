@@ -1,4 +1,4 @@
-local nocode = function ()
+local nocode = function()
   return vim.fn.exists('g:vscode') == 0
 end
 
@@ -6,9 +6,9 @@ local vscode = vim.g.vscode
 
 local ensure_packer = function()
   local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
     vim.cmd [[packadd packer.nvim]]
     return true
   end
@@ -22,7 +22,6 @@ local packer_bootstrap = ensure_packer()
 local autopairs_config = require('plugins/autopairs-config')
 local copilot_config = require('plugins/copilot')
 local mason_config = require('plugins/mason-config')
-local neotree_config = require('plugins/neotree-config')
 local null_ls_config = require('plugins/null-ls-config')
 local telescope_config = require('plugins/telescope-config')
 local treesitter_config = require('plugins/treesitter-config')
@@ -46,7 +45,7 @@ else
   filename = "packer_compiled.lua"
 end
 packer.init({
-  compile_path = vim.fn.stdpath('config')..'/lua/'..filename,
+  compile_path = vim.fn.stdpath('config') .. '/lua/' .. filename,
 })
 
 packer.startup(function(use)
@@ -65,6 +64,8 @@ packer.startup(function(use)
       config = function() require('transparent').setup({ enable = true }) end,
     }
 
+    use 'nvim-tree/nvim-web-devicons'
+
     -- Measure startup time
     use {
       'dstein64/vim-startuptime',
@@ -79,8 +80,8 @@ packer.startup(function(use)
       event = 'BufRead',
       config = function()
         vim.cmd(':let g:vim_current_word#highlight_delay = 250')
-        vim.cmd[[ hi CurrentWord gui=none guibg=#5f5f5f]]
-        vim.cmd[[ hi CurrentWordTwins gui=none guibg=#5f5f5f]]
+        vim.cmd [[ hi CurrentWord gui=none guibg=#5f5f5f]]
+        vim.cmd [[ hi CurrentWordTwins gui=none guibg=#5f5f5f]]
       end,
     }
 
@@ -89,13 +90,13 @@ packer.startup(function(use)
 
     -- Git signs
     use 'lewis6991/gitsigns.nvim'
+
+    -- Commenting
+    use 'tpope/vim-commentary'
+
+    -- Automatically adjusts tabstop, softtabstop, shiftwidth, and expandtab
+    use 'tpope/vim-sleuth'
   end
-
-  -- Commenting
-  use 'tpope/vim-commentary'
-
-  -- Automatically adjusts tabstop, softtabstop, shiftwidth, and expandtab
-  use 'tpope/vim-sleuth'
 
   -- Add indentation guides to all lines (including empty lines)
   use {
@@ -104,8 +105,8 @@ packer.startup(function(use)
     after = "nvim-treesitter",
     config = function()
       require("indent_blankline").setup {
-        buftype_exclude = {"terminal"},
-        filetype_exclude = {"help", "packer", "dashboard", "neogitstatus", "NvimTree", "Trouble", "TelescopePrompt", "TelescopeResults"},
+        buftype_exclude = { "terminal" },
+        filetype_exclude = { "help", "packer", "dashboard", "neogitstatus", "NvimTree", "Trouble", "TelescopePrompt", "TelescopeResults" },
         show_current_context = true,
         show_current_context_start = true,
         show_current_context_end = true,
@@ -116,19 +117,6 @@ packer.startup(function(use)
       }
     end,
   }
-
-  -- Navigation 
-  use {
-    'nvim-neo-tree/neo-tree.nvim',
-    opt = true,
-    cmd = 'Neotree',
-    config = neotree_config.neotree,
-    requires = {{'kyazdani42/nvim-web-devicons', opt = true}, {'MunifTanjim/nui.nvim', opt = true}},
-    cond = { nocode }
-  }
-
-  -- Icons
-  use 'nvim-tree/nvim-web-devicons'
 
   -- Better pasting
   use 'sickill/vim-pasta'
@@ -141,27 +129,29 @@ packer.startup(function(use)
     'iamcco/markdown-preview.nvim',
     opt = true,
     run = 'cd app && yarn install',
-    cmd = 'MarkdownPreview'
+    cmd = 'MarkdownPreview',
+    cond = { nocode }
   }
 
-  -- Plenery 
+  -- Plenery
   use 'nvim-lua/plenary.nvim'
-
-  -- Generate ctags
-  use 'ludovicchabant/vim-gutentags'
 
   -- Better undo
   use 'mbbill/undotree'
 
   -- Tmux integration
-  use 'tmux-plugins/vim-tmux'
 
   if not vscode then
-  -- Key bindings help
+    -- Generate ctags
+    use 'ludovicchabant/vim-gutentags'
+
+    use 'tmux-plugins/vim-tmux'
+
+    -- Key bindings help
     use {
       'folke/which-key.nvim',
       keys = ',',
-      config = function () require('which-key').setup() end,
+      config = function() require('which-key').setup() end,
     }
 
     use {
@@ -179,7 +169,7 @@ packer.startup(function(use)
       cmd = 'Telescope',
       module_pattern = 'telescope.*',
       config = telescope_config.telescope,
-      requires = {{'nvim-lua/popup.nvim', opt = true}, {'nvim-lua/plenary.nvim'}},
+      requires = { { 'nvim-lua/popup.nvim', opt = true }, { 'nvim-lua/plenary.nvim' } },
     }
     use {
       'nvim-telescope/telescope-fzf-native.nvim',
@@ -195,7 +185,7 @@ packer.startup(function(use)
       'nvim-telescope/telescope-frecency.nvim',
       opt = true,
       after = 'telescope.nvim',
-      requires = {{'tami5/sql.nvim', opt = true}},
+      requires = { { 'tami5/sql.nvim', opt = true } },
     }
     use {
       'nvim-telescope/telescope-media-files.nvim',
@@ -261,25 +251,13 @@ packer.startup(function(use)
       event = "InsertEnter",
     }
 
-    -- Code runner 
-    use {
-      'CRAG666/code_runner.nvim',
-      requires = {'nvim-lua/plenary.nvim'},
-      config = function() require('code_runner').setup({
-        filetype = {
-          go = "go run",
-        },
-        mode = "term",
-      }) end
-    }
-
     use 'ray-x/lsp_signature.nvim'
 
     -- Golang support
 
     use {
       'fatih/vim-go',
-      ft = {'go'},
+      ft = { 'go' },
       opt = true,
       run = ':GoUpdateBinaries',
       config = function()
@@ -370,4 +348,3 @@ packer.startup(function(use)
     require('packer').sync()
   end
 end)
-

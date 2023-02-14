@@ -33,12 +33,10 @@ function config.mason_lspconfig()
       'graphql',
       'grammarly',
       'jsonls',
-      'sumneko_lua',
-      'terraformls',
+      'lua_ls',
       'vimls',
       'yamlls',
       'html',
-      'intelephense',
       'tsserver',
       'cssls',
       'eslint',
@@ -52,8 +50,8 @@ function config.mason_lspconfig()
         capabilities = capabilities,
       }
     end,
-    ['sumneko_lua'] = function()
-      require'lspconfig'.sumneko_lua.setup {
+    ['lua_ls'] = function()
+      require'lspconfig'.lua_ls.setup {
         settings = {
           Lua = {
             diagnostics = {

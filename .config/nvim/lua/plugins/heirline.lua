@@ -118,20 +118,6 @@ local FileNameBlock = {
 }
 -- We can now define some children separately and add them later
 
-local FileIcon = {
-    init = function(self)
-        local filename = self.filename
-        local extension = vim.fn.fnamemodify(filename, ":e")
-        self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
-    end,
-    provider = function(self)
-        return self.icon and (self.icon .. " ")
-    end,
-    hl = function(self)
-        return { fg = self.icon_color }
-    end
-}
-
 local FileName = {
     init = function(self)
         self.lfilename = vim.fn.fnamemodify(self.filename, ":.")
@@ -216,7 +202,6 @@ local WorkDir = {
 
 -- let's add the children to our FileNameBlock component
 FileNameBlock = utils.insert(FileNameBlock,
-    FileIcon,
     utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
     FileFlags,
     { provider = '%<'} -- this means that the statusline is cut here when there's not enough space

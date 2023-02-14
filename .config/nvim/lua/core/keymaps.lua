@@ -108,15 +108,3 @@ if not vscode then
   keymap.set('n', '<leader>rp', ':RunProject<CR>', { noremap = true, silent = false })
   keymap.set('n', '<leader>rc', ':RunClose<CR>', { noremap = true, silent = false })
 end
-
--- fzf-lsp
-
--- keymap.set('n', '<leader>fs', ':DocumentSymbol<CR>')
--- keymap.set('n', '<leader>fw', ':WorkspaceSymbol<CR>')
--- keymap.set('n', '<leader>fd', ':Definition<CR>')
--- keymap.set('n', '<leader>fdc', ':Declarations<CR>')
--- keymap.set('n', '<leader>fr', ':References<CR>')
--- keymap.set('n', '<leader>fi', ':Implementation<CR>')
--- keymap.set('n', '<leader>ft', ':TypeDefinition<CR>')
--- keymap.set('n', '<leader>fa', ':CodeAction<CR>')
--- keymap.set('n', '<leader>fe', ':Diagnostics<CR>')
