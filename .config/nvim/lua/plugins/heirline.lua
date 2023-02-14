@@ -4,6 +4,11 @@ local utils = require("heirline.utils")
 local colors = require'kanagawa.colors'.setup()
 require('heirline').load_colors(colors)
 
+vim.fn.sign_define("DiagnosticSignError", {text = " ", texthl = "DiagnosticSignError"})
+vim.fn.sign_define("DiagnosticSignWarn", {text = " ", texthl = "DiagnosticSignWarn"})
+vim.fn.sign_define("DiagnosticSignInfo", {text = " ", texthl = "DiagnosticSignInfo"})
+vim.fn.sign_define("DiagnosticSignHint", {text = "", texthl = "DiagnosticSignHint"})
+
 local function setup_colors()
   return {
     bright_bg = utils.get_highlight("Folded").bg,
@@ -65,7 +70,7 @@ local ViMode = {
             V = "V_",
             Vs = "Vs",
             ["\22"] = "^V",
-            ["\22s"] = "^V",
+            ["\22S"] = "^v",
             s = "S",
             S = "S_",
             ["\19"] = "^S",
@@ -117,6 +122,20 @@ local FileNameBlock = {
     end,
 }
 -- We can now define some children separately and add them later
+
+local FileIcon = {
+    init = function(self)
+        local filename = self.filename
+        local extension = vim.fn.fnamemodify(filename, ":e")
+        self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
+    end,
+    provider = function(self)
+        return self.icon and (self.icon .. " ")
+    end,
+    hl = function(self)
+        return { fg = self.icon_color }
+    end
+}
 
 local FileName = {
     init = function(self)
@@ -202,6 +221,7 @@ local WorkDir = {
 
 -- let's add the children to our FileNameBlock component
 FileNameBlock = utils.insert(FileNameBlock,
+    FileName,
     utils.insert(FileNameModifer, FileName), -- a new table where FileName is a child of FileNameModifier
     FileFlags,
     { provider = '%<'} -- this means that the statusline is cut here when there's not enough space

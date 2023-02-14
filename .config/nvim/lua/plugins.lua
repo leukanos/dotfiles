@@ -57,14 +57,14 @@ packer.startup(function(use)
   -- Theme
   use 'rebelot/kanagawa.nvim'
 
+  use 'nvim-tree/nvim-web-devicons'
+
   if not vscode then
     -- Transparent
     use {
       'xiyaowong/nvim-transparent',
       config = function() require('transparent').setup({ enable = true }) end,
     }
-
-    use 'nvim-tree/nvim-web-devicons'
 
     -- Measure startup time
     use {
