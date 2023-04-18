@@ -304,14 +304,8 @@ export SS_ANALYTICS_TUNNEL_USERNAME=lostrowski
 export SS_TUNNEL_USERNAME=lostrowski
 export SS_ANALYTICS_TUNNEL_KEY_FILENAME=id_rsa
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/lukaszostrowski/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/lukaszostrowski/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/lukaszostrowski/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/lukaszostrowski/google-cloud-sdk/completion.zsh.inc'; fi
-
 if hash op 2>/dev/null; then
-  eval "$(op completion zsh)"; compdef _op op
+  eval "$(op completion zsh)";
 fi
 
 export NPM_AUTH_TOKEN="ee25a6015f97db39fa648645083147b1669b0757"
@@ -322,3 +316,9 @@ fi
 
 eval "$(starship init zsh)"
 alias luamake=/tmp/lua-language-server/3rd/luamake/luamake
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/lukaszostrowski/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/lukaszostrowski/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/lukaszostrowski/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/lukaszostrowski/Downloads/google-cloud-sdk/completion.zsh.inc'; fi

@@ -25,3 +25,7 @@ gcr-secret.yaml
 erd.pdf
 
 tags
+
+**/.phan/config.php
+.vscode
+.history
