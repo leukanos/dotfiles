@@ -1,0 +1,15 @@
+{
+	"latest_signin": "my",
+	"device": "lsy4nznk3tqou543lkwcegcraa",
+	"accounts": [
+		{
+			"shorthand": "my",
+			"accountUUID": "VVRDZKOUOZG6ZK72IHQHXCAT6Y",
+			"url": "https://my.1password.com",
+			"email": "kontakt@lostrowski.pl",
+			"accountKey": "A3-N27STT-AB4D2E-QPFV2-SFAAR-PFZTR-4DKZ8",
+			"userUUID": "OSCNPRRUZJG73OGR55SMB3CAZA",
+			"dsecret": "5fzo6_T0VvsSFwQxr3VkCw"
+		}
+	]
+}
