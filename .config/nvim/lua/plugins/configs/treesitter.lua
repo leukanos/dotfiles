@@ -1,5 +1,5 @@
 local options = {
-  ensure_installed = { "lua", "ruby", "python", "javascript", "typescript" },
+ensure_installed = { "lua", "ruby", "python", "html", "javascript", "json", "typescript", "go" },
 
   highlight = {
     enable = true,

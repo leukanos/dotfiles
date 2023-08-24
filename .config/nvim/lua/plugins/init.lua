@@ -3,6 +3,7 @@
 local default_plugins = {
 
   "nvim-lua/plenary.nvim",
+  "christoomey/vim-tmux-navigator",
 
   -- nvchad plugins
   { "NvChad/extensions", branch = "v2.0" },
