@@ -285,7 +285,7 @@ export PATH
 # Local configuration #
 #######################
 
-source ~/.zshrc_local
+# source ~/.zshrc_local
 
 ######################
 # User configuration #
@@ -322,3 +322,4 @@ if [ -f '/Users/lukaszostrowski/Downloads/google-cloud-sdk/path.zsh.inc' ]; then
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/lukaszostrowski/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/lukaszostrowski/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
