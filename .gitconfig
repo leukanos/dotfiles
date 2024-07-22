@@ -48,17 +48,17 @@
 
 [pretty]
         custom = "%C(magenta)%h%C(red)%d %C(yellow)%ar %C(green)%s %C(yellow)(%an)"
-        #                     │        │            │            │             └─ author name
-        #                     │        │            │            └─ message
-        #                     │        │            └─ date (relative)
-        #                     │        └─ decorations (branch, heads or tags)
-        #                     └─ hash (abbreviated)
+        #                     ???        ???            ???            ???             ?????? author name
+        #                     ???        ???            ???            ?????? message
+        #                     ???        ???            ?????? date (relative)
+        #                     ???        ?????? decorations (branch, heads or tags)
+        #                     ?????? hash (abbreviated)
 
 [help]
         # Correct typos
         autocorrect = 1
-[url "git@github.com:"]
-	insteadOf = https://github.com/
+#[url "git@github.com:"]
+#	insteadOf = https://github.com/
 [diff]
 	ignoreSubmodules = dirty
 [gpg]

@@ -189,7 +189,7 @@ zinit wait'1' lucid for \
     OMZP::git
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  zinit ice svn
+  # zinit ice svn
   zinit snippet OMZP::macos
 fi
 
