@@ -1,7 +1,12 @@
 # Defaults
 export SHELL=/bin/zsh
 
-source ~/.zinit/bin/zinit.zsh
+
+
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -86,6 +91,11 @@ zinit wait'1' atclone"dircolors -b LS_COLORS > clrs.zsh" \
 atpull'%atclone' pick"clrs.zsh" nocompile'!' \
 atload'zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"' \
 lucid light-mode for trapd00r/LS_COLORS
+
+# zsh-nvm
+export NVM_COMPLETION=true
+export NVM_SYMLINK_CURRENT="true"
+zinit wait lucid light-mode for lukechilds/zsh-nvm
 
 ###############################################################################
 # fzf
@@ -178,10 +188,6 @@ zinit wait'1' lucid for \
     OMZL::directories.zsh\
     OMZP::git
 
-if hash kubectl 2>/dev/null; then
-  zinit wait'1' lucid for atload"unalias k" OMZP::kubectl
-fi
-
 if [[ "$OSTYPE" == "darwin"* ]]; then
   zinit ice svn
   zinit snippet OMZP::macos
@@ -224,21 +230,6 @@ fi
 zbell_ignore+=($EDITOR $PAGER vim code less bat cat man run-help lnav)
 zinit wait'0' lucid for OMZP::zbell
 
-# exa doesn't download well on WSL
-# zinit wait'0' lucid as"program" from"gh-r" mv"exa* -> exa" pick"$ZPFX/exa" light-mode for ogham/exa
-export TIME_STYLE=long-iso
-if [ -x "$(command -v exa)" ]; then
-  function x() {
-    command exa -F --color-scale --group-directories-first --color=always --icons -x $*
-    }
-  function xl() {
-    command exa -F --color-scale --group-directories-first --color=always --icons -l $* | command less -r
-  }
-else
-  alias x=l
-  alias xl=ll
-fi
-
 ##################
 # Custom Aliases #
 ##################
@@ -267,7 +258,7 @@ dirs_to_prepend=(
 )
 
 # Explicitly configured $PATH
-PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 for dir in ${(k)dirs_to_prepend[@]}
 do
@@ -285,11 +276,20 @@ export PATH
 # Local configuration #
 #######################
 
-# source ~/.zshrc_local
+[ -f ~/.zshrc_local ] && source ~/.zshrc_local
 
 ######################
 # User configuration #
 ######################
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+  autoload -Uz compinit
+  compinit
+fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   if [ -f `brew --prefix`/etc/bash_completion ]; then
@@ -310,16 +310,26 @@ fi
 
 export NPM_AUTH_TOKEN="ee25a6015f97db39fa648645083147b1669b0757"
 
-if hash complete 2>/dev/null; then
-  complete -o nospace -C /usr/local/bin/terraform terraform
-fi
-
 eval "$(starship init zsh)"
 alias luamake=/tmp/lua-language-server/3rd/luamake/luamake
 
+
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zdharma-continuum/zinit-annex-as-monitor \
+    zdharma-continuum/zinit-annex-bin-gem-node \
+    zdharma-continuum/zinit-annex-patch-dl \
+    zdharma-continuum/zinit-annex-rust
+
+### End of Zinit's installer chunk
+
+eval "$(rbenv init - zsh)"
+
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/lukaszostrowski/Downloads/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/lukaszostrowski/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/leukanos/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/leukanos/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/lukaszostrowski/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/lukaszostrowski/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
+if [ -f '/Users/leukanos/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/leukanos/google-cloud-sdk/completion.zsh.inc'; fi
+eval 
+MAPPS_AC_ZSH_SETUP_PATH=/Users/leukanos/Library/Caches/mapps/autocomplete/zsh_setup && test -f $MAPPS_AC_ZSH_SETUP_PATH && source $MAPPS_AC_ZSH_SETUP_PATH; # mapps autocomplete setup

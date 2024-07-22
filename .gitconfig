@@ -1,7 +1,7 @@
 [user]
 	email = kontakt@lostrowski.pl
 	name = leukanos
-	signingkey = 2E78CCDF4E2B0BB2
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF/+b9xwq5BA9MZoRh+cZIdY1QHohgRqAEo71i6v17RU
 [alias]
 	conflicts = !git ls-files -u | cut -f 2 | sort -u
 	ignore = !git update-index --assume-unchanged
@@ -61,3 +61,9 @@
 	insteadOf = https://github.com/
 [diff]
 	ignoreSubmodules = dirty
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+	gpgsign = true

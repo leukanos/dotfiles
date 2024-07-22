@@ -70,6 +70,8 @@ $sudo\
 $cmd_duration\
 $jobs\
 $line_break\
+$os\
+$time\
 $status\
 $shell\
 $character"""
@@ -84,6 +86,7 @@ disabled = true
 [time]
 disabled = false
 format = '[\[](white)[ $time ]($style)[\]](white) '
+style = "bold #e79f31"
 time_format = "%T"
 utc_time_offset = "+2"
 
@@ -95,8 +98,14 @@ disabled = false
 min_time = 100
 format = '[\(took $duration\)](bold bright-yellow)'
 
+[aws]
+format = 'on [$symbol($profile )(\[$region\] )]($style)'
+style = 'bold yellow'
+symbol = '🅰 '
+
 [gcloud]
-disabled = true
+format = 'on [$symbol$account(@$domain)(\($project\)\[$region\])]($style) '
+symbol = '🅶 '
 
 [git_commit]
 commit_hash_length = 8
@@ -129,7 +138,7 @@ success_symbol = "[❯](bold green)"
 error_symbol = "[✖](bold red)"
 
 [username]
-style_user = "bright-cyan bold"
+style_user = "#236AB3 bold"
 style_root = "black bold"
 format = "[$user]($style)"
 disabled = false
@@ -141,3 +150,10 @@ format = "@[$hostname](bold bright-blue) "
 trim_at = "@Searchspring"
 disabled = false
 
+[nodejs]
+format = 'via [$symbol($version )]($style)'
+
+[localip]
+ssh_only = false
+format = '@[$localipv4](bold red) '
+disabled = false

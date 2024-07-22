@@ -17,9 +17,6 @@ alias gll="gl --no-ff origin"
 
 alias weather="curl -4 http://wttr.in/"
 
-alias deploy="~/dev/code/helm-deployment-charts/deploy.sh"
-alias change_cluster="~/dev/code/helm-deployment-charts/change_cluster.sh"
-
 alias dc="docker-compose"
 
 alias w2='watch -n2'
