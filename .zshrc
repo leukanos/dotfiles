@@ -1,6 +1,6 @@
 # Defaults
 export SHELL=/bin/zsh
-
+export LC_CTYPE=en_US.UTF-8
 
 
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
@@ -21,6 +21,43 @@ setopt extended_glob # treat #, ~, and ^ as part of patterns for filename genera
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+########################################
+# Directories to be prepended to $PATH #
+########################################
+
+# export GOROOT=/usr/homebrew/bin/go
+export GOPATH=$HOME/gocode
+
+declare -a dirs_to_prepend
+dirs_to_prepend=(
+  "/usr/local/opt/openssl/bin"
+  "/usr/local/sbin"
+  "/usr/local"
+  "$HOME/bin"
+  "$GOPATH/bin"
+  "$HOME/go/bin"
+  "/usr/local/go/bin"
+  "/Library/Developer/CommandLineTools/usr/libexec/git-core/git"
+  "$GOPATH"
+  "$HOME/.lua-language-server/bin"
+  "/Users/leukanos/.local/bin"
+)
+
+# Explicitly configured $PATH
+PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
+for dir in ${(k)dirs_to_prepend[@]}
+do
+  if [ -d ${dir} ]; then
+    # If these directories exist, then prepend them to existing PATH
+    PATH="${dir}:$PATH"
+  fi
+done
+
+unset dirs_to_prepend
+
+export PATH
 
 ###############################################################################
 # History
@@ -70,7 +107,7 @@ zstyle ':completion::complete:*' use-cache 1
 # Theme and plugins #
 ########################################
 
-COMPLETION_WAITING_DOTS="true"
+CfortuneOMPLETION_WAITING_DOTS="true"
 zinit wait'0a' lucid blockf for zsh-users/zsh-completions
 
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
@@ -203,7 +240,7 @@ zinit wait'2' lucid atload'ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(autopair-insert)' lig
 
 zinit lucid light-mode for agkozak/zsh-z
 
-zinit wait'2' lucid --atinit="ZINIT[COMPINIT_OPTS]=-C; zicompinit; autoload -U +X bashcompinit && bashcompinit; zicdreplay" --atload="fast-theme XDG:improved-default >> /tmp/fast-theme.log" light-mode for zdharma-continuum/fast-syntax-highlighting
+zinit wait'2' lucid --atinit="ZINIT[COMPINIT_OPTS]=-C; zicompinit; autoload -U +X bashcompinit && bashcompinit; zicdreplay; complete -C aws_completer aws" --atload="fast-theme XDG:improved-default >> /tmp/fast-theme.log" light-mode for zdharma-continuum/fast-syntax-highlighting
 
 # zsh-notify (as opposed to zbell) only notifies when the pane with the command is not focused
 # icons (whether remote or local) affects performance noticably
@@ -236,41 +273,6 @@ zinit wait'0' lucid for OMZP::zbell
 
 [ -f ~/.config/zsh/aliases ] && . ~/.config/zsh/aliases
 
-########################################
-# Directories to be prepended to $PATH #
-########################################
-
-export GOROOT=/usr/local/go
-export GOPATH=$HOME/go
-
-declare -a dirs_to_prepend
-dirs_to_prepend=(
-  "/usr/local/opt/openssl/bin"
-  "/usr/local/sbin"
-  "/usr/local"
-  "$HOME/bin"
-  "$GOPATH/bin"
-  "$HOME/go/bin"
-  "/usr/local/go/bin"
-  "$GOPATH"
-  "$GOROOT"
-  "$HOME/.lua-language-server/bin"
-)
-
-# Explicitly configured $PATH
-PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-
-for dir in ${(k)dirs_to_prepend[@]}
-do
-  if [ -d ${dir} ]; then
-    # If these directories exist, then prepend them to existing PATH
-    PATH="${dir}:$PATH"
-  fi
-done
-
-unset dirs_to_prepend
-
-export PATH
 
 #######################
 # Local configuration #
@@ -284,17 +286,17 @@ export PATH
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  if [ -f `brew --prefix`/etc/bash_completion ]; then
+    . `brew --prefix`/etc/bash_completion
+  fi
+fi
+
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
   autoload -Uz compinit
   compinit
-fi
-
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
-  fi
 fi
 
 export DEPS_AWS_CONFIG_PATH="~/.aws/config"
@@ -307,8 +309,6 @@ export SS_ANALYTICS_TUNNEL_KEY_FILENAME=id_rsa
 if hash op 2>/dev/null; then
   eval "$(op completion zsh)";
 fi
-
-export NPM_AUTH_TOKEN="ee25a6015f97db39fa648645083147b1669b0757"
 
 eval "$(starship init zsh)"
 alias luamake=/tmp/lua-language-server/3rd/luamake/luamake
@@ -331,5 +331,6 @@ if [ -f '/Users/leukanos/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/leukan
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/leukanos/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/leukanos/google-cloud-sdk/completion.zsh.inc'; fi
-eval 
-MAPPS_AC_ZSH_SETUP_PATH=/Users/leukanos/Library/Caches/mapps/autocomplete/zsh_setup && test -f $MAPPS_AC_ZSH_SETUP_PATH && source $MAPPS_AC_ZSH_SETUP_PATH; # mapps autocomplete setup
+eval
+
+# MAPPS_AC_ZSH_SETUP_PATH=/Users/leukanos/Library/Caches/mapps/autocomplete/zsh_setup && test -f $MAPPS_AC_ZSH_SETUP_PATH && source $MAPPS_AC_ZSH_SETUP_PATH; # mapps autocomplete setup

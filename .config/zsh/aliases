@@ -45,3 +45,6 @@ alias ypp='yadm push'
 alias ysta='yadm stash'
 alias ystp='yadm stash pop'
 alias ydiff='yadm diff'
+
+############# brew
+alias brewuu="brew update && brew upgrade"
